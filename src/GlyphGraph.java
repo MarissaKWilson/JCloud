@@ -28,6 +28,7 @@ public class GlyphGraph {
 		//return v1
 		return null;
 	}
+	
 	/*
 	 * addGlyph takes in an iToken of a glyph and the vertex of an author
 	 * Creates a new vertex for the glyph
@@ -36,5 +37,13 @@ public class GlyphGraph {
 	public void addGlyph(iToken glyph, Vertex author){
 		//Vertex v2 = (Vertex) g.addVertex(new UndirectedSparseVertex(glyph));
 		//UndirectedEdge e1 = (Edge) g.addEdge(author, v2);
+	}
+	
+	/*
+	 * Takes in a glyph object and the vertex of an author
+	 * Checks the graph to see if the glyph is already  
+	 */
+	public void checkGraph(iToken glyph, Vertex author){
+		
 	}
 }
