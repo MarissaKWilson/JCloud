@@ -8,6 +8,8 @@ package graphmap;
  */
 public class Author implements iToken {
 	String name;
+	//File picture; 
+	//picture functionality will be added later
 	
 	public Author(String name){
 		this.name = name;
