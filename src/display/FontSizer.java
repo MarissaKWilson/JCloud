@@ -6,6 +6,9 @@ import graphmap.Glyph;
  * Parses through all glyphs and assigns font sizes
  * Finds the largest weighted edge, sets that as maximum
  * Finds the smallest weighted edge, sets that as minimum
+ * Offset is created by comparing the largest weight of a glyph
+ * And the remaining weigths of the same glyph
+ * In descending order the 
  * @author M
  *
  */
