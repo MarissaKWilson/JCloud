@@ -1,6 +1,8 @@
 package graphmap;
 /**
  * Contains data for the edge of the vertices
+ * 
+ * How will weighted edges be retrieved?
  * @author M
  *
  */
@@ -15,11 +17,10 @@ public class WeightedEdge {
 		weight=1;
 	}
 	/*
-	 * adds to the weight
-	 * Generally will be 1, but leaves it generic in case bulk weight is ever needed
+	 * adds 1 to the weight
 	 */
-	public void addWeight(int amount){
-		weight+=amount;
+	public void addWeight(){
+		weight++;
 	}
 	/*
 	 * Returns weight

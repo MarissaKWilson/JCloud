@@ -1,5 +1,6 @@
 package display;
 
+import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import graphmap.Glyph;
 
 /**
@@ -13,21 +14,27 @@ import graphmap.Glyph;
  *
  */
 public class FontSizer {
-	int max;
-	int min;
+	int max=0;
+	int min=1;
 	/*
 	 * Sets max and min to the largest and smallest weights
 	 */
-	public FontSizer(){
+	public FontSizer(UndirectedSparseGraph g){
+		//for(Glyph glyph:g){
+		//	if(g.Weight(glyph)>max){
+		//		max=g.Weight;
+		//	}
+		//}
 		
 	}
 	/*
 	 * Takes in a Glyph to view all it's edges
 	 */
 	public void makeSize(Glyph glyph){
-		//Makes font size first
+		//Makes font size
+		int size = ceiling(log(((72*(glyph.Weight - min))/max-min)));
+		glyph.setSize(size);
 		
-		//Makes offset next
 	}
 	
 	
