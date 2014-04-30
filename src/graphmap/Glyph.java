@@ -45,6 +45,6 @@ public class Glyph implements iToken{
 	 * Author associated becomes primary author
 	 */
 	public Author getPrimary(){
-		return null
+		return null;
 	}
 }

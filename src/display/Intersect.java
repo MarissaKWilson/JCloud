@@ -8,4 +8,7 @@ package display;
  */
 public class Intersect {
 
+	public static boolean doesIntersect() {
+		return false;
+	}
 }

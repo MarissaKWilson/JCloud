@@ -6,4 +6,7 @@ package display;
  */
 public class ColorAssigner {
 
+	public static void AssignColors(){
+		
+	}
 }
