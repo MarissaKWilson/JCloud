@@ -39,5 +39,12 @@ public class Glyph implements iToken{
 	public int getSize(){
 		return fontSize;
 	}
-
+	/*
+	 * Goes through the Glyph's weight's
+	 * Retrieves the largest weight
+	 * Author associated becomes primary author
+	 */
+	public Author getPrimary(){
+		return null
+	}
 }

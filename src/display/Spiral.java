@@ -1,5 +1,6 @@
 package display;
 
+import graphmap.Author;
 import graphmap.Glyph;
 
 /**
@@ -12,7 +13,7 @@ import graphmap.Glyph;
  */
 public class Spiral {
 	
-	public static void spiralOut(Glyph glyph){
+	public static void spiralOut(Glyph glyph, Author prime){
 		
 	}
 
