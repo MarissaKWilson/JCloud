@@ -1,7 +1,8 @@
 package display;
 
-import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import graphmap.Glyph;
+import graphmap.GlyphGraph;
+import graphmap.iToken;
 
 /**
  * Parses through all glyphs and assigns font sizes
@@ -13,24 +14,28 @@ import graphmap.Glyph;
  * @author M
  *
  */
-public class FontSizer {
+abstract public class FontSizer {
 	int max=0;
 	int min=1;
 	/*
 	 * Sets max and min to the largest and smallest weights
 	 */
-	public FontSizer(UndirectedSparseGraph g){
-		//for(Glyph glyph:g){
-		//	if(g.Weight(glyph)>max){
-		//		max=g.Weight;
-		//	}
-		//}
+	public FontSizer(GlyphGraph g){
+		for(iToken t:g.getTokens()){
+//			if(){
+//				max=g.Weight;
+//			}	
+		}
 		
 	}
+	
+	abstract public Double calcWeight(iToken t, GlyphGraph g);
+	
 	/*
 	 * Takes in a Glyph to view all it's edges
 	 */
 	public void makeSize(Glyph glyph){
+		
 		//Makes font size
 		int size = ceiling(log(((72*(glyph.Weight - min))/max-min)));
 		glyph.setSize(size);

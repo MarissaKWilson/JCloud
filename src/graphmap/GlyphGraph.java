@@ -1,4 +1,7 @@
 package graphmap;
+import java.util.Collection;
+import java.util.Iterator;
+
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.event.GraphEvent.Vertex;
@@ -11,15 +14,18 @@ import edu.uci.ics.jung.graph.event.GraphEvent.Vertex;
  */
 
 public class GlyphGraph {
-	UndirectedSparseGraph<iToken,Long> g;
+	UndirectedSparseGraph<iToken,WeightedEdge> g;
 	/*
 	 * Glyph Graph constructor
 	 * Creates a new undirected sparse graph
 	 */
 	public GlyphGraph(){
-		g = new UndirectedSparseGraph<iToken,Long>();
+		g = new UndirectedSparseGraph<iToken,WeightedEdge>();
 	}
 	
+	public Collection<iToken> getTokens(){
+		return g.getVertices();
+	}
 	/*
 	 * addAuthor method takes in author iToken
 	 * Creates a new vertex on the graph for the author token

@@ -11,6 +11,7 @@ package graphmap;
 public class Glyph implements iToken{
 	String name;
 	int fontSize;
+	//String file;
 	/*
 	 * Takes in the name of the glyph to be displayed
 	 */

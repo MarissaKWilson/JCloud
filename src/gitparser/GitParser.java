@@ -9,4 +9,19 @@ package gitparser;
 
 public class GitParser {
 
+	/*
+	 * Query to git
+	 * gitRecentFiles
+	 */
+	
+	/*
+	 * Iterate over recent files
+	 * Send to JParser
+	 */
+	
+	/*
+	 * Diff maker 
+	 * Associates authors with tokens
+	 * 
+	 */
 }
