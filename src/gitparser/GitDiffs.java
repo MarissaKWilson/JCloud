@@ -9,8 +9,7 @@ package gitparser;
 public class GitDiffs {
 
 	/*
-	 * Diff maker 
-	 * Associates authors with tokens
+	 * Creates diffs from the parsed files
 	 * 
 	 */
 }

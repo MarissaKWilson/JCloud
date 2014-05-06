@@ -30,10 +30,13 @@ public class GlyphGraph {
 	 * to the author. Not sure where to have those added
 	 * Also  creates new vertex for author in graph
 	 */
-	public void addAuthor(String name){
-		Author a = new Author(name);
+	public void addAuthor(iToken a){
 		authors.add(a);
 		g.addVertex(a);
+	}
+	
+	public ArrayList<iToken> getAuthors(){
+		return authors;
 	}
 	
 	/*
