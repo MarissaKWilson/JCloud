@@ -19,9 +19,5 @@ public class GitParser {
 	 * Send to JParser
 	 */
 	
-	/*
-	 * Diff maker 
-	 * Associates authors with tokens
-	 * 
-	 */
+
 }

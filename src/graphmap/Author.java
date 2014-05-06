@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Author implements iToken {
 	String name;
-	ArrayList<File> sourceFiles;
+	ArrayList<sourceCodeFile> sourceFiles;
 	//File picture; 
 	//picture functionality will be added later
 	
@@ -27,27 +27,28 @@ public class Author implements iToken {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 	/*
 	 * Adds file to the list of source files
 	 * associated with this author
 	 */
 	public void addFile(File source){
-		sourceFiles.add(source);
+		sourceCodeFile f = new sourceCodeFile(source);
+		sourceFiles.add(f);
 	}
 	/*
 	 * Returns the list of all source files
 	 * associated with this author
 	 */
-	public ArrayList<File> getFiles(){
+	public ArrayList<sourceCodeFile> getFiles(){
 		return sourceFiles;
 	}
 	/*
 	 * Returns the specific file associated
 	 * with the index number provided
 	 */
-	public File getOneFile(int index){
+	public sourceCodeFile getOneFile(int index){
 		return sourceFiles.get(index);
 	}
 	
