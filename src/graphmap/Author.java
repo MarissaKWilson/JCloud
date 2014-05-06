@@ -26,7 +26,6 @@ public class Author implements iToken {
 	 */
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 	/*
@@ -50,6 +49,10 @@ public class Author implements iToken {
 	 */
 	public sourceCodeFile getOneFile(int index){
 		return sourceFiles.get(index);
+	}
+	
+	public int numberOfFiles(){
+		return sourceFiles.size();
 	}
 	
 }
