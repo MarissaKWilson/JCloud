@@ -36,4 +36,13 @@ public class GlyphGraph {
 		g.addVertex(a);
 	}
 	
+	/*
+	 * Returns true if glyph added successfully
+	 * Adds a glyph
+	 */
+	public boolean addGlyph(iToken glyph, WeightedEdge weight, iToken auth){
+		g.addVertex(glyph);
+		return g.addEdge(weight, glyph, auth);
+		
+	}
 }
