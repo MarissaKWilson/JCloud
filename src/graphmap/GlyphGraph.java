@@ -1,4 +1,5 @@
 package graphmap;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -15,6 +16,7 @@ import edu.uci.ics.jung.graph.event.GraphEvent.Vertex;
 
 public class GlyphGraph {
 	UndirectedSparseGraph<iToken,WeightedEdge> g;
+	ArrayList<iToken> authors;
 	/*
 	 * Glyph Graph constructor
 	 * Creates a new undirected sparse graph
@@ -22,29 +24,16 @@ public class GlyphGraph {
 	public GlyphGraph(){
 		g = new UndirectedSparseGraph<iToken,WeightedEdge>();
 	}
-	
-	public Collection<iToken> getTokens(){
-		return g.getVertices();
-	}
 	/*
-	 * addAuthor method takes in author iToken
-	 * Creates a new vertex on the graph for the author token
+	 * Creates a new author with the name
+	 * Could also include a list of sourceCodeFiles to attach
+	 * to the author. Not sure where to have those added
+	 * Also  creates new vertex for author in graph
 	 */
-	public void addAuthor(iToken author){
-		//Vertex v1 = (Vertex) g.addVertex(new UndirectedSparseVertex(author));
-		//return v1
-		g.addVertex(author);
-	}
-	
-	/*
-	 * addGlyph takes in an iToken of a glyph and the vertex of an author
-	 * Creates a new vertex for the glyph
-	 * Creates an edge between glyph and author
-	 */
-	public void addGlyph(iToken glyph, iToken author){
-		//Vertex v2 = (Vertex) g.addVertex(new UndirectedSparseVertex(glyph));
-		//UndirectedEdge e1 = (Edge) g.addEdge(author, v2);
-		//g.addEdge(weight, author, glyph);
+	public void addAuthor(String name){
+		Author a = new Author(name);
+		authors.add(a);
+		g.addVertex(a);
 	}
 	
 }
