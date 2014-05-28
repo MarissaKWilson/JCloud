@@ -12,7 +12,9 @@ import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 
 public class GlyphGraph {
 	UndirectedSparseGraph<iToken,WeightedEdge> g;
-	ArrayList<iToken> authors;
+	ArrayList<Author> authors = new ArrayList<Author>(); //TODO Do we really need this? Graph has this list and maybe that's all we need
+	ArrayList<Glyph> glyphs = new ArrayList<Glyph>(); //TODO Do we really need this? Graph has this list and maybe that's all we need
+	
 	/*
 	 * Glyph Graph constructor
 	 * Creates a new undirected sparse graph
@@ -27,13 +29,22 @@ public class GlyphGraph {
 	 * Not sure where to have those added
 	 * Also  creates new vertex for author in graph
 	 */
-	public void addAuthor(iToken a){
+	public void add(Author a){
 		authors.add(a);
 		g.addVertex(a);
 	}
 	
-	public ArrayList<iToken> getAuthors(){
+	public void add(Glyph a){
+		glyphs.add(a);
+		g.addVertex(a);
+	}
+	
+	public ArrayList<Author> getAuthors(){
 		return authors;
+	}
+	
+	public ArrayList<Glyph> getGlyph(){
+		return glyphs;
 	}
 	
 	/*
