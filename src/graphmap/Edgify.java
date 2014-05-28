@@ -14,11 +14,13 @@ import java.util.ArrayList;
  *
  */
 public class Edgify {
-	
-	public Edgify(){
+		GlyphGraph g;
+		
+	public Edgify(GlyphGraph g){
+		this.g=g;
 	}
 	
-	public static void addGlyphs(Author a, GlyphGraph g){
+	public void addAuthorsGlyphs(Author a){
 		int fileNum;
 		fileNum = a.numberOfFiles();
 		for(int i=0; i<=fileNum; i++){

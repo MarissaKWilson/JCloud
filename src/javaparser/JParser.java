@@ -1,4 +1,7 @@
 package javaparser;
+
+import java.io.File;
+
 /**
  * Handles the parsing of the java
  * Takes out Java keywords
@@ -9,6 +12,11 @@ package javaparser;
  *
  */
 public class JParser {
+
+	public File parse(File diffed) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 	/*

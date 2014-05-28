@@ -27,7 +27,8 @@ public class GlyphGraph {
 	/*
 	 * Creates a new author with the name
 	 * Could also include a list of sourceCodeFiles to attach
-	 * to the author. Not sure where to have those added
+	 * to the author.
+	 * Not sure where to have those added
 	 * Also  creates new vertex for author in graph
 	 */
 	public void addAuthor(iToken a){
@@ -42,6 +43,7 @@ public class GlyphGraph {
 	/*
 	 * Returns true if glyph added successfully
 	 * Adds a glyph
+	 * TODO If edge already exists, increment weight
 	 */
 	public boolean addGlyph(iToken glyph, WeightedEdge weight, iToken auth){
 		g.addVertex(glyph);

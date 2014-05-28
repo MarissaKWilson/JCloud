@@ -32,12 +32,26 @@ public class GitParser {
 		RevWalk revwalk = new RevWalk(repo);
 		Iterable<RevCommit> commits = git.log().add(repo.resolve(Constants.HEAD)).all().call();
 		for (RevCommit revCommit : commits) {
-			authors.add(revCommit.getAuthorIdent());
-			System.out.println(revCommit.getCommitTime());
+			//check for date
+			//make list of authors
+		}
 	}
 	
 	public ArrayList<String> getAuthors(){
 		return authors;
+	}
+	
+	/*
+	 * Grabs the next file in the stack
+	 */
+	public File getNextFile() {
+		// TODO create method for getNextFile()
+		return null;
+	}
+
+	public String getAuthor(File unparsed) {
+		// TODO create method for getAuthor(File)
+		return null;
 	}
 	
 	/*
