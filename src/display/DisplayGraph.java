@@ -1,7 +1,6 @@
 package display;
 
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
-import graphmap.Glyph;
 import graphmap.iToken;
 
 /**
@@ -21,9 +20,9 @@ public class DisplayGraph {
 		/*
 		 * How to iterate over GlyphGraph?
 		 */
-		for(Glyph i:g){
-			Spiral.spiralOut(i);
-		}
+//		for(Glyph i:g){
+//			Spiral.spiralOut(i);
+//		}
 		
 		ColorAssigner.AssignColors();
 	}

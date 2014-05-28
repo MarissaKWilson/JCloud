@@ -1,7 +1,6 @@
 package gitparser;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.jgit.api.Git;

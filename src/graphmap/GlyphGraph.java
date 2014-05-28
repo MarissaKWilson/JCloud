@@ -1,11 +1,7 @@
 package graphmap;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
-import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
-import edu.uci.ics.jung.graph.event.GraphEvent.Vertex;
 
 /**
  * The class that handles the undirected sparse graph of authors and tokens

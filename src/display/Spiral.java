@@ -1,8 +1,6 @@
 package display;
 
-import graphmap.Author;
 import graphmap.Glyph;
-import graphmap.WeightedEdge;
 
 /**
  * The spiral algorithm

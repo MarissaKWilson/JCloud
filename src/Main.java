@@ -3,12 +3,9 @@ import gitparser.GitParser;
 import graphmap.Author;
 import graphmap.Edgify;
 import graphmap.GlyphGraph;
-import graphmap.iToken;
-import graphmap.sourceCodeFile;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javaparser.JParser;
 
@@ -21,17 +18,12 @@ import javaparser.JParser;
 public class Main {
 	
 	public static void main(String[] args) throws Exception{
-		int prevDays;
-		String path;
-		ArrayList<iToken> listOfAuthors;
+		int prevDays = 3; //default to three days
+		String path = ""; //TODO put together a test repo
+		ArrayList<Author> listOfAuthors = new ArrayList<Author>();
 		GlyphGraph graph = new GlyphGraph();
 		
 		/* Prompt user for input */
-		System.out.println("How many days would you like commits from? ");
-		Scanner scan = new Scanner(System.in);
-		prevDays = scan.nextInt();
-		System.out.println("What is your repository file path? ");
-		path = scan.next();
 		//TODO Add in a file not found exception here
 		
 		/* Send filepath to gitparser
@@ -41,7 +33,7 @@ public class Main {
 		
 		/* Creates author objects, adds to graph */
 		for(String auths:parsedAuthors){
-			iToken a = new Author(auths);
+			Author a = new Author(auths);
 			listOfAuthors.add(a);
 			graph.addAuthor(a);
 		}
@@ -67,9 +59,8 @@ public class Main {
 			while(listOfAuthors.get(e).getName() != tmpAuthor){
 				e++;
 			}
-			Author tmp = (Author) listOfAuthors.get(e);
+			Author tmp = listOfAuthors.get(e);
 			tmp.addFile(jparsed);
-			
 		}
 		
 		/* Sends files to Java Parser*/
@@ -77,15 +68,12 @@ public class Main {
 		
 		/*Sends parsed files to get the diffs */
 		//GitDiffs
-		
+	
 		/*Adds the glyph objects to the graph with weighted edges*/
-		for(iToken author:listOfAuthors){
-			Edgify.addAuthorsGlyphs(author);
+		Edgify edgify = new Edgify(graph);
+		for(Author author:listOfAuthors){
+			edgify.addAuthorsGlyphs(author);
 		}
-		
-		
-		
-		
 	
 	}
 }
