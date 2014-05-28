@@ -30,6 +30,7 @@ public class GlyphGraph {
 	 * Also  creates new vertex for author in graph
 	 */
 	public void add(Author a){
+		//FIXME Check to see if it's already there (maybe the caller does this?)
 		authors.add(a);
 		g.addVertex(a);
 	}

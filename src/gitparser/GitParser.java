@@ -24,6 +24,7 @@ public class GitParser {
 	 * gitRecentFiles
 	 */
 	public GitParser(String path, int prevDays) throws Exception{
+		
 	}
 	
 	public ArrayList<String> getAuthors(){

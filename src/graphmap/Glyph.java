@@ -1,5 +1,7 @@
 package graphmap;
 
+import java.awt.Font;
+import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,9 +15,10 @@ import java.util.List;
  *
  */
 public class Glyph implements iToken{
-	String name;
-	int fontSize;
+	private String name;
 	private List<SourceCodeFile> files = new LinkedList<SourceCodeFile>();
+	private Font font;
+	private Point2D.Double home = new Point2D.Double();
 	//String file;
 	/*
 	 * Takes in the name of the glyph to be displayed.
@@ -37,15 +40,16 @@ public class Glyph implements iToken{
 	/*
 	 * Setter for fontSize
 	 */
-	public void setSize(int size){
-		fontSize=size;
+	public void setFont(Font font){
+		this.font = font;
 	}
 	/*
 	 * Getter for fontSize
 	 */
-	public int getSize(){
-		return fontSize;
+	public Font getFont(){
+		return font;
 	}
+	
 	/*
 	 * Goes through the Glyph's weight's
 	 * Retrieves the largest weight
@@ -59,4 +63,36 @@ public class Glyph implements iToken{
 		return files ;
 	}
 	
+	public Point2D.Double getHome() {
+		return home;
+	}
+	
+	public void setHome(Point2D.Double home) {
+		this.home = home;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Glyph other = (Glyph) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+		
 }
