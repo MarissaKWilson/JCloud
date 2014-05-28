@@ -23,6 +23,8 @@ abstract public class FontSizer {
 	public FontSizer(GlyphGraph g) {
 
 	}
+	// TODO Design a way to offset the font size based on other author's usage.
+	
 
 	abstract public Double calcWeight(iToken t, GlyphGraph g);
 
@@ -37,5 +39,6 @@ abstract public class FontSizer {
 		// glyph.setSize(size);
 
 	}
+	
 
 }
