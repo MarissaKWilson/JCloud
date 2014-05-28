@@ -1,5 +1,6 @@
 package gitparser;
 
+import graphmap.Author;
 import graphmap.SourceCodeFile;
 
 import java.io.File;
@@ -42,9 +43,21 @@ public class GitParser {
 		return null;
 	}
 
+	/**
+	 * Run a git log command to get the most recent files, populating with author information
+	 * 
+	 * @return
+	 */
 	public List<SourceCodeFile> findRecentFiles() {
 		System.out.println("GitParser: Run a git log command to get the most recent files");
 		//We'll need today's date and subtract from previous days
+		//e.g.
+//		SourceCodeFile scf = new SourceCodeFile(new File("abc.cpp"));
+//		Author author = new Author("Bobby Tables");
+//		scf.getAuthors().add(author); //link them both ways!
+//		author.getFiles().add(scf);
+		
+		
 		return new LinkedList<SourceCodeFile>();
 	}
 

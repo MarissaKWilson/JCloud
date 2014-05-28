@@ -18,7 +18,7 @@ public class Main {
 		int prevDays = 3; // default to three days
 		String path = ""; // TODO put together a test repo
 		
-		System.out.println("Main: Get the list of recently-modified files");
+		System.out.println("Main: Get the list of recently-modified files, with author info");
 		GitParser gitParser = new GitParser(path, prevDays);
 		List<SourceCodeFile> files = gitParser.findRecentFiles();
 		
@@ -28,7 +28,6 @@ public class Main {
 		System.out.println("Main: Determine which Java identifiers appear in the Git diffs");
 		gitParser.cull(files);
 		
-		System.out.println("Main: Link author to files");
 		System.out.println("Main: Edgify glyph to author, with weighted edge. Graph complete.");
 		GlyphGraph graph = new GlyphGraph();
 
