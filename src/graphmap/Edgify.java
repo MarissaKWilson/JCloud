@@ -1,6 +1,6 @@
 package graphmap;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Edgify class adds glyphs to glyph graph
@@ -24,8 +24,8 @@ public class Edgify {
 		int fileNum;
 		fileNum = a.numberOfFiles();
 		for(int i=0; i<=fileNum; i++){
-			sourceCodeFile f = a.getOneFile(i);
-			ArrayList<iToken> glyphs = f.getGlyphs();
+			SourceCodeFile f = a.getOneFile(i);
+			List<Glyph> glyphs = f.getGlyphs();
 			for(int e=0; e<glyphs.size(); e++){
 				WeightedEdge we = new WeightedEdge();
 				g.addGlyph(glyphs.get(e), we, a);

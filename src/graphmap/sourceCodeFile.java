@@ -1,7 +1,8 @@
 package graphmap;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 /**
  * sourceCodeFile holds the file associated with each commit and each
  * Author. File is the parsed java file, diffs have been removed already
@@ -10,12 +11,12 @@ import java.util.ArrayList;
  * @author M
  *
  */
-public class sourceCodeFile {
+public class SourceCodeFile {
 	File f;
 	/*
 	 * Takes in a file as constructor, sets as file
 	 */
-	public sourceCodeFile(File f){
+	public SourceCodeFile(File f){
 		this.f = f;
 	}
 
@@ -26,10 +27,11 @@ public class sourceCodeFile {
 		return f;
 	}
 	
-	public ArrayList<iToken> getGlyphs(){
-		ArrayList<iToken> glyphs = new ArrayList<iToken>();
-		//Get each string from the file
-		//Add to glyphs
-		return glyphs;
+	public List<Glyph> getGlyphs(){
+		return new LinkedList<Glyph>();
+	}
+	
+	public List<Author> getAuthors(){
+		return new LinkedList<Author>();
 	}
 }

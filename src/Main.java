@@ -1,4 +1,10 @@
+import gitparser.GitParser;
 import graphmap.GlyphGraph;
+import graphmap.SourceCodeFile;
+
+import java.util.List;
+
+import javaparser.JParser;
 
 /**
  * The main method Executes the main design of the program
@@ -11,9 +17,16 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		int prevDays = 3; // default to three days
 		String path = ""; // TODO put together a test repo
-
 		
-		System.out.println("Main: Convert files to glyphs");
+		System.out.println("Main: Get the list of recently-modified files");
+		GitParser gitParser = new GitParser(path, prevDays);
+		List<SourceCodeFile> files = gitParser.findRecentFiles();
+		
+		System.out.println("Main: Process the list of recently modified files to get all of their Java identifiers");
+		new JParser().populateGlyphs(files);
+		
+		System.out.println("Main: Determine which Java identifiers appear in the Git diffs");
+		gitParser.cull(files);
 		
 		System.out.println("Main: Link author to files");
 		System.out.println("Main: Edgify glyph to author, with weighted edge. Graph complete.");

@@ -1,13 +1,11 @@
 package gitparser;
 
+import graphmap.SourceCodeFile;
+
 import java.io.File;
 import java.util.ArrayList;
-
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.internal.storage.file.FileRepository;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.jgit.revwalk.RevWalk;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Takes in the date from the main method
@@ -24,16 +22,7 @@ public class GitParser {
 	 * Query to git
 	 * gitRecentFiles
 	 */
-	public GitParser(String path) throws Exception{
-		File gitDir = new File(path);
-		FileRepository repo=new FileRepository(gitDir);
-		Git git = new Git(repo);
-		RevWalk revwalk = new RevWalk(repo);
-		Iterable<RevCommit> commits = git.log().add(repo.resolve(Constants.HEAD)).all().call();
-		for (RevCommit revCommit : commits) {
-			//check for date
-			//make list of authors
-		}
+	public GitParser(String path, int prevDays) throws Exception{
 	}
 	
 	public ArrayList<String> getAuthors(){
@@ -51,6 +40,20 @@ public class GitParser {
 	public String getAuthor(File unparsed) {
 		// TODO create method for getAuthor(File)
 		return null;
+	}
+
+	public List<SourceCodeFile> findRecentFiles() {
+		System.out.println("GitParser: Run a git log command to get the most recent files");
+		//We'll need today's date and subtract from previous days
+		return new LinkedList<SourceCodeFile>();
+	}
+
+	/**
+	 * Given a list of source code files, remove the Glyphs that are not present in recent diffs
+	 * @param files
+	 */
+	public void cull(List<SourceCodeFile> files) {
+		
 	}
 	
 	/*

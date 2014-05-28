@@ -1,4 +1,8 @@
 package graphmap;
+
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Glyph class
  * Holds the text of the glyph
@@ -11,9 +15,12 @@ package graphmap;
 public class Glyph implements iToken{
 	String name;
 	int fontSize;
+	private List<SourceCodeFile> files = new LinkedList<SourceCodeFile>();
 	//String file;
 	/*
-	 * Takes in the name of the glyph to be displayed
+	 * Takes in the name of the glyph to be displayed.
+	 * 
+	 * This is a Java identifier that was populated in JParser
 	 */
 	public Glyph(String name){
 		this.name = name;
@@ -47,4 +54,9 @@ public class Glyph implements iToken{
 	public Author getPrimary(){
 		return null;
 	}
+	
+	public List<SourceCodeFile> getSourceCodeFiles(){
+		return files ;
+	}
+	
 }
