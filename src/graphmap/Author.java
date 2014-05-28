@@ -28,31 +28,13 @@ public class Author implements iToken {
 	public String getName() {
 		return name;
 	}
-	/*
-	 * Adds file to the list of source files
-	 * associated with this author
-	 */
-	public void addFile(File source){
-		SourceCodeFile f = new SourceCodeFile(source);
-		sourceFiles.add(f);
-	}
+
 	/*
 	 * Returns the list of all source files
 	 * associated with this author
 	 */
 	public ArrayList<SourceCodeFile> getFiles(){
 		return sourceFiles;
-	}
-	/*
-	 * Returns the specific file associated
-	 * with the index number provided
-	 */
-	public SourceCodeFile getOneFile(int index){
-		return sourceFiles.get(index);
-	}
-	
-	public int numberOfFiles(){
-		return sourceFiles.size();
 	}
 	
 }
