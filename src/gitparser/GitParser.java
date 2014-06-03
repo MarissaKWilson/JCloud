@@ -1,10 +1,6 @@
 package gitparser;
-
-import graphmap.Author;
 import graphmap.SourceCodeFile;
-
 import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +13,7 @@ import java.util.List;
  */
 
 public class GitParser {
-	ArrayList<String> authors;
+	LinkedList<String> authors;
 	private String path;
 	private int prevDays;
 	
@@ -31,7 +27,7 @@ public class GitParser {
 		this.prevDays=prevDays;
 	}
 	
-	public ArrayList<String> getAuthors(){
+	public LinkedList<String> getAuthors(){
 		return authors;
 	}
 	

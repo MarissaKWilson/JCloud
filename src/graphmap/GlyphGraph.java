@@ -1,5 +1,5 @@
 package graphmap;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 
@@ -12,8 +12,8 @@ import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 
 public class GlyphGraph {
 	UndirectedSparseGraph<iToken,WeightedEdge> g;
-	ArrayList<Author> authors = new ArrayList<Author>(); //TODO Do we really need this? Graph has this list and maybe that's all we need
-	ArrayList<Glyph> glyphs = new ArrayList<Glyph>(); //TODO Do we really need this? Graph has this list and maybe that's all we need
+	LinkedList<Author> authors = new LinkedList<Author>(); //TODO Do we really need this? Graph has this list and maybe that's all we need
+	LinkedList<Glyph> glyphs = new LinkedList<Glyph>(); //TODO Do we really need this? Graph has this list and maybe that's all we need
 	
 	/*
 	 * Glyph Graph constructor
@@ -40,11 +40,11 @@ public class GlyphGraph {
 		g.addVertex(a);
 	}
 	
-	public ArrayList<Author> getAuthors(){
+	public LinkedList<Author> getAuthors(){
 		return authors;
 	}
 	
-	public ArrayList<Glyph> getGlyph(){
+	public LinkedList<Glyph> getGlyph(){
 		return glyphs;
 	}
 	

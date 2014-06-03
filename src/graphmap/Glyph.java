@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Glyph implements iToken{
 	private String name;
-	private List<SourceCodeFile> files = new LinkedList<SourceCodeFile>();
+	private LinkedList<SourceCodeFile> files = new LinkedList<SourceCodeFile>();
 	private Font font;
 	private Point2D.Double home = new Point2D.Double();
 	//String file;
