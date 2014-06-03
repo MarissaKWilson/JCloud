@@ -18,13 +18,17 @@ import java.util.List;
 
 public class GitParser {
 	ArrayList<String> authors;
-
+	private String path;
+	private int prevDays;
+	
 	/*
 	 * Query to git
 	 * gitRecentFiles
 	 */
 	public GitParser(String path, int prevDays) throws Exception{
-		
+		System.out.println("GitParser: Initialize GitParser");
+		this.path=path;
+		this.prevDays=prevDays;
 	}
 	
 	public ArrayList<String> getAuthors(){
@@ -36,11 +40,13 @@ public class GitParser {
 	 */
 	public File getNextFile() {
 		// TODO create method for getNextFile()
+		//Is this method still necessary?
 		return null;
 	}
 
 	public String getAuthor(File unparsed) {
 		// TODO create method for getAuthor(File)
+		//Is this method still necessary?
 		return null;
 	}
 
