@@ -1,9 +1,11 @@
 import gitparser.GitParser;
+import graphmap.Glyph;
 import graphmap.GlyphGraph;
 import graphmap.GlyphGraphFactory;
 import graphmap.SourceCodeFile;
 
 import java.awt.Dimension;
+import java.util.LinkedList;
 import java.util.List;
 
 import javaparser.JParser;
@@ -32,7 +34,7 @@ public class Main {
 		List<SourceCodeFile> files = gitParser.findRecentFiles();
 
 		System.out.println("Main: Process the list of recently modified files to get all of their Java identifiers");
-		new JParser().populateGlyphs(files);
+		LinkedList<Glyph> glyphList = new JParser().populateGlyphs(files);
 
 		System.out.println("Main: Determine which Java identifiers appear in the Git diffs");
 		gitParser.cull(files);

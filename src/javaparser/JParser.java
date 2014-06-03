@@ -1,9 +1,11 @@
 package javaparser;
 
 import graphmap.Glyph;
+import graphmap.GlyphGraph;
 import graphmap.SourceCodeFile;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ import java.util.List;
  */
 public class JParser {
 	//java Dictionary?
+	LinkedList<Glyph> unfilteredGlyphs = new LinkedList<Glyph>();
 
 	public File parse(File diffed) {
 		// TODO Auto-generated method stub
@@ -30,12 +33,14 @@ public class JParser {
 	 * 
 	 * @param files
 	 */
-	public void populateGlyphs(List<SourceCodeFile> files) {
+	public LinkedList populateGlyphs(List<SourceCodeFile> files) {
 		System.out.println("JParser: Check each element, if not Java keyword create Glyph");
 		// TODO Auto-generated method stub
 		
-		Glyph g = new Glyph("str");
+		System.out.println("Create new Glyph, add to list");
+		unfilteredGlyphs.add(new Glyph("str"));
 		
+		return unfilteredGlyphs;
 	}
 
 	
