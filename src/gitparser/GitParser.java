@@ -56,12 +56,13 @@ public class GitParser {
 		
 		System.out.println("GitParser: Run a git log command to get the most recent files");
 		//We'll need today's date and subtract from previous days
+		//checkDate goes here in a while-loop
 		//e.g.
 //		SourceCodeFile scf = new SourceCodeFile(new File("abc.cpp"));
 //		Author author = new Author("Bobby Tables");
 //		scf.getAuthors().add(author); //link them both ways!
 //		author.getFiles().add(scf);
-		
+
 		authors = getAuthors();
 		
 		return new LinkedList<SourceCodeFile>();
