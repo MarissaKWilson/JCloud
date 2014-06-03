@@ -23,7 +23,7 @@ public class JParser {
 	//java Dictionary?
 	LinkedList<Glyph> unfilteredGlyphs = new LinkedList<Glyph>();
 
-	public File parse(File diffed) {
+	public SourceCodeFile parse(SourceCodeFile diffed) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,14 +33,21 @@ public class JParser {
 	 * 
 	 * @param files
 	 */
-	public LinkedList populateGlyphs(List<SourceCodeFile> files) {
-		System.out.println("JParser: Check each element, if not Java keyword create Glyph");
+	public void populateGlyphs(List<SourceCodeFile> files) {
+		System.out.println("JParser: Parse file for keyword identification");
 		// TODO Auto-generated method stub
+		int i = 0;
+		files.set(i, parse(files.get(i)));
 		
 		System.out.println("Create new Glyph, add to list");
-		unfilteredGlyphs.add(new Glyph("str"));
+		int e=0;
 		
-		return unfilteredGlyphs;
+		//Get each file
+		//Get each string
+		//make into glyph
+		//add glyph to SourceCodeFile list
+		
+		
 	}
 
 	

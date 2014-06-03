@@ -34,7 +34,7 @@ public class Main {
 		List<SourceCodeFile> files = gitParser.findRecentFiles();
 
 		System.out.println("Main: Process the list of recently modified files to get all of their Java identifiers");
-		LinkedList<Glyph> glyphList = new JParser().populateGlyphs(files);
+		new JParser().populateGlyphs(files);
 
 		System.out.println("Main: Determine which Java identifiers appear in the Git diffs");
 		gitParser.cull(files);
