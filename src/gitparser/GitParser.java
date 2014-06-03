@@ -28,6 +28,7 @@ public class GitParser {
 	}
 	
 	public LinkedList<String> getAuthors(){
+		System.out.println("GitParser: Populate authors list from recent files");
 		return authors;
 	}
 	
@@ -52,6 +53,7 @@ public class GitParser {
 	 * @return
 	 */
 	public List<SourceCodeFile> findRecentFiles() {
+		
 		System.out.println("GitParser: Run a git log command to get the most recent files");
 		//We'll need today's date and subtract from previous days
 		//e.g.
@@ -60,8 +62,19 @@ public class GitParser {
 //		scf.getAuthors().add(author); //link them both ways!
 //		author.getFiles().add(scf);
 		
+		authors = getAuthors();
 		
 		return new LinkedList<SourceCodeFile>();
+	}
+	
+	/*
+	 * Checks the provided date against the range to be collected from
+	 * If within the intended range return true
+	 * else return false
+	 */
+	public boolean checkDate(int day){
+		System.out.println("GitParser: Check date of commit against requested date range");
+		return true;
 	}
 
 	/**
