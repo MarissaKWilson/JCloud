@@ -23,11 +23,7 @@ public class JParser {
 	//java Dictionary?
 	LinkedList<Glyph> unfilteredGlyphs = new LinkedList<Glyph>();
 
-	public SourceCodeFile parse(SourceCodeFile diffed) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	/**
 	 * Given all of these source code files, create the glyph objects. Link the files to the glyphs.
 	 * 
@@ -38,22 +34,14 @@ public class JParser {
 		// TODO Auto-generated method stub
 		
 		
-		System.out.println("Create new Glyph, add to list");
-		int e=0;
+		System.out.println("JParser: For each SCF create new Glyph, add to SCF list");
 		
 		//Get each file
 		//Get each string
 		//make into glyph
 		//add glyph to SourceCodeFile list
-		
+		Glyph g = new Glyph(" ");
 		
 	}
-
-	
-	/*
-	 * Heres a file
-	 * Give me the tokens in the glyph graph without edges
-	 * Associate file with token
-	 */
 	
 }
