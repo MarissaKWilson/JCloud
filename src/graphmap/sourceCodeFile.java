@@ -14,7 +14,9 @@ import java.util.List;
 public class SourceCodeFile {
 	File f;
 	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
-	LinkedList<Author> authors = new LinkedList<Author>();
+	//LinkedList<Author> authors = new LinkedList<Author>();
+	//I don't think this needs to be a list. Any commit should only have one author, right?
+	Author author = new Author(" ");
 	/*
 	 * Takes in a file as constructor, sets as file
 	 */
@@ -33,7 +35,7 @@ public class SourceCodeFile {
 		return glyphs;
 	}
 	
-	public List<Author> getAuthors(){
-		return authors;
+	public Author getAuthor(){
+		return author;
 	}
 }

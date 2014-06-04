@@ -67,7 +67,7 @@ public class GitParser {
 //		scf.getAuthors().add(author); //link them both ways!
 //		author.getFiles().add(scf);
 
-		authors = getAuthors();
+		Author auth = getAuthor("Bill");
 		
 		return new LinkedList<SourceCodeFile>();
 	}
