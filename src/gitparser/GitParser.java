@@ -36,20 +36,7 @@ public class GitParser {
 		return a;
 	}
 	
-	/*
-	 * Grabs the next file in the stack
-	 */
-	public File getNextFile() {
-		// TODO create method for getNextFile()
-		//Is this method still necessary?
-		return null;
-	}
 
-	public String getAuthor(File unparsed) {
-		// TODO create method for getAuthor(File)
-		//Is this method still necessary?
-		return null;
-	}
 
 	/**
 	 * Run a git log command to get the most recent files, populating with author information
