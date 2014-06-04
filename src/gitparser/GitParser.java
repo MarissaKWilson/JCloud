@@ -1,5 +1,7 @@
 package gitparser;
+import graphmap.Author;
 import graphmap.SourceCodeFile;
+
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
  */
 
 public class GitParser {
-	LinkedList<String> authors;
+	LinkedList<Author> authors;
 	private String path;
 	private int prevDays;
 	
@@ -27,9 +29,11 @@ public class GitParser {
 		this.prevDays=prevDays;
 	}
 	
-	public LinkedList<String> getAuthors(){
-		System.out.println("GitParser: Populate authors list from recent files");
-		return authors;
+	public Author getAuthor(String name){
+		System.out.println("GitParser: Finds the authors from each commit, creates Author objects");
+		Author a = new Author(name);
+		//TODO connect author and SCF
+		return a;
 	}
 	
 	/*
@@ -83,6 +87,7 @@ public class GitParser {
 	 * @param files
 	 */
 	public void cull(List<SourceCodeFile> files) {
+		
 		
 	}
 	

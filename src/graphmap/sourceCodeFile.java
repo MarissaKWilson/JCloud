@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class SourceCodeFile {
 	File f;
+	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
+	LinkedList<Author> authors = new LinkedList<Author>();
 	/*
 	 * Takes in a file as constructor, sets as file
 	 */
@@ -28,10 +30,10 @@ public class SourceCodeFile {
 	}
 	
 	public List<Glyph> getGlyphs(){
-		return new LinkedList<Glyph>();
+		return glyphs;
 	}
 	
 	public List<Author> getAuthors(){
-		return new LinkedList<Author>();
+		return authors;
 	}
 }

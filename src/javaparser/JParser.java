@@ -36,8 +36,7 @@ public class JParser {
 	public void populateGlyphs(List<SourceCodeFile> files) {
 		System.out.println("JParser: Parse file for keyword identification");
 		// TODO Auto-generated method stub
-		int i = 0;
-		files.set(i, parse(files.get(i)));
+		
 		
 		System.out.println("Create new Glyph, add to list");
 		int e=0;

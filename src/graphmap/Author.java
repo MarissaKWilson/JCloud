@@ -17,6 +17,7 @@ public class Author implements iToken {
 	//picture functionality will be added later
 	
 	public Author(String name){
+		System.out.println("Author: Initialize new Author");
 		this.name = name;
 	}
 	/*
