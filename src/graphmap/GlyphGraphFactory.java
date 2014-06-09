@@ -24,6 +24,7 @@ public class GlyphGraphFactory {
 	 * @param files
 	 */
 	public GlyphGraph edgify(List<SourceCodeFile> files) {
+		System.out.println("GlyphGraph: Iterate through SCF, add ");
 		// int fileNum;
 		// fileNum = a.numberOfFiles();
 		// for(int i=0; i<=fileNum; i++){

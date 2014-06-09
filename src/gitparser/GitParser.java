@@ -36,8 +36,7 @@ public class GitParser {
 		return a;
 	}
 	
-
-
+	
 	/**
 	 * Run a git log command to get the most recent files, populating with author information
 	 * 
@@ -59,6 +58,7 @@ public class GitParser {
 		return new LinkedList<SourceCodeFile>();
 	}
 	
+	
 	/*
 	 * Checks the provided date against the range to be collected from
 	 * If within the intended range return true
@@ -74,6 +74,8 @@ public class GitParser {
 	 * @param files
 	 */
 	public void cull(List<SourceCodeFile> files) {
+		System.out.println(" ");
+		//TODO Coming back to this after some reading
 		
 		
 	}
