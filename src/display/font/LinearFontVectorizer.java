@@ -13,6 +13,7 @@ public class LinearFontVectorizer implements IGlyphVectorizer {
 
 	@Override
 	public GlyphVector forge(Glyph glyph) {
+		System.out.println("LinearFontVectorizer: Create each glyph font size on a linear scale.");
 		// Makes font size
 		// FIXME Get weighted edge another way
 		// int size = ceiling(log(((72*(glyph.Weight - min))/max-min)));
