@@ -32,6 +32,8 @@ public class RenderQueue {
 		new LinearFontVectorizer(graph);
 		System.out.println("Render Queue: Convert glyphs to vectors");
 		new SpiralStrategy().layout(resolution, graph);
+		System.out.println("RenderQueue: Rasterize graph vector to png.");
+		new Rasterizer().rasterize(resolution, graph);
 	}
 
 }
