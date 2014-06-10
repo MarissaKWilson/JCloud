@@ -12,6 +12,7 @@ public class Rasterizer {
 	 * @param graph
 	 */
 	public void rasterize(Dimension resolution, GlyphGraph graph){
+		System.out.println("Rasterizer: Create a png of the laid out graph.");
 		//This code might help:
 //		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 //		Graphics2D g2d = bi.createGraphics();
