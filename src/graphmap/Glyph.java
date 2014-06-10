@@ -36,18 +36,21 @@ public class Glyph implements iToken{
 	 */
 	@Override
 	public String getName() {
+		System.out.println("Glyph: Get name of Glyph");
 		return name;
 	}
 	/*
 	 * Setter for fontSize
 	 */
 	public void setFont(Font font){
+		System.out.println("Glyph: Set font for Glyph");
 		this.font = font;
 	}
 	/*
 	 * Getter for fontSize
 	 */
 	public Font getFont(){
+		System.out.println("Glyph: Get font for Glyph");
 		return font;
 	}
 	
@@ -61,14 +64,17 @@ public class Glyph implements iToken{
 	}
 	
 	public List<SourceCodeFile> getSourceCodeFiles(){
+		System.out.println("Glyph: Get SCF");
 		return files ;
 	}
 	
 	public Point2D.Double getHome() {
+		System.out.println("Glyph: Get home position");
 		return home;
 	}
 	
 	public void setHome(Point2D.Double home) {
+		System.out.println("Glyph: Set home position");
 		this.home = home;
 	}
 	

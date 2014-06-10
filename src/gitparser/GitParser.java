@@ -30,7 +30,7 @@ public class GitParser {
 	}
 	
 	public Author getAuthor(String name){
-		System.out.println("GitParser: Finds the authors from each commit, creates Author objects");
+		System.out.println("GitParser: Find the authors from each commit, create Author objects");
 		Author a = new Author(name);
 		//TODO connect author and SCF
 		return a;

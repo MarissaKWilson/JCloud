@@ -29,6 +29,7 @@ public class Author implements iToken {
 	 */
 	@Override
 	public String getName() {
+		System.out.println("Author: Get name of Author");
 		return name;
 	}
 
@@ -37,6 +38,7 @@ public class Author implements iToken {
 	 * associated with this author
 	 */
 	public ArrayList<SourceCodeFile> getFiles(){
+		System.out.println("Author: Get SCF of Author");
 		return sourceFiles;
 	}
 	

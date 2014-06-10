@@ -28,14 +28,22 @@ public class SourceCodeFile {
 	 * Returns the stored file
 	 */
 	public File getFile(){
+		System.out.println("SourceCodeFile: return stored file");
 		return f;
 	}
 	
 	public List<Glyph> getGlyphs(){
+		System.out.println("SourceCodeFile: return stored glyphs");
 		return glyphs;
 	}
 	
 	public Author getAuthor(){
+		System.out.println("SourceCodeFile: return stored author");
 		return author;
+	}
+	
+	public void setAuthor(Author a){
+		System.out.println("SourceCodeFile: set author");
+		author=a;
 	}
 }

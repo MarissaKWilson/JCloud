@@ -30,21 +30,25 @@ public class GlyphGraph {
 	 * Also  creates new vertex for author in graph
 	 */
 	public void add(Author a){
+		System.out.println("GlyphGraph: Add author if not present");
 		//FIXME Check to see if it's already there (maybe the caller does this?)
 		authors.add(a);
 		g.addVertex(a);
 	}
 	
 	public void add(Glyph a){
+		System.out.println("GlyphGraph: Add glyph if not present");
 		glyphs.add(a);
 		g.addVertex(a);
 	}
 	
 	public LinkedList<Author> getAuthors(){
+		System.out.println("GlyphGraph: return list of authors");
 		return authors;
 	}
 	
 	public LinkedList<Glyph> getGlyph(){
+		System.out.println("GlyphGraph: return list of glyphs");
 		return glyphs;
 	}
 	
@@ -54,6 +58,7 @@ public class GlyphGraph {
 	 * TODO If edge already exists, increment weight
 	 */
 	public boolean addGlyph(iToken glyph, WeightedEdge weight, iToken auth){
+		System.out.println("GlyphGraph: Creates the edge association between Author and Glyph using WeightedEdge");
 		g.addVertex(glyph);
 		return g.addEdge(weight, glyph, auth);
 		

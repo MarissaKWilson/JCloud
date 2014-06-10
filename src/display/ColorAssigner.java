@@ -7,6 +7,7 @@ package display;
 public class ColorAssigner {
 
 	public static void AssignColors(){
+		System.out.println("ColorAssigner: Assigns colors to glyphs before rasterizing");
 		
 	}
 }
