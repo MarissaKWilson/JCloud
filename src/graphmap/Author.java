@@ -1,5 +1,6 @@
 package graphmap;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class Author implements iToken {
 	ArrayList<SourceCodeFile> sourceFiles;
 	//File picture; 
 	//picture functionality will be added later
+	//private Point2D.Double desk = new Point2D.Double();
 	
 	public Author(String name){
 		System.out.println("Author: Initialize new Author");
