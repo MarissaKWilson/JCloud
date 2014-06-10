@@ -22,9 +22,13 @@ public class RenderQueue {
 	}
 	public void run() {
 		//TODO This is hard-coded for now, but could be more flexible
+		System.out.println("RenderQueue: Create new CenterStrategy");
 		new CenterStrategy().layout(resolution, graph);
+		System.out.println("RenderQueue: Create new CircleAuthorStrategy");
 		new CircleAuthorStrategy().layout(resolution, graph);
+		System.out.println("RenderQueue: Create new NetworkLayoutStrategy");
 		new NetworkLayoutStrategy().layout(resolution, graph);
+		System.out.println("RenderQueue: Create new FontVectorizer");
 		new LinearFontVectorizer(graph);
 		System.out.println("Render Queue: Convert glyphs to vectors");
 		new SpiralStrategy().layout(resolution, graph);

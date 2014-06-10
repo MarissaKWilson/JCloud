@@ -8,6 +8,8 @@ public class CenterStrategy implements IPlacementStrategy {
 
 	@Override
 	public void layout(Dimension2D resolution, GlyphGraph g) {
+		System.out.println("CenterStrategy: Determine center of given area");
+		//Do we really need the glyphgraph here if this is all this does?
 		// TODO Auto-generated method stub
 
 	}
