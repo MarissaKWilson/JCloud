@@ -2,7 +2,6 @@ package graphmap;
 /**
  * Contains data for the edge of the vertices
  * 
- * How will weighted edges be retrieved?
  * @author M
  *
  */

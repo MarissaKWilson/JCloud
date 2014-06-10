@@ -26,7 +26,7 @@ public class Glyph implements iToken{
 	 * This is a Java identifier that was populated in JParser
 	 */
 	public Glyph(String name){
-		System.out.println("Glyph: Create new glyph");
+		System.out.println("		Glyph: Create new glyph");
 		this.name = name;
 	}
 	/*

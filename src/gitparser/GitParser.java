@@ -24,7 +24,7 @@ public class GitParser {
 	 * gitRecentFiles
 	 */
 	public GitParser(String path, int prevDays) throws Exception{
-		System.out.println("GitParser: Initialize GitParser");
+		System.out.println("	GitParser: Initialize GitParser");
 		this.path=path;
 		this.prevDays=prevDays;
 	}
@@ -44,7 +44,7 @@ public class GitParser {
 	 */
 	public List<SourceCodeFile> findRecentFiles() {
 		
-		System.out.println("GitParser: Run a git log command to get the most recent files");
+		System.out.println("	GitParser: Run a git log command to get the most recent files");
 		//We'll need today's date and subtract from previous days
 		//checkDate goes here in a while-loop
 		//e.g.
@@ -53,7 +53,7 @@ public class GitParser {
 //		scf.getAuthors().add(author); //link them both ways!
 //		author.getFiles().add(scf);
 
-		Author auth = getAuthor("Bill");
+		//Author auth = getAuthor("Bill");
 		
 		return new LinkedList<SourceCodeFile>();
 	}
@@ -74,7 +74,7 @@ public class GitParser {
 	 * @param files
 	 */
 	public void cull(List<SourceCodeFile> files) {
-		System.out.println("GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
+		System.out.println("	GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
 		
 		
 		

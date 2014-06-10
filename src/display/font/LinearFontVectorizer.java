@@ -7,13 +7,16 @@ import java.awt.Font;
 import java.awt.font.GlyphVector;
 
 public class LinearFontVectorizer implements IGlyphVectorizer {
+	GlyphGraph g;
 
 	public LinearFontVectorizer(GlyphGraph g){
+	this.g=g;
+	forge(new Glyph("gl"));
 	}
 
 	@Override
 	public GlyphVector forge(Glyph glyph) {
-		System.out.println("LinearFontVectorizer: Create each glyph font size on a linear scale.");
+		System.out.println("		LinearFontVectorizer: Create each glyph font size on a linear scale.");
 		// Makes font size
 		// FIXME Get weighted edge another way
 		// int size = ceiling(log(((72*(glyph.Weight - min))/max-min)));

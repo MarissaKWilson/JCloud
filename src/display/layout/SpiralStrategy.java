@@ -8,7 +8,7 @@ public class SpiralStrategy implements IPlacementStrategy {
 
 	@Override
 	public void layout(Dimension2D resolution, GlyphGraph g) {
-		System.out.println("SpiralStrategy: Follow spiral pattern outwards from Network placement");
+		System.out.println("		SpiralStrategy: Follow spiral pattern outwards from Network placement");
 		// TODO Auto-generated method stub
 		
 	}

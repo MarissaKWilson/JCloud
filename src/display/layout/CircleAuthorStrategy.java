@@ -13,7 +13,7 @@ public class CircleAuthorStrategy implements IPlacementStrategy {
 
 	@Override
 	public void layout(Dimension2D resolution, GlyphGraph g) {
-		System.out.println("CircleAuthorStrategy: Find each author's position, set as author's desk");
+		System.out.println("		CircleAuthorStrategy: Find each author's position, set as author's desk");
 		// TODO Auto-generated method stub
 
 	}

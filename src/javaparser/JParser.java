@@ -30,11 +30,11 @@ public class JParser {
 	 * @param files
 	 */
 	public void populateGlyphs(List<SourceCodeFile> files) {
-		System.out.println("JParser: Parse file for keyword identification");
+		System.out.println("	JParser: Parse file for keyword identification");
 		// TODO Auto-generated method stub
 		
 		
-		System.out.println("JParser: For each SCF create new Glyph, add to SCF list");
+		System.out.println("	JParser: For each SCF create new Glyph, add to SCF list");
 		
 		//Get each file
 		//Get each string
