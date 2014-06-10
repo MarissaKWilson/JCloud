@@ -74,8 +74,8 @@ public class GitParser {
 	 * @param files
 	 */
 	public void cull(List<SourceCodeFile> files) {
-		System.out.println(" ");
-		//TODO Coming back to this after some reading
+		System.out.println("GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
+		
 		
 		
 	}
