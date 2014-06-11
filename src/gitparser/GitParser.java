@@ -6,6 +6,9 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+
 /**
  * Takes in the date from the main method
  * Retrieves all commits from present to the date
@@ -16,17 +19,19 @@ import java.util.List;
 
 public class GitParser {
 	LinkedList<Author> authors;
-	private String path;
+	private File path;
+	private Repository repo;
 	private int prevDays;
 	
 	/*
 	 * Query to git
 	 * gitRecentFiles
 	 */
-	public GitParser(String path, int prevDays) throws Exception{
+	public GitParser(String pathstr, int prevDays) throws Exception{
 		System.out.println("	GitParser: Initialize GitParser");
-		this.path=path;
+		path = new File(pathstr);
 		this.prevDays=prevDays;
+		repo =  new FileRepositoryBuilder().setGitDir(path).readEnvironment().findGitDir().build();
 	}
 	
 	public Author getAuthor(String name){
