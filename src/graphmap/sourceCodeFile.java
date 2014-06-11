@@ -46,4 +46,6 @@ public class SourceCodeFile {
 		System.out.println("SourceCodeFile: set author");
 		author=a;
 	}
+	
+	//TODO hashcode
 }

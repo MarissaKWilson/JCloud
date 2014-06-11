@@ -42,4 +42,5 @@ public class Author implements iToken {
 		return sourceFiles;
 	}
 	
+	//TODO hashcode
 }
