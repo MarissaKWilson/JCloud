@@ -35,20 +35,19 @@ public class GitParser {
 	private Calendar today;
 	private boolean loaded = false;
 	
-	/*
-	 * Query to git
-	 * gitRecentFiles
+	/**
+	 * Constructor
+	 * Given a file path, creates new repo
+	 * 
+	 * @param pathstr path of repo, prevDays number of days to review
 	 */
 	public GitParser(String pathstr, int prevDays) throws Exception{
 		System.out.println("	GitParser: Initialize GitParser");
 		System.out.println(today.toString());
 		path = new File(pathstr);
 		this.prevDays=prevDays;
-		//This line brought over from old code and edited to fit
 		repo =  new FileRepositoryBuilder().setGitDir(path).readEnvironment().findGitDir().build();
 	}
-	
-	
 	
 	/**
 	 * Run a git log command to get the most recent files, populating with author information
@@ -70,34 +69,15 @@ public class GitParser {
 				//SourceCodeFile sf = new SourceCodeFile(file);
 				//dev.sourceFiles.add(sf);
 				//sf.setAuthor(dev);
+				//scf.add(sf);
 			}
 		}		
-		return new LinkedList<SourceCodeFile>();
-		
+		return scf;
 	}
 	
 	public void dateHandling(){
 		//TODO Create since from prevDays and today
-			}
-	
-	/*
-	 * Checks the provided date against the range to be collected from
-	 * If within the intended range return true
-	 * else return false
-	 */
-	public boolean checkDate(int day){
-		System.out.println("GitParser: Check date of commit against requested date range");
-		return true;
 	}
-
-	
-	public Author getAuthor(String name){
-		System.out.println("GitParser: Find the authors from each commit, create Author objects");
-		Author a = new Author(name);
-		//TODO connect author and SCF
-		return a;
-	}
-	
 	
 	/**
 	 * Given a list of source code files, remove the Glyphs that are not present in recent diffs
@@ -106,9 +86,13 @@ public class GitParser {
 	public void cull(List<SourceCodeFile> files) {
 		System.out.println("	GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
 		
-		
 	}
 	
+	/**
+	 * Creates a new RevWalk and assigns a head
+	 * Marks commits to be uninteresting of after the selected date
+	 * @return RevWalk
+	 */
 	private RevWalk loadRevWalk() {
 		RevWalk rw = new RevWalk(repo);
 		try {
