@@ -61,7 +61,7 @@ public class GitParser {
 		
 		System.out.println("	GitParser: Run a git log command to get the most recent files");
 		//List of sourcecodefiles (scf)
-		LinkedList scf = new LinkedList(); 
+		LinkedList<SourceCodeFile> scf = new LinkedList<SourceCodeFile>(); 
 		
 		if (!loaded) {
 			Iterator<RevCommit> itr = loadRevWalk().iterator();
@@ -72,10 +72,10 @@ public class GitParser {
 					//TODO convert commit to file
 					//Things may have to work with commit
 
-					//SourceCodeFile sf = new SourceCodeFile(file);
-					//dev.sourceFiles.add(sf);
-					//sf.setAuthor(dev);
-					//scf.add(sf);
+					SourceCodeFile sf = new SourceCodeFile(commit);
+					dev.setFile(sf);
+					sf.setAuthor(dev);
+					scf.add(sf);
 				} else{
 					break;
 				}
@@ -84,11 +84,11 @@ public class GitParser {
 		return scf;
 	}
 	
-	public void dateHandling(){
-		//TODO Create since from prevDays and today
-		
-	}
-	
+	/**
+	 * Checks a given commit to see if it is in the date range
+	 * @param commit
+	 * @return true if outside the range, false if within the range
+	 */
 	public boolean dateOutsideRange(RevCommit commit){
 		int comDate = commit.getCommitTime();
 		if(comDate >= totalTime-(prevDays*86400)){
@@ -104,7 +104,10 @@ public class GitParser {
 	 */
 	public void cull(List<SourceCodeFile> files) {
 		System.out.println("	GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
-		
+		for(SourceCodeFile f : files){
+			//Trying to figure out the logic here
+			//May have to revisit after JParser
+		}
 	}
 	
 	/**
@@ -129,5 +132,4 @@ public class GitParser {
 		}
 		return rw;
 	}
-
 }

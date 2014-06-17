@@ -3,6 +3,8 @@ package graphmap;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.eclipse.jgit.revwalk.RevCommit;
 /**
  * sourceCodeFile holds the file associated with each commit and each
  * Author. File is the parsed java file, diffs have been removed already
@@ -12,7 +14,7 @@ import java.util.List;
  *
  */
 public class SourceCodeFile {
-	File f;
+	RevCommit c;
 	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
 	//LinkedList<Author> authors = new LinkedList<Author>();
 	//I don't think this needs to be a list. Any commit should only have one author, right?
@@ -20,16 +22,16 @@ public class SourceCodeFile {
 	/*
 	 * Takes in a file as constructor, sets as file
 	 */
-	public SourceCodeFile(File f){
-		this.f = f;
+	public SourceCodeFile(RevCommit commit){
+		this.c = commit;
 	}
 
 	/*
 	 * Returns the stored file
 	 */
-	public File getFile(){
+	public RevCommit getFile(){
 		System.out.println("SourceCodeFile: return stored file");
-		return f;
+		return c;
 	}
 	
 	public List<Glyph> getGlyphs(){

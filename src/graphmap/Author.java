@@ -42,5 +42,9 @@ public class Author implements iToken {
 		return sourceFiles;
 	}
 	
+	public void setFile(SourceCodeFile f){
+		sourceFiles.add(f);
+	}
+	
 	//TODO hashcode
 }
