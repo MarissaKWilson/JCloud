@@ -3,10 +3,17 @@ import graphmap.Author;
 import graphmap.SourceCodeFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.jgit.errors.IncorrectObjectTypeException;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
@@ -17,11 +24,13 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
  *
  */
 
-public class GitParser {
-	LinkedList<Author> authors;
+public class GitParser {	
+	private LinkedList<Author> authors;
 	private File path;
 	private Repository repo;
 	private int prevDays;
+	private ObjectId since;
+	private Calendar today;
 	
 	/*
 	 * Query to git
@@ -29,17 +38,13 @@ public class GitParser {
 	 */
 	public GitParser(String pathstr, int prevDays) throws Exception{
 		System.out.println("	GitParser: Initialize GitParser");
+		System.out.println(today.toString());
 		path = new File(pathstr);
 		this.prevDays=prevDays;
+		//This line brought over from old code and edited to fit
 		repo =  new FileRepositoryBuilder().setGitDir(path).readEnvironment().findGitDir().build();
 	}
 	
-	public Author getAuthor(String name){
-		System.out.println("GitParser: Find the authors from each commit, create Author objects");
-		Author a = new Author(name);
-		//TODO connect author and SCF
-		return a;
-	}
 	
 	
 	/**
@@ -52,6 +57,7 @@ public class GitParser {
 		System.out.println("	GitParser: Run a git log command to get the most recent files");
 		//We'll need today's date and subtract from previous days
 		//checkDate goes here in a while-loop
+		
 		//e.g.
 //		SourceCodeFile scf = new SourceCodeFile(new File("abc.cpp"));
 //		Author author = new Author("Bobby Tables");
@@ -61,8 +67,12 @@ public class GitParser {
 		//Author auth = getAuthor("Bill");
 		
 		return new LinkedList<SourceCodeFile>();
+		
 	}
 	
+	public void dateHandling(){
+		//TODO Create since from prevDays and today
+			}
 	
 	/*
 	 * Checks the provided date against the range to be collected from
@@ -74,6 +84,15 @@ public class GitParser {
 		return true;
 	}
 
+	
+	public Author getAuthor(String name){
+		System.out.println("GitParser: Find the authors from each commit, create Author objects");
+		Author a = new Author(name);
+		//TODO connect author and SCF
+		return a;
+	}
+	
+	
 	/**
 	 * Given a list of source code files, remove the Glyphs that are not present in recent diffs
 	 * @param files
@@ -82,13 +101,25 @@ public class GitParser {
 		System.out.println("	GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
 		
 		
-		
 	}
 	
-	/*
-	 * Iterate over recent files
-	 * Send to JParser
-	 */
-	
+	private RevWalk loadRevWalk() {
+		RevWalk rw = new RevWalk(repo);
+		try {
+			ObjectId head = repo.resolve(Constants.HEAD);
+			rw.markStart(rw.parseCommit(head));
+			rw.markUninteresting(rw.parseCommit(since));
+		} catch (org.eclipse.jgit.errors.MissingObjectException e) {
+			System.err.println("Error loading git repo.");
+			e.printStackTrace();
+		} catch (IncorrectObjectTypeException e) {
+			System.err.println("Error loading git repo.");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.err.println("Error loading git repo.");
+			e.printStackTrace();
+		}
+		return rw;
+	}
 
 }
