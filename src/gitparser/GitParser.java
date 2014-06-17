@@ -20,8 +20,9 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
  * Takes in the date from the main method
- * Retrieves all commits from present to the date
- * Passes commits to java parser
+ * Retrieves all commits from present to the date specified
+ * Find all authors from each commit, associates them with their SourceCodeFiles
+ * Returns commits to Main
  * @author M
  *
  */
@@ -31,6 +32,8 @@ public class GitParser {
 	private File path;
 	private Repository repo;
 	private int prevDays;
+	//Total time from the git epoch until now
+	private int totalTime;
 	private ObjectId since;
 	private Calendar today;
 	private boolean loaded = false;
@@ -64,12 +67,18 @@ public class GitParser {
 			Iterator<RevCommit> itr = loadRevWalk().iterator();
 			while (itr.hasNext()) {
 				RevCommit commit = itr.next();
-				Author dev = new Author(commit.getAuthorIdent().getName());
-				//TODO convert commit to file
-				//SourceCodeFile sf = new SourceCodeFile(file);
-				//dev.sourceFiles.add(sf);
-				//sf.setAuthor(dev);
-				//scf.add(sf);
+				if (dateOutsideRange(commit) == false){
+					Author dev = new Author(commit.getAuthorIdent().getName());
+					//TODO convert commit to file
+					//Things may have to work with commit
+
+					//SourceCodeFile sf = new SourceCodeFile(file);
+					//dev.sourceFiles.add(sf);
+					//sf.setAuthor(dev);
+					//scf.add(sf);
+				} else{
+					break;
+				}
 			}
 		}		
 		return scf;
@@ -77,6 +86,16 @@ public class GitParser {
 	
 	public void dateHandling(){
 		//TODO Create since from prevDays and today
+		
+	}
+	
+	public boolean dateOutsideRange(RevCommit commit){
+		int comDate = commit.getCommitTime();
+		if(comDate >= totalTime-(prevDays*86400)){
+			return false;
+		}else{
+			return true;
+		}
 	}
 	
 	/**
@@ -98,7 +117,6 @@ public class GitParser {
 		try {
 			ObjectId head = repo.resolve(Constants.HEAD);
 			rw.markStart(rw.parseCommit(head));
-			rw.markUninteresting(rw.parseCommit(since));
 		} catch (org.eclipse.jgit.errors.MissingObjectException e) {
 			System.err.println("Error loading git repo.");
 			e.printStackTrace();
