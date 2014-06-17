@@ -46,7 +46,6 @@ public class GitParser {
 	 */
 	public GitParser(String pathstr, int prevDays) throws Exception{
 		System.out.println("	GitParser: Initialize GitParser");
-		System.out.println(today.toString());
 		path = new File(pathstr);
 		this.prevDays=prevDays;
 		repo =  new FileRepositoryBuilder().setGitDir(path).readEnvironment().findGitDir().build();
@@ -67,6 +66,9 @@ public class GitParser {
 			Iterator<RevCommit> itr = loadRevWalk().iterator();
 			while (itr.hasNext()) {
 				RevCommit commit = itr.next();
+				if(commit.getCommitTime() > totalTime){
+					totalTime = commit.getCommitTime();
+				}
 				if (dateOutsideRange(commit) == false){
 					Author dev = new Author(commit.getAuthorIdent().getName());
 					//TODO convert commit to file
@@ -80,6 +82,7 @@ public class GitParser {
 					break;
 				}
 			}
+			loaded = true;
 		}		
 		return scf;
 	}
@@ -90,6 +93,7 @@ public class GitParser {
 	 * @return true if outside the range, false if within the range
 	 */
 	public boolean dateOutsideRange(RevCommit commit){
+		System.out.println("	GitParser: Check if commit date is in range");
 		int comDate = commit.getCommitTime();
 		if(comDate >= totalTime-(prevDays*86400)){
 			return false;
@@ -116,6 +120,7 @@ public class GitParser {
 	 * @return RevWalk
 	 */
 	private RevWalk loadRevWalk() {
+		System.out.println("	GitParser: Create new RevWalk");
 		RevWalk rw = new RevWalk(repo);
 		try {
 			ObjectId head = repo.resolve(Constants.HEAD);
