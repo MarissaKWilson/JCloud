@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
@@ -31,6 +33,7 @@ public class GitParser {
 	private int prevDays;
 	private ObjectId since;
 	private Calendar today;
+	private boolean loaded = false;
 	
 	/*
 	 * Query to git
@@ -55,17 +58,20 @@ public class GitParser {
 	public List<SourceCodeFile> findRecentFiles() {
 		
 		System.out.println("	GitParser: Run a git log command to get the most recent files");
-		//We'll need today's date and subtract from previous days
-		//checkDate goes here in a while-loop
+		//List of sourcecodefiles (scf)
+		LinkedList scf = new LinkedList(); 
 		
-		//e.g.
-//		SourceCodeFile scf = new SourceCodeFile(new File("abc.cpp"));
-//		Author author = new Author("Bobby Tables");
-//		scf.getAuthors().add(author); //link them both ways!
-//		author.getFiles().add(scf);
-
-		//Author auth = getAuthor("Bill");
-		
+		if (!loaded) {
+			Iterator<RevCommit> itr = loadRevWalk().iterator();
+			while (itr.hasNext()) {
+				RevCommit commit = itr.next();
+				Author dev = new Author(commit.getAuthorIdent().getName());
+				//TODO convert commit to file
+				//SourceCodeFile sf = new SourceCodeFile(file);
+				//dev.sourceFiles.add(sf);
+				//sf.setAuthor(dev);
+			}
+		}		
 		return new LinkedList<SourceCodeFile>();
 		
 	}
