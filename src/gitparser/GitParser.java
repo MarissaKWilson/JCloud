@@ -40,6 +40,8 @@ public class GitParser {
 	private Date today;
 	private Date targetDate;
 	private boolean loaded = false;
+	private final String[] ignorePrefixes = { "index", "diff", "@@" };
+	private final String javaDelimiters = "[ ,;\\(\\)\\[\\]<>\\{\\}\\.:&\\|\\/\\+\\-]";
 
 	/**
 	 * Constructor
@@ -153,7 +155,7 @@ public class GitParser {
 			for(SourceCodeFile f : tmpFiles){
 				tmpGlyphs = f.getGlyphs();
 				for(Glyph g : tmpGlyphs){
-					if (isDiff(g) == false){
+					if (isDiff(g, f) == false){
 						f.cullGlyph(g);
 					}
 				}
@@ -170,8 +172,10 @@ public class GitParser {
 	 * @param g
 	 * @return
 	 */
-	private boolean isDiff(Glyph g) {
+	private boolean isDiff(Glyph g, SourceCodeFile f) {
 		// TODO Auto-generated method stub
+		
+		
 		return false;
 		
 	}
