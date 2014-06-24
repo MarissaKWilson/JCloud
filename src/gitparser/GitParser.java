@@ -1,5 +1,6 @@
 package gitparser;
 import graphmap.Author;
+import graphmap.Glyph;
 import graphmap.SourceCodeFile;
 
 import java.io.File;
@@ -36,7 +37,6 @@ public class GitParser {
 	private int prevDays;
 	//Total time from the git epoch until now
 	private int totalTime;
-	private ObjectId since;
 	private Date today;
 	private Date targetDate;
 	private boolean loaded = false;
@@ -83,6 +83,7 @@ public class GitParser {
 				RevCommit commit = itr.next();
 
 				Author dev = new Author(commit.getAuthorIdent().getName());
+				authors.add(dev);
 				//TODO convert commit to file
 				//Things may have to work with commit
 
@@ -111,17 +112,6 @@ public class GitParser {
 		}
 	}
 
-	/**
-	 * Given a list of source code files, remove the Glyphs that are not present in recent diffs
-	 * @param files
-	 */
-	public void cull(List<SourceCodeFile> files) {
-		System.out.println("	GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
-		for(SourceCodeFile f : files){
-			//Trying to figure out the logic here
-			//May have to revisit after JParser
-		}
-	}
 
 	/**
 	 * Creates a new RevWalk and assigns a head
@@ -147,5 +137,42 @@ public class GitParser {
 			e.printStackTrace();
 		}
 		return rw;
+	}
+	
+
+	/**
+	 * Given a list of source code files, remove the Glyphs that are not present in recent diffs
+	 * @param files
+	 */
+	public void cull(List<SourceCodeFile> files) {
+		System.out.println("	GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
+		LinkedList<SourceCodeFile> tmpFiles;
+		LinkedList<Glyph> tmpGlyphs;
+		for(Author a: authors){
+			tmpFiles = a.getFiles();
+			for(SourceCodeFile f : tmpFiles){
+				tmpGlyphs = f.getGlyphs();
+				for(Glyph g : tmpGlyphs){
+					if (isDiff(g) == false){
+						f.cullGlyph(g);
+					}
+				}
+			}
+		}
+		for(SourceCodeFile f : files){
+			//Trying to figure out the logic here
+			//May have to revisit after JParser
+		}
+	}
+	/**
+	 * returns true if the glyph is in the diff
+	 * false if the glyph has not been changed
+	 * @param g
+	 * @return
+	 */
+	private boolean isDiff(Glyph g) {
+		// TODO Auto-generated method stub
+		return false;
+		
 	}
 }

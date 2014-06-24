@@ -34,9 +34,14 @@ public class SourceCodeFile {
 		return c;
 	}
 	
-	public List<Glyph> getGlyphs(){
+	public LinkedList<Glyph> getGlyphs(){
 		System.out.println("SourceCodeFile: return stored glyphs");
 		return glyphs;
+	}
+	
+	public void cullGlyph(Glyph g){
+		System.out.println("SourceCodeFile: Remove unused glyph");
+		glyphs.remove(g);
 	}
 	
 	public Author getAuthor(){

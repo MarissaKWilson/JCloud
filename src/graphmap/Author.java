@@ -3,6 +3,7 @@ package graphmap;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Author class
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Author implements iToken {
 	String name;
-	ArrayList<SourceCodeFile> sourceFiles;
+	LinkedList<SourceCodeFile> sourceFiles;
 	//File picture; 
 	//picture functionality will be added later
 	//private Point2D.Double desk = new Point2D.Double();
@@ -37,7 +38,7 @@ public class Author implements iToken {
 	 * Returns the list of all source files
 	 * associated with this author
 	 */
-	public ArrayList<SourceCodeFile> getFiles(){
+	public LinkedList<SourceCodeFile> getFiles(){
 		System.out.println("Author: Get SCF of Author");
 		return sourceFiles;
 	}
