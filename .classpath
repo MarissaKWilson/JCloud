@@ -128,6 +128,7 @@
 	<classpathentry kind="lib" path="jars/trilead-ssh2-1.0.0-build217.jar"/>
 	<classpathentry kind="lib" path="jars/wstx-asl-3.2.6-sources.jar"/>
 	<classpathentry kind="lib" path="jars/wstx-asl-3.2.6.jar"/>
-	<classpathentry kind="lib" path="jars/org.eclipse.jgit_3.3.0.201403021825-r.jar"/>
+	<classpathentry kind="lib" path="jars/org.eclipse.jgit-3.3.2.201404171909-r-javadoc.jar"/>
+	<classpathentry kind="lib" path="jars/org.eclipse.jgit-3.3.2.201404171909-r.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
