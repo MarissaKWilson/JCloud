@@ -16,6 +16,8 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.revwalk.filter.CommitTimeRevFilter;
+import org.eclipse.jgit.revwalk.filter.RevFilter;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
@@ -35,9 +37,10 @@ public class GitParser {
 	//Total time from the git epoch until now
 	private int totalTime;
 	private ObjectId since;
-	private Calendar today;
+	private Date today;
+	private Date targetDate;
 	private boolean loaded = false;
-	
+
 	/**
 	 * Constructor
 	 * Given a file path, creates new repo
@@ -49,44 +52,50 @@ public class GitParser {
 		path = new File(pathstr);
 		this.prevDays=prevDays;
 		repo =  new FileRepositoryBuilder().setGitDir(path).readEnvironment().findGitDir().build();
+		setTargetDate();
 	}
-	
+
+	@SuppressWarnings("deprecation")
+	/**
+	 * Sets target date for use in RevWalk Filter
+	 * Using depreciated date functions as RevFilter
+	 * expects a Date object
+	 */
+	private void setTargetDate() {
+		targetDate.setDate(today.getDate() - prevDays);
+	}
+
 	/**
 	 * Run a git log command to get the most recent files, populating with author information
 	 * 
 	 * @return
 	 */
 	public List<SourceCodeFile> findRecentFiles() {
-		
+
 		System.out.println("	GitParser: Run a git log command to get the most recent files");
 		//List of sourcecodefiles (scf)
 		LinkedList<SourceCodeFile> scf = new LinkedList<SourceCodeFile>(); 
-		
+
 		if (!loaded) {
 			Iterator<RevCommit> itr = loadRevWalk().iterator();
+
 			while (itr.hasNext()) {
 				RevCommit commit = itr.next();
-				if(commit.getCommitTime() > totalTime){
-					totalTime = commit.getCommitTime();
-				}
-				if (dateOutsideRange(commit) == false){
-					Author dev = new Author(commit.getAuthorIdent().getName());
-					//TODO convert commit to file
-					//Things may have to work with commit
 
-					SourceCodeFile sf = new SourceCodeFile(commit);
-					dev.setFile(sf);
-					sf.setAuthor(dev);
-					scf.add(sf);
-				} else{
-					break;
-				}
+				Author dev = new Author(commit.getAuthorIdent().getName());
+				//TODO convert commit to file
+				//Things may have to work with commit
+
+				SourceCodeFile sf = new SourceCodeFile(commit);
+				dev.setFile(sf);
+				sf.setAuthor(dev);
+				scf.add(sf);
 			}
 			loaded = true;
 		}		
 		return scf;
 	}
-	
+
 	/**
 	 * Checks a given commit to see if it is in the date range
 	 * @param commit
@@ -101,7 +110,7 @@ public class GitParser {
 			return true;
 		}
 	}
-	
+
 	/**
 	 * Given a list of source code files, remove the Glyphs that are not present in recent diffs
 	 * @param files
@@ -113,7 +122,7 @@ public class GitParser {
 			//May have to revisit after JParser
 		}
 	}
-	
+
 	/**
 	 * Creates a new RevWalk and assigns a head
 	 * Marks commits to be uninteresting of after the selected date
@@ -122,6 +131,8 @@ public class GitParser {
 	private RevWalk loadRevWalk() {
 		System.out.println("	GitParser: Create new RevWalk");
 		RevWalk rw = new RevWalk(repo);
+		RevFilter after = CommitTimeRevFilter.after(targetDate);
+		rw.setRevFilter(after);
 		try {
 			ObjectId head = repo.resolve(Constants.HEAD);
 			rw.markStart(rw.parseCommit(head));
