@@ -37,8 +37,8 @@ public class GitParser {
 	private int prevDays;
 	//Total time from the git epoch until now
 	private int totalTime;
-	private Date today;
-	private Date targetDate;
+	private Date today = new Date();
+	private Date targetDate = new Date();
 	private boolean loaded = false;
 	private final String[] ignorePrefixes = { "index", "diff", "@@" };
 	private final String javaDelimiters = "[ ,;\\(\\)\\[\\]<>\\{\\}\\.:&\\|\\/\\+\\-]";
