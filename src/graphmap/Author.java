@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class Author implements iToken {
 	String name;
-	LinkedList<SourceCodeFile> sourceFiles;
+	LinkedList<SourceCodeFile> sourceFiles = new LinkedList<SourceCodeFile>();
 	//File picture; 
 	//picture functionality will be added later
 	//private Point2D.Double desk = new Point2D.Double();

@@ -32,7 +32,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
  */
 
 public class GitParser {	
-	private LinkedList<Author> authors;
+	private LinkedList<Author> authors = new LinkedList<Author>();
 	private File path;
 	private Repository repo;
 	private int prevDays;
@@ -90,8 +90,8 @@ public class GitParser {
 				//Things may have to work with commit
 
 				SourceCodeFile sf = new SourceCodeFile(commit);
-				dev.setFile(sf);
 				sf.setAuthor(dev);
+				dev.setFile(sf);
 				scf.add(sf);
 			}
 			loaded = true;

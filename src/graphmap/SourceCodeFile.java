@@ -24,6 +24,7 @@ public class SourceCodeFile {
 	 */
 	public SourceCodeFile(RevCommit commit){
 		this.c = commit;
+		System.out.println("		SourceCodeFile: Initiated");
 	}
 
 	/*
@@ -50,7 +51,7 @@ public class SourceCodeFile {
 	}
 	
 	public void setAuthor(Author a){
-		System.out.println("SourceCodeFile: set author");
+		System.out.println("		SourceCodeFile: set author");
 		author=a;
 	}
 	
