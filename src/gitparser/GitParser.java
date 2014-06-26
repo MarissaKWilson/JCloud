@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
@@ -83,8 +84,7 @@ public class GitParser {
 
 			while (itr.hasNext()) {
 				RevCommit commit = itr.next();
-
-				Author dev = new Author(commit.getAuthorIdent().getName());
+				Author dev = new Author(commit.getAuthorIdent().getEmailAddress());
 				authors.add(dev);
 				//TODO convert commit to file
 				//Things may have to work with commit

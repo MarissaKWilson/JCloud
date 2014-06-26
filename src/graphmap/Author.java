@@ -20,8 +20,9 @@ public class Author implements iToken {
 	//private Point2D.Double desk = new Point2D.Double();
 	
 	public Author(String name){
-		System.out.println("Author: Initialize new Author");
+		System.out.println("		Author: Initialize new Author");
 		this.name = name;
+		System.out.println("		Author is " + name);
 	}
 	/*
 	 * (non-Javadoc)
