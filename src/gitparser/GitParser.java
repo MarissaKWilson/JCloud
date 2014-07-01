@@ -32,6 +32,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
  */
 
 public class GitParser {	
+	private static final int DAY_IN_MS = 86400000;
 	private LinkedList<Author> authors = new LinkedList<Author>();
 	private File path;
 	private Repository repo;
@@ -39,8 +40,9 @@ public class GitParser {
 	//Total time from the git epoch until now
 	private int totalTime;
 	private Date today = new Date();
-	private Date targetDate = new Date();
+//	private Date targetDate = new Date();
 	private boolean loaded = false;
+	
 	private final String[] ignorePrefixes = { "index", "diff", "@@" };
 	private final String javaDelimiters = "[ ,;\\(\\)\\[\\]<>\\{\\}\\.:&\\|\\/\\+\\-]";
 
@@ -55,17 +57,18 @@ public class GitParser {
 		path = new File(pathstr);
 		this.prevDays=prevDays;
 		repo =  new FileRepositoryBuilder().setGitDir(path).readEnvironment().findGitDir().build();
-		setTargetDate();
+		
 	}
 
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	/**
 	 * Sets target date for use in RevWalk Filter
 	 * Using depreciated date functions as RevFilter
 	 * expects a Date object
 	 */
-	private void setTargetDate() {
-		targetDate.setDate(today.getDate() - prevDays);
+	private Date setTargetDate() {
+		Date targetDate = new Date(System.currentTimeMillis() - (prevDays* DAY_IN_MS));
+		return targetDate;
 	}
 
 	/**
@@ -78,6 +81,7 @@ public class GitParser {
 		System.out.println("	GitParser: Run a git log command to get the most recent files");
 		//List of sourcecodefiles (scf)
 		LinkedList<SourceCodeFile> scf = new LinkedList<SourceCodeFile>(); 
+		
 
 		if (!loaded) {
 			Iterator<RevCommit> itr = loadRevWalk().iterator();
@@ -122,6 +126,7 @@ public class GitParser {
 	 */
 	private RevWalk loadRevWalk() {
 		System.out.println("	GitParser: Create new RevWalk");
+		Date targetDate = setTargetDate();
 		RevWalk rw = new RevWalk(repo);
 		RevFilter after = CommitTimeRevFilter.after(targetDate);
 		rw.setRevFilter(after);
