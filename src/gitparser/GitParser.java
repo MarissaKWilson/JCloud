@@ -172,16 +172,24 @@ public class GitParser {
 		}
 	}
 	/**
+	 * Takes in a list of source code files
+	 * Identifies the diffs, passes off diffed strings to
+	 * JParser to be made into glyphs
+	 * @param files
+	 */
+	public void filterDiffs(List<SourceCodeFile> files){
+		for (SourceCodeFile f : files){
+			
+		}
+	}
+	/**
 	 * returns true if the glyph is in the diff
 	 * false if the glyph has not been changed
 	 * @param g
 	 * @return
 	 */
 	private boolean isDiff(Glyph g, SourceCodeFile f) {
-		// TODO Auto-generated method stub
-		
-		
+		// TODO Auto-generated method stub	
 		return false;
-		
 	}
 }
