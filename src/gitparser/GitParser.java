@@ -3,6 +3,7 @@ import graphmap.Author;
 import graphmap.Glyph;
 import graphmap.SourceCodeFile;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -11,6 +12,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
@@ -181,6 +183,24 @@ public class GitParser {
 		for (SourceCodeFile f : files){
 			
 		}
+	}
+	
+	public String buildDiffString() throws IOException {
+		RevWalk rw = loadRevWalk();
+		StringBuilder builder = new StringBuilder();
+		Iterator<RevCommit> itr = rw.iterator();
+		while (itr.hasNext()) {
+			RevCommit commit = itr.next();
+			RevCommit parent = commit.getParent(0); // TODO Handle multiple
+													// parents
+			System.out.println("Building diffstring, visiting commit: " + commit.getId().name());
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			DiffFormatter formatter = new DiffFormatter(out);
+			formatter.setRepository(repo);
+			formatter.format(commit, parent);
+			builder.append(out.toString());
+		}
+		return builder.toString();
 	}
 	/**
 	 * returns true if the glyph is in the diff

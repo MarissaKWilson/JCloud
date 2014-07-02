@@ -16,7 +16,8 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class SourceCodeFile {
 	RevCommit c;
 	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
-	//LinkedList<Author> authors = new LinkedList<Author>();
+	LinkedList<Author> authors = new LinkedList<Author>();
+	LinkedList<String> diffedTokens = new LinkedList<String>();
 	//I don't think this needs to be a list. Any commit should only have one author, right?
 	Author author = new Author(" ");
 	/*
@@ -52,7 +53,15 @@ public class SourceCodeFile {
 	
 	public void setAuthor(Author a){
 		System.out.println("		SourceCodeFile: set author");
-		author=a;
+		authors.add(a);
+	}
+	
+	public void setDiffed(List<String> tokens){
+		diffedTokens = tokens;
+	}
+	
+	public List getTokens(){
+		return diffedTokens;
 	}
 	
 	//TODO hashcode
