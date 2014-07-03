@@ -11,7 +11,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
+import org.chaoticbits.collabcloud.ISummarizable;
 import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.Constants;
@@ -87,18 +89,37 @@ public class GitParser {
 
 		if (!loaded) {
 			Iterator<RevCommit> itr = loadRevWalk().iterator();
-
+			
 			while (itr.hasNext()) {
 				RevCommit commit = itr.next();
 				Author dev = new Author(commit.getAuthorIdent().getEmailAddress());
 				authors.add(dev);
-				//TODO convert commit to file
-				//Things may have to work with commit
-
 				SourceCodeFile sf = new SourceCodeFile(commit);
 				sf.setAuthor(dev);
 				dev.setFile(sf);
 				scf.add(sf);
+				for (int parentIndex = 0; parentIndex < commit.getParentCount(); parentIndex++) {
+					RevCommit parent = commit.getParent(parentIndex);
+					ByteArrayOutputStream diff = new ByteArrayOutputStream();
+					DiffFormatter formatter = new DiffFormatter(diff);
+					formatter.setRepository(repo);
+					ISummarizable currentSummarizable = null;
+					try {
+						formatter.format(commit, parent);
+						Scanner scanner = new Scanner(diff.toString());
+						while (scanner.hasNextLine()) { // scan until the diff part
+							String line = scanner.nextLine();
+							if (isFile(line)) {
+								currentSummarizable = diffParser.makeSummarizable(line);
+							}
+							if (currentSummarizable != null)
+								diffParser.processTextLine(line, weights, contributions, dev, currentSummarizable);
+						}
+					} catch (IOException e) {
+						System.err.println("IO Exception on commit " + commit.getId().toString());
+						e.printStackTrace();
+					}
+				}
 			}
 			loaded = true;
 		}		
@@ -210,6 +231,18 @@ public class GitParser {
 	 */
 	private boolean isDiff(Glyph g, SourceCodeFile f) {
 		// TODO Auto-generated method stub	
+		return false;
+	}
+	
+	private boolean isFile(String line) {
+		return line.startsWith("+++");
+	}
+	
+	private boolean ignoreIt(String line) {
+		for (String prefix : ignorePrefixes) {
+			if (line.startsWith(prefix))
+				return true;
+		}
 		return false;
 	}
 }
