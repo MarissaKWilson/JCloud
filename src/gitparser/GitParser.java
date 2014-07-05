@@ -47,6 +47,7 @@ public class GitParser {
 	private Date today = new Date();
 //	private Date targetDate = new Date();
 	private boolean loaded = false;
+	gitDiffs diffs = new gitDiffs();
 	
 	private final String[] ignorePrefixes = { "index", "diff", "@@" };
 	private final String javaDelimiters = "[ ,;\\(\\)\\[\\]<>\\{\\}\\.:&\\|\\/\\+\\-]";
@@ -110,11 +111,11 @@ public class GitParser {
 						Scanner scanner = new Scanner(diff.toString());
 						while (scanner.hasNextLine()) { // scan until the diff part
 							String line = scanner.nextLine();
-							if (isFile(line)) {
-								currentSummarizable = diffParser.makeSummarizable(line);
+							if (diffs.isFile(line)) {
+								currentSummarizable = diffs.makeSummarizable(line);
 							}
 							if (currentSummarizable != null)
-								diffParser.processTextLine(line, weights, contributions, dev, currentSummarizable);
+								diffs.processTextLine(line, weights, contributions, dev, currentSummarizable);
 						}
 					} catch (IOException e) {
 						System.err.println("IO Exception on commit " + commit.getId().toString());
@@ -126,6 +127,7 @@ public class GitParser {
 		}		
 		return scf;
 	}
+
 
 	/**
 	 * Checks a given commit to see if it is in the date range
@@ -195,18 +197,7 @@ public class GitParser {
 			//May have to revisit after JParser
 		}
 	}
-	/**
-	 * Takes in a list of source code files
-	 * Identifies the diffs, passes off diffed strings to
-	 * JParser to be made into glyphs
-	 * @param files
-	 */
-	public void filterDiffs(List<SourceCodeFile> files){
-		for (SourceCodeFile f : files){
-			
-		}
-	}
-	
+
 	public String buildDiffString() throws IOException {
 		RevWalk rw = loadRevWalk();
 		StringBuilder builder = new StringBuilder();
@@ -247,7 +238,4 @@ public class GitParser {
 		return false;
 	}
 	
-	public JavaClassSummarizable makeSummarizable(String plusLine) {
-		return new JavaClassSummarizable(new File(plusLine.substring(6)));
-	}
 }
