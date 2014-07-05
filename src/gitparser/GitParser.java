@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.chaoticbits.collabcloud.ISummarizable;
+import org.chaoticbits.collabcloud.codeprocessor.java.JavaClassSummarizable;
 import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.Constants;
@@ -244,5 +245,9 @@ public class GitParser {
 				return true;
 		}
 		return false;
+	}
+	
+	public JavaClassSummarizable makeSummarizable(String plusLine) {
+		return new JavaClassSummarizable(new File(plusLine.substring(6)));
 	}
 }

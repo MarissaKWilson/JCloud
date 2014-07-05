@@ -13,7 +13,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
  * @author M
  *
  */
-public class SourceCodeFile {
+public class SourceCodeFile implements ISummarizable{
 	RevCommit c;
 	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
 	LinkedList<Author> authors = new LinkedList<Author>();
@@ -31,9 +31,13 @@ public class SourceCodeFile {
 	/*
 	 * Returns the stored file
 	 */
-	public RevCommit getFile(){
+	public RevCommit getCommit(){
 		System.out.println("SourceCodeFile: return stored file");
 		return c;
+	}
+	
+	public File getFile(){
+		return null;
 	}
 	
 	public LinkedList<Glyph> getGlyphs(){
