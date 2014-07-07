@@ -98,7 +98,7 @@ public class GitParser {
 				Author dev = new Author(commit.getAuthorIdent().getEmailAddress());
 				authors.add(dev);
 				SourceCodeFile sf = new SourceCodeFile(commit);
-				sf.setAuthor(dev);
+				sf.addAuthor(dev);
 				dev.setFile(sf);
 				scf.add(sf);
 				for (int parentIndex = 0; parentIndex < commit.getParentCount(); parentIndex++) {
@@ -109,6 +109,7 @@ public class GitParser {
 					ISummarizable currentSummarizable = null;
 					try {
 						formatter.format(commit, parent);
+						@SuppressWarnings("resource")
 						Scanner scanner = new Scanner(diff.toString());
 						while (scanner.hasNextLine()) { // scan until the diff part
 							String line = scanner.nextLine();

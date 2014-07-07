@@ -22,7 +22,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class SourceCodeFile implements ISummarizable{
 	RevCommit c;
 	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
-	LinkedList<File> files = new LinkedList<File>();
+	LinkedList<FileSummaries> fileSummaries = new LinkedList<FileSummaries>();
 	LinkedList<Author> authors = new LinkedList<Author>();
 	LinkedList<String> diffedTokens = new LinkedList<String>();
 	//I don't think this needs to be a list. Any commit should only have one author, right?
@@ -44,13 +44,8 @@ public class SourceCodeFile implements ISummarizable{
 		return c;
 	}
 	
-	public LinkedList<File> getFiles(){
-		return files;
-	}
-	 
-	public void addFile(File f){
-		files.add(f);
-	}
+	
+	
 	
 	public LinkedList<Glyph> getGlyphs(){
 		System.out.println("SourceCodeFile: return stored glyphs");
@@ -118,6 +113,10 @@ public class SourceCodeFile implements ISummarizable{
 	public File getFile() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void addAuthor(Author dev) {
+		authors.add(dev);
 	}
 	
 }
