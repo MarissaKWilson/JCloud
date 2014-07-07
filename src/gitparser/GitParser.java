@@ -16,9 +16,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import org.chaoticbits.collabcloud.ISummarizable;
-import org.chaoticbits.collabcloud.codeprocessor.java.JavaClassSummarizable;
-import org.chaoticbits.collabcloud.vc.Developer;
 import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.Constants;
@@ -230,16 +227,5 @@ public class GitParser {
 		return false;
 	}
 	
-	private boolean isFile(String line) {
-		return line.startsWith("+++");
-	}
-	
-	private boolean ignoreIt(String line) {
-		for (String prefix : ignorePrefixes) {
-			if (line.startsWith(prefix))
-				return true;
-		}
-		return false;
-	}
 	
 }

@@ -4,6 +4,8 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Author class
@@ -15,6 +17,7 @@ import java.util.LinkedList;
 public class Author implements iToken {
 	String name;
 	LinkedList<SourceCodeFile> sourceFiles = new LinkedList<SourceCodeFile>();
+	private Map<Glyph, WeightedEdge> glyphWeights;
 	//File picture; 
 	//picture functionality will be added later
 	//private Point2D.Double desk = new Point2D.Double();
@@ -46,6 +49,10 @@ public class Author implements iToken {
 	
 	public void setFile(SourceCodeFile f){
 		sourceFiles.add(f);
+	}
+	
+	public Map<Glyph, WeightedEdge> getGlyphWeights(){
+		return glyphWeights;
 	}
 	
 	@Override

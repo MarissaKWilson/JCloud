@@ -27,7 +27,7 @@ public class SourceCodeFile implements ISummarizable{
 	LinkedList<String> diffedTokens = new LinkedList<String>();
 	//I don't think this needs to be a list. Any commit should only have one author, right?
 	Author author = new Author(" ");
-	Map<Author, Set<ISummarizable>> contributions;//TODO Figure out how to instantiate
+	Map<Author, Set<ISummarizable>> contributions;
 	/*
 	 * Takes in a file as constructor, sets as file
 	 */
@@ -105,9 +105,19 @@ public class SourceCodeFile implements ISummarizable{
 		return true;
 	}
 
-	public void addContribution(Map<Author, Set<ISummarizable>> contributions) {
-		contributions.put(contributions);		
+	public void addContribution(Author a,Map<Author, Set<ISummarizable>> aContribution) {
+		if(contributions.get(a)!=null){
+			contributions.get(a).addAll(aContribution.get(a));
+		}else if (contributions.get(a) == null){
+			contributions.get(a).addAll(aContribution.get(a));
+		}
+		//This ended up being the same, this doesn't seem right
+	}
+
+	@Override
+	public File getFile() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	//TODO hashcode
 }
