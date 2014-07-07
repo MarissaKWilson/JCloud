@@ -5,6 +5,10 @@ import gitparser.ISummarizable;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javaparser.JavaClassSummarizable;
 
 import org.eclipse.jgit.revwalk.RevCommit;
 /**
@@ -18,10 +22,12 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class SourceCodeFile implements ISummarizable{
 	RevCommit c;
 	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
+	LinkedList<File> files = new LinkedList<File>();
 	LinkedList<Author> authors = new LinkedList<Author>();
 	LinkedList<String> diffedTokens = new LinkedList<String>();
 	//I don't think this needs to be a list. Any commit should only have one author, right?
 	Author author = new Author(" ");
+	Map<Author, Set<ISummarizable>> contributions;//TODO Figure out how to instantiate
 	/*
 	 * Takes in a file as constructor, sets as file
 	 */
@@ -38,8 +44,12 @@ public class SourceCodeFile implements ISummarizable{
 		return c;
 	}
 	
-	public File getFile(){
-		return null;
+	public LinkedList<File> getFiles(){
+		return files;
+	}
+	 
+	public void addFile(File f){
+		files.add(f);
 	}
 	
 	public LinkedList<Glyph> getGlyphs(){
@@ -52,7 +62,7 @@ public class SourceCodeFile implements ISummarizable{
 		glyphs.remove(g);
 	}
 	
-	public List getAuthors(){
+	public LinkedList<Author> getAuthors(){
 		System.out.println("SourceCodeFile: return stored author");
 		return authors;
 	}
@@ -66,7 +76,7 @@ public class SourceCodeFile implements ISummarizable{
 		diffedTokens = tokens;
 	}
 	
-	public List getTokens(){
+	public LinkedList<String> getTokens(){
 		return diffedTokens;
 	}
 
@@ -93,6 +103,10 @@ public class SourceCodeFile implements ISummarizable{
 		} else if (!c.equals(other.c))
 			return false;
 		return true;
+	}
+
+	public void addContribution(Map<Author, Set<ISummarizable>> contributions) {
+		contributions.put(contributions);		
 	}
 	
 	//TODO hashcode

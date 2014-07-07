@@ -9,12 +9,16 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.chaoticbits.collabcloud.ISummarizable;
 import org.chaoticbits.collabcloud.codeprocessor.java.JavaClassSummarizable;
+import org.chaoticbits.collabcloud.vc.Developer;
 import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.Constants;
@@ -48,9 +52,9 @@ public class GitParser {
 //	private Date targetDate = new Date();
 	private boolean loaded = false;
 	gitDiffs diffs = new gitDiffs();
-	
-	private final String[] ignorePrefixes = { "index", "diff", "@@" };
-	private final String javaDelimiters = "[ ,;\\(\\)\\[\\]<>\\{\\}\\.:&\\|\\/\\+\\-]";
+	private final Map<Author, Set<ISummarizable>> contributions = new LinkedHashMap<Author, Set<ISummarizable>>();
+
+
 
 	/**
 	 * Constructor
@@ -115,7 +119,7 @@ public class GitParser {
 								currentSummarizable = diffs.makeSummarizable(line);
 							}
 							if (currentSummarizable != null)
-								diffs.processTextLine(line, weights, contributions, dev, currentSummarizable);
+								diffs.processTextLine(line, contributions, sf, dev, currentSummarizable);
 						}
 					} catch (IOException e) {
 						System.err.println("IO Exception on commit " + commit.getId().toString());
