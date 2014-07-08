@@ -22,6 +22,7 @@ import java.util.List;
 public class JParser {
 	//java Dictionary?
 	LinkedList<Glyph> unfilteredGlyphs = new LinkedList<Glyph>();
+	
 
 	
 	/**

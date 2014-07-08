@@ -6,8 +6,8 @@ import graphmap.SourceCodeFile;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -20,7 +20,6 @@ import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
-import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
@@ -39,7 +38,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 public class GitParser {	
 	private static final int DAY_IN_MS = 86400000;
-	private LinkedList<Author> authors = new LinkedList<Author>();
+	private Set<Author> authors;
 	private File path;
 	private Repository repo;
 	private int prevDays;
@@ -95,7 +94,14 @@ public class GitParser {
 			
 			while (itr.hasNext()) {
 				RevCommit commit = itr.next();
-				Author dev = new Author(commit.getAuthorIdent().getEmailAddress());
+				String aEmail = commit.getAuthorIdent().getEmailAddress();
+				System.out.println("Name is " + aEmail );
+				Author dev = new Author(aEmail);
+				System.out.println(dev.toString());
+				
+				if(authors==null){
+					authors = new HashSet<Author>();
+				}
 				authors.add(dev);
 				SourceCodeFile sf = new SourceCodeFile(commit);
 				sf.addAuthor(dev);

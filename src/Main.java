@@ -22,8 +22,8 @@ import display.font.FontRegistrar;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		int prevDays = 9; // default to nine days
-		String path = "C:\\Users\\M\\workspace\\AndroidViewAnimations\\.git"; // TODO put together a test repo
+		int prevDays = 20; // default to nine days
+		String path = "C:\\Users\\M\\workspace\\JCloud\\.git"; // TODO put together a test repo
 		Dimension resolution = new Dimension(800, 600);
 
 		System.out.println("Register fonts to the local environment, if needed ");

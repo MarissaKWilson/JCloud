@@ -15,7 +15,8 @@ import java.util.Set;
  *
  */
 public class Author implements iToken {
-	String name;
+	String email="";
+	String name="";
 	LinkedList<SourceCodeFile> sourceFiles = new LinkedList<SourceCodeFile>();
 	private Map<Glyph, WeightedEdge> glyphWeights;
 	//File picture; 
@@ -27,6 +28,11 @@ public class Author implements iToken {
 		this.name = name;
 		System.out.println("		Author is " + name);
 	}
+	public Author(String name, String emailAddress) {
+		this.name = name;
+		this.email = email;
+		System.out.println("		Author is " + name);
+	}
 	/*
 	 * (non-Javadoc)
 	 * @see graphmap.iToken#getName()
@@ -36,6 +42,10 @@ public class Author implements iToken {
 	public String getName() {
 		System.out.println("Author: Get name of Author");
 		return name;
+	}
+	
+	public String toString(){
+		return getName();
 	}
 
 	/*
