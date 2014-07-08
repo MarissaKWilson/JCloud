@@ -3,6 +3,7 @@ package graphmap;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class Author implements iToken {
 	String email="";
 	String name="";
 	LinkedList<SourceCodeFile> sourceFiles = new LinkedList<SourceCodeFile>();
-	private Map<Glyph, WeightedEdge> glyphWeights;
+	private Map<Glyph, WeightedEdge> glyphWeights = null;
 	//File picture; 
 	//picture functionality will be added later
 	//private Point2D.Double desk = new Point2D.Double();
@@ -27,6 +28,7 @@ public class Author implements iToken {
 		System.out.println("		Author: Initialize new Author");
 		this.name = name;
 		System.out.println("		Author is " + name);
+		glyphWeights = new HashMap<Glyph, WeightedEdge>();
 	}
 	public Author(String name, String emailAddress) {
 		this.name = name;
@@ -63,6 +65,16 @@ public class Author implements iToken {
 	
 	public Map<Glyph, WeightedEdge> getGlyphWeights(){
 		return glyphWeights;
+	}
+	
+	public void addWeight(Glyph g, int weight){
+		if(glyphWeights.containsKey(g)){
+			WeightedEdge tmpWeight = glyphWeights.get(g);
+			tmpWeight.addWeight(weight);
+			glyphWeights.put(g,tmpWeight);
+		}else{
+			glyphWeights.put(g, new WeightedEdge());
+		}
 	}
 	
 	@Override

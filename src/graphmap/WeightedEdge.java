@@ -21,6 +21,9 @@ public class WeightedEdge {
 	public void addWeight(){
 		weight++;
 	}
+	public void addWeight(int w){
+		weight+=w;
+	}
 	/*
 	 * Returns weight
 	 */

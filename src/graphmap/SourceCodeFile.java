@@ -10,7 +10,9 @@ import java.util.Set;
 
 import javaparser.JavaClassSummarizable;
 
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevObject;
 /**
  * sourceCodeFile holds the file associated with each commit and each
  * Author. File is the parsed java file, diffs have been removed already
@@ -20,7 +22,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
  *
  */
 public class SourceCodeFile implements ISummarizable{
-	RevCommit c;
+	ObjectId c;
 	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
 	LinkedList<FileSummaries> fileSummaries = new LinkedList<FileSummaries>();
 	LinkedList<Author> authors = new LinkedList<Author>();
@@ -32,14 +34,14 @@ public class SourceCodeFile implements ISummarizable{
 	 * Takes in a file as constructor, sets as file
 	 */
 	public SourceCodeFile(RevCommit commit){
-		this.c = commit;
+		this.c = commit.getId();
 		System.out.println("		SourceCodeFile: Initiated");
 	}
 
 	/*
 	 * Returns the stored file
 	 */
-	public RevCommit getCommit(){
+	public ObjectId getCommit(){
 		System.out.println("SourceCodeFile: return stored file");
 		return c;
 	}
