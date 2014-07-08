@@ -14,12 +14,12 @@ import java.util.Set;
 
 import javaparser.JavaClassSummarizable;
 
-public class gitDiffs {
+public class GitDiffs {
 	private final String javaDelimiters = "[ ,;\\(\\)\\[\\]<>\\{\\}\\.:&\\|\\/\\+\\-]";
 	private final String[] ignorePrefixes = { "index", "diff", "@@" };
 	private Set<Entry<iToken, Double>> entries;
 
-	public gitDiffs(){
+	public GitDiffs(){
 
 	}
 	

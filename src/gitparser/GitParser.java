@@ -47,7 +47,7 @@ public class GitParser {
 	private Date today = new Date();
 //	private Date targetDate = new Date();
 	private boolean loaded = false;
-	gitDiffs diffs = new gitDiffs();
+	GitDiffs diffs = new GitDiffs();
 	private final Map<Author, Set<ISummarizable>> contributions = new LinkedHashMap<Author, Set<ISummarizable>>();
 
 
