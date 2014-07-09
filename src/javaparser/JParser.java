@@ -55,21 +55,17 @@ public class JParser {
 					LinkedList<String> listofTokens = fileSummary.getTokens();
 					for (String token : listofTokens) {
 						if (!javaKeyWords.contains(token)) {
-							
+							System.out.println("TOKEN" + token);
+							Glyph g = new Glyph(token);
+							a.setGlyph(g);
+							a.addWeight(g, 1);
+							f.addGlyph(g);
 						}
-						// compare to java dictionary
 					}
 				}
+			//	System.out.println("JPARSER GLYPH" + a.getGlyphs().toString());
 			}
 		}
-		// get each commit
-		// new buffered reader
-		// for each token
-		// is !in ignore list
-		// make new glyph
-		// add to SCF glyph list
-		// close buffered reader
-
 		System.out
 				.println("	JParser: For each SCF create new Glyph, add to SCF list");
 

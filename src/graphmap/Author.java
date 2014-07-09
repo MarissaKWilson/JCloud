@@ -20,6 +20,7 @@ public class Author implements iToken {
 	String name="";
 	LinkedList<SourceCodeFile> sourceFiles = new LinkedList<SourceCodeFile>();
 	private Map<Glyph, WeightedEdge> glyphWeights = null;
+	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
 	//File picture; 
 	//picture functionality will be added later
 	//private Point2D.Double desk = new Point2D.Double();
@@ -90,6 +91,14 @@ public class Author implements iToken {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public void setGlyph(Glyph g) {
+		glyphs.add(g);		
+	}
+	
+	public LinkedList<Glyph> getGlyphs(){
+		return glyphs;
 	}
 	
 	

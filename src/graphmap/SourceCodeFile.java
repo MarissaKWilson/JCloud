@@ -61,7 +61,6 @@ public class SourceCodeFile {
 
 
 	public LinkedList<Author> getAuthors() {
-		System.out.println("SourceCodeFile: return stored author");
 		return authors;
 	}
 
