@@ -50,14 +50,15 @@ public class GitDiffs {
 		String[] lineTokens = line.split(javaDelimiters);
 //		System.out.println(lineTokens);
 //		LinkedList<String> newTokens = jankySplit(line);
-		System.out.println("GITDIFFS line " + line);
+//		System.out.println("GITDIFFS line " + line);
 //		System.out.println(lineTokens.toString());
 		for (String lineToken : lineTokens) {
 			lineToken = lineToken.trim();
-//			if (isWord(lineToken)) {
-				summarizable.addToken(lineToken);
-//			}
+			if (isWord(lineToken)) {
+				summarizable.addToken(lineToken);	
+			}
 		}
+//		System.out.println("TOKENS " + summarizable.getTokens().toString());
 		// System.out.println(summarizable.getTokens().toString());
 		return summarizable;
 	}
@@ -67,11 +68,10 @@ public class GitDiffs {
 //		String tmp;
 //		char[] lineChars =line.toCharArray();
 //		for(char c : lineChars){
-//			if(javaDelimiters.){
 //				
 //			}
 //		}
-//		return null;
+//		return tokenList;
 //	}
 
 	private boolean isWord(String lineToken) {

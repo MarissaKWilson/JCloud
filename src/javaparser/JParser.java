@@ -26,7 +26,7 @@ public class JParser {
 	// java Dictionary?
 	LinkedList<Glyph> unfilteredGlyphs = new LinkedList<Glyph>();
 	Map<Author, Set<ISummarizable>> contributions = null;
-	private final String javaDelimiters = "[ ,;\\(\\)\\[\\]<>\\{\\}\\.:&\\|\\/\\+\\-]";
+	private final String javaKeyWords = "abstract,assert,boolean,break,byte,case,catch,char,class,const,continue,default,do,double,else,enum,extends,final,finally,float,for,goto,if,implements,import,instanceof,int,interface,long,native,new,package,private,protected,public,return,short,static,strictfp,super,switch,synchronized,this,throw,throws,transient,try,void,volatile,while,false,null,true";
 
 	public JParser() {
 
@@ -37,23 +37,28 @@ public class JParser {
 	 * files to the glyphs.
 	 * 
 	 * @param files
-	 * @throws ParseException 
-	 * @throws IOException 
+	 * @throws ParseException
+	 * @throws IOException
 	 */
 	public void populateGlyphs(List<SourceCodeFile> sourceFiles)
 			throws ParseException, IOException {
 		System.out.println("	JParser: Parse file for keyword identification");
+
 		for (SourceCodeFile f : sourceFiles) {
 			contributions = f.getContributions();
 			LinkedList<Author> authors = f.getAuthors();
 			for (Author a : authors) {
 				Set<ISummarizable> allFiles = contributions.get(a);
-				
 				Iterator<ISummarizable> itr = allFiles.iterator();
 				while (itr.hasNext()) {
 					ISummarizable fileSummary = itr.next();
-					LinkedList<String>tokens = fileSummary.getTokens();
-					//compare to java dictionary
+					LinkedList<String> listofTokens = fileSummary.getTokens();
+					for (String token : listofTokens) {
+						if (!javaKeyWords.contains(token)) {
+							
+						}
+						// compare to java dictionary
+					}
 				}
 			}
 		}
