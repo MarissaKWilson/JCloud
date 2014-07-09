@@ -3,15 +3,9 @@ package javaparser;
 import gitparser.ISummarizable;
 import graphmap.Author;
 import graphmap.Glyph;
-import graphmap.GlyphGraph;
 import graphmap.SourceCodeFile;
-import japa.parser.JavaParser;
 import japa.parser.ParseException;
-import japa.parser.ast.CompilationUnit;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -53,18 +47,16 @@ public class JParser {
 			contributions = f.getContributions();
 			LinkedList<Author> authors = f.getAuthors();
 			for (Author a : authors) {
-				System.out.println("A  " + a.getName());
 				Set<ISummarizable> allFiles = contributions.get(a);
 				Iterator<ISummarizable> itr = allFiles.iterator();
 				while (itr.hasNext()) {
 					ISummarizable fileSummary = itr.next();
 					LinkedList<String>tokens = fileSummary.getTokens();
+					System.out.print(tokens);
 					//compare to java dictionary
 				}
 			}
 		}
-		// TODO Auto-generated method stub
-
 		// get each commit
 		// new buffered reader
 		// for each token
@@ -75,11 +67,6 @@ public class JParser {
 
 		System.out
 				.println("	JParser: For each SCF create new Glyph, add to SCF list");
-
-		// Get each file
-		// Get each string
-		// make into glyph
-		// add glyph to SourceCodeFile list
 
 	}
 

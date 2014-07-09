@@ -84,7 +84,7 @@ public class GitParser {
 	 * @return
 	 */
 	public List<SourceCodeFile> findRecentFiles() {
-
+		Author test = new Author(" ");
 		System.out
 				.println("	GitParser: Run a git log command to get the most recent files");
 		// List of sourcecodefiles (scf)
@@ -97,6 +97,7 @@ public class GitParser {
 				RevCommit commit = itr.next();
 				String aEmail = commit.getAuthorIdent().getEmailAddress();
 				Author dev = new Author(aEmail);
+				test=dev;
 				authors.add(dev);
 				SourceCodeFile sf = new SourceCodeFile(commit);
 				sf.addAuthor(dev);
@@ -117,10 +118,8 @@ public class GitParser {
 							String line = scanner.nextLine();
 
 							if (line.charAt(0) == '+' || line.charAt(0) == '-') {
-								System.out.println(line);
 								if (diffs.isFile(line)) {
-									currentSummarizable = diffs
-											.makeSummarizable(line);
+									currentSummarizable = diffs.makeSummarizable(line);
 									// UP TO HERE WORKS PROPERLY(mostly)
 								}
 								if (currentSummarizable != null)
@@ -135,26 +134,13 @@ public class GitParser {
 					}
 				}
 			}
+			
 			loaded = true;
 		}
+
 		return scf;
 	}
 
-	/**
-	 * Checks a given commit to see if it is in the date range
-	 * 
-	 * @param commit
-	 * @return true if outside the range, false if within the range
-	 */
-	public boolean dateOutsideRange(RevCommit commit) {
-		System.out.println("	GitParser: Check if commit date is in range");
-		int comDate = commit.getCommitTime();
-		if (comDate >= totalTime - (prevDays * 86400)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
 
 	/**
 	 * Creates a new RevWalk and assigns a head Marks commits to be
@@ -184,33 +170,6 @@ public class GitParser {
 		return rw;
 	}
 
-	/**
-	 * Given a list of source code files, remove the Glyphs that are not present
-	 * in recent diffs
-	 * 
-	 * @param files
-	 */
-	public void cull(List<SourceCodeFile> files) {
-		System.out
-				.println("	GitParser: Identify changed glyphs in each diff, remove all other glyphs from SCF");
-		LinkedList<SourceCodeFile> tmpFiles;
-		LinkedList<Glyph> tmpGlyphs;
-		for (Author a : authors) {
-			tmpFiles = a.getFiles();
-			for (SourceCodeFile f : tmpFiles) {
-				tmpGlyphs = f.getGlyphs();
-				for (Glyph g : tmpGlyphs) {
-					if (isDiff(g, f) == false) {
-						f.cullGlyph(g);
-					}
-				}
-			}
-		}
-		for (SourceCodeFile f : files) {
-			// Trying to figure out the logic here
-			// May have to revisit after JParser
-		}
-	}
 
 	public String buildDiffString() throws IOException {
 		RevWalk rw = loadRevWalk();

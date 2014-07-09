@@ -36,9 +36,7 @@ public class Main {
 		System.out.println("Main: Process the list of recently modified files to get all of their Java identifiers");
 		new JParser().populateGlyphs(files);
 
-		System.out.println("Main: Determine which Java identifiers appear in the Git diffs");
-		gitParser.cull(files);
-
+	
 		System.out.println("Main: Edgify glyph to author, with weighted edge. Graph complete.");
 		GlyphGraph graph = new GlyphGraphFactory().edgify(files);
 
