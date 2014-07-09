@@ -3,9 +3,11 @@ package graphmap;
 import gitparser.ISummarizable;
 
 import java.io.File;
+import java.util.LinkedList;
 
 public class FileSummaries implements ISummarizable{
 	File f = null;
+	LinkedList<String> tokens = new LinkedList();
 	
 	public FileSummaries(File file){
 		f = file;
@@ -44,6 +46,15 @@ public class FileSummaries implements ISummarizable{
 	@Override
 	public String toString() {
 		return f.toString();
+	}
+
+	@Override
+	public LinkedList<String> getTokens() {
+		return tokens;
+	}
+	
+	public void addToken(String tok){
+		tokens.add(tok);
 	}
 		
 

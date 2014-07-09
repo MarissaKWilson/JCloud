@@ -95,9 +95,7 @@ public class GitParser {
 			while (itr.hasNext()) {
 				RevCommit commit = itr.next();
 				String aEmail = commit.getAuthorIdent().getEmailAddress();
-				System.out.println("Name is " + aEmail );
 				Author dev = new Author(aEmail);
-				System.out.println(dev.toString());
 				
 				if(authors==null){
 					authors = new HashSet<Author>();
@@ -121,6 +119,7 @@ public class GitParser {
 							String line = scanner.nextLine();
 							if (diffs.isFile(line)) {
 								currentSummarizable = diffs.makeSummarizable(line);
+								//UP TO HERE WORKS PROPERLY(mostly)
 							}
 							if (currentSummarizable != null)
 								diffs.processTextLine(line, contributions, sf, dev, currentSummarizable);

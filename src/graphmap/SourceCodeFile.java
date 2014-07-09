@@ -3,6 +3,7 @@ package graphmap;
 import gitparser.ISummarizable;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ import org.eclipse.jgit.revwalk.RevObject;
  * @author M
  *
  */
-public class SourceCodeFile implements ISummarizable{
+public class SourceCodeFile{
 	ObjectId c;
 	LinkedList<Glyph> glyphs = new LinkedList<Glyph>();
 	LinkedList<FileSummaries> fileSummaries = new LinkedList<FileSummaries>();
@@ -29,13 +30,12 @@ public class SourceCodeFile implements ISummarizable{
 	LinkedList<String> diffedTokens = new LinkedList<String>();
 	//I don't think this needs to be a list. Any commit should only have one author, right?
 	Author author = new Author(" ");
-	Map<Author, Set<ISummarizable>> contributions;
+	Map<Author, Set<ISummarizable>> contributions = new HashMap<Author, Set<ISummarizable>>();
 	/*
 	 * Takes in a file as constructor, sets as file
 	 */
 	public SourceCodeFile(RevCommit commit){
 		this.c = commit.getId();
-		System.out.println("		SourceCodeFile: Initiated");
 	}
 
 	/*
@@ -115,11 +115,6 @@ public class SourceCodeFile implements ISummarizable{
 		//This ended up being the same, this doesn't seem right
 	}
 
-	@Override
-	public File getFile() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void addAuthor(Author dev) {
 		authors.add(dev);

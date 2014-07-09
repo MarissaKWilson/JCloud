@@ -7,17 +7,16 @@ import graphmap.iToken;
 
 import java.io.File;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import javaparser.JavaClassSummarizable;
+import java.util.regex.Pattern;
 
 public class GitDiffs {
 	private final String javaDelimiters = "[ ,;\\(\\)\\[\\]<>\\{\\}\\.:&\\|\\/\\+\\-]";
 	private final String[] ignorePrefixes = { "index", "diff", "@@" };
 	private Set<Entry<iToken, Double>> entries;
+	private final Pattern wordRegex = Pattern.compile("[a-zA-Z][\\w]+");
 
 	public GitDiffs(){
 
@@ -43,8 +42,27 @@ public class GitDiffs {
 		if(ignoreIt(line)){
 			return;
 		}
+		else{
+			processTextLine(line,summarizable, sfc);
+		}
 	}
 	
+	public ISummarizable processTextLine(String line, ISummarizable summarizable, SourceCodeFile sfc) {
+		if (ignoreIt(line))
+			return summarizable;
+		String[] lineTokens = line.split(javaDelimiters);
+		for (String lineToken : lineTokens) {
+			lineToken = lineToken.trim();
+			if (isWord(lineToken))
+				summarizable.addToken(lineToken);
+				
+		}
+		return summarizable;
+	}
+	
+	private boolean isWord(String lineToken) {
+		return wordRegex.matcher(lineToken).matches();
+	}
 	
 	public boolean isFile(String line) {
 		return line.startsWith("+++");

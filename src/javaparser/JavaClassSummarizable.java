@@ -3,6 +3,7 @@ package javaparser;
 import gitparser.ISummarizable;
 
 import java.io.File;
+import java.util.LinkedList;
 
 
 public class JavaClassSummarizable implements ISummarizable {
@@ -45,6 +46,18 @@ public class JavaClassSummarizable implements ISummarizable {
 	@Override
 	public String toString() {
 		return file.toString();
+	}
+
+	@Override
+	public LinkedList<String> getTokens() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addToken(String lineToken) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

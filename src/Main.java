@@ -22,7 +22,7 @@ import display.font.FontRegistrar;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		int prevDays = 20; // default to nine days
+		int prevDays = 3; // default to nine days
 		String path = "C:\\Users\\M\\workspace\\JCloud\\.git"; // TODO put together a test repo
 		Dimension resolution = new Dimension(800, 600);
 
