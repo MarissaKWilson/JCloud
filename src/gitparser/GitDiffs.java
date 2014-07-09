@@ -42,9 +42,7 @@ public class GitDiffs {
 		if(ignoreIt(line)){
 			return;
 		}
-		else{
-			processTextLine(line,summarizable, sfc);
-		}
+		processTextLine(line,summarizable, sfc);
 	}
 	
 	public ISummarizable processTextLine(String line, ISummarizable summarizable, SourceCodeFile sfc) {
@@ -53,10 +51,11 @@ public class GitDiffs {
 		String[] lineTokens = line.split(javaDelimiters);
 		for (String lineToken : lineTokens) {
 			lineToken = lineToken.trim();
-			if (isWord(lineToken))
+			if (isWord(lineToken)){
 				summarizable.addToken(lineToken);
-				
+			}
 		}
+		//System.out.println(summarizable.getTokens().toString());
 		return summarizable;
 	}
 	

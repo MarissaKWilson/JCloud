@@ -58,21 +58,8 @@ public class JParser {
 				Iterator<ISummarizable> itr = allFiles.iterator();
 				while (itr.hasNext()) {
 					ISummarizable fileSummary = itr.next();
-					File file = fileSummary.getFile();
-					String filePath = file.getPath();
-					FileInputStream in = new FileInputStream(filePath);
-					CompilationUnit cu;
-					try {
-						// parse the file
-						cu = JavaParser.parse(in);
-					} finally {
-						in.close();
-					}
-
-					// visit and print the methods names
-					MethodVisitor mvisits = new MethodVisitor();
-					mvisits.visit(cu, null);
-
+					LinkedList<String>tokens = fileSummary.getTokens();
+					//compare to java dictionary
 				}
 			}
 		}
