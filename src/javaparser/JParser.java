@@ -48,11 +48,11 @@ public class JParser {
 			LinkedList<Author> authors = f.getAuthors();
 			for (Author a : authors) {
 				Set<ISummarizable> allFiles = contributions.get(a);
+				
 				Iterator<ISummarizable> itr = allFiles.iterator();
 				while (itr.hasNext()) {
 					ISummarizable fileSummary = itr.next();
 					LinkedList<String>tokens = fileSummary.getTokens();
-					System.out.print(tokens);
 					//compare to java dictionary
 				}
 			}

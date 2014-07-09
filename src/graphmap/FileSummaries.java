@@ -50,6 +50,7 @@ public class FileSummaries implements ISummarizable{
 
 	@Override
 	public LinkedList<String> getTokens() {
+//		System.out.print("FILESUM TOKENS " + tokens.toString());
 		return tokens;
 	}
 	

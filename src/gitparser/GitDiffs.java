@@ -7,6 +7,7 @@ import graphmap.iToken;
 
 import java.io.File;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -43,18 +44,35 @@ public class GitDiffs {
 
 	public ISummarizable processTextLine(String line,
 			ISummarizable summarizable, SourceCodeFile sfc) {
-		if (ignoreIt(line))
+		if (ignoreIt(line)){
 			return summarizable;
+		}
 		String[] lineTokens = line.split(javaDelimiters);
+//		System.out.println(lineTokens);
+//		LinkedList<String> newTokens = jankySplit(line);
+		System.out.println("GITDIFFS line " + line);
+//		System.out.println(lineTokens.toString());
 		for (String lineToken : lineTokens) {
 			lineToken = lineToken.trim();
-			if (isWord(lineToken)) {
+//			if (isWord(lineToken)) {
 				summarizable.addToken(lineToken);
-			}
+//			}
 		}
 		// System.out.println(summarizable.getTokens().toString());
 		return summarizable;
 	}
+
+//	private LinkedList<String> jankySplit(String line) {
+//		LinkedList<String> tokenList = new LinkedList<String>();
+//		String tmp;
+//		char[] lineChars =line.toCharArray();
+//		for(char c : lineChars){
+//			if(javaDelimiters.){
+//				
+//			}
+//		}
+//		return null;
+//	}
 
 	private boolean isWord(String lineToken) {
 		return wordRegex.matcher(lineToken).matches();
