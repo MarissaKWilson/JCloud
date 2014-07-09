@@ -54,6 +54,10 @@ public class SourceCodeFile implements ISummarizable{
 		return glyphs;
 	}
 	
+	public void addGlyph(Glyph g){
+		glyphs.add(g);
+	}
+	
 	public void cullGlyph(Glyph g){
 		System.out.println("SourceCodeFile: Remove unused glyph");
 		glyphs.remove(g);
@@ -120,5 +124,7 @@ public class SourceCodeFile implements ISummarizable{
 	public void addAuthor(Author dev) {
 		authors.add(dev);
 	}
-	
+	public Map<Author, Set<ISummarizable>> getContributions(){
+		return contributions;
+	}
 }
