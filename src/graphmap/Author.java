@@ -37,7 +37,6 @@ public class Author implements iToken {
 	 */
 	@Override
 	public String getName() {
-		System.out.println("Author: Get name of Author");
 		return name;
 	}
 	

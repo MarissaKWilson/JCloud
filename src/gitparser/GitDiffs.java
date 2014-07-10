@@ -6,6 +6,7 @@ import graphmap.SourceCodeFile;
 import graphmap.iToken;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Map;
@@ -39,40 +40,50 @@ public class GitDiffs {
 		if (isFile(line)) {
 			addContribution(developer, contributions, line, sfc);
 		}
-		return processTextLine(line, summarizable, sfc);
+
+//		System.out.println("GITDIFFS " + summarizable.getTokens());
+		ISummarizable sum = processTextLine(line, summarizable, sfc, developer);
+		if(sum == null){
+			System.out.println("FOUND NULL");
+		}
+//		System.out.println(sum.getTokens().toString());
+		sfc.addContribution(developer, sum);
+		Set<ISummarizable> tmpsums= sfc.getContributions().get(developer);
+		Iterator<ISummarizable >it = tmpsums.iterator();
+		while(it.hasNext()){
+			ISummarizable tmp = it.next();
+			System.out.print(tmp.getTokens());
+		}
+		return sum;
 	}
 
 	public ISummarizable processTextLine(String line,
-			ISummarizable summarizable, SourceCodeFile sfc) {
+			ISummarizable summarizable, SourceCodeFile sfc, Author dev) {
 		if (ignoreIt(line)){
 			return summarizable;
 		}
 		String[] lineTokens = line.split(javaDelimiters);
 //		System.out.println(lineTokens);
-//		LinkedList<String> newTokens = jankySplit(line);
 //		System.out.println("GITDIFFS line " + line);
 //		System.out.println(lineTokens.toString());
 		for (String lineToken : lineTokens) {
 			lineToken = lineToken.trim();
 			if (isWord(lineToken)) {
 				summarizable.addToken(lineToken);	
+//					System.out.println("GITDIFFS linetoken " + summarizable.getTokens());
+				
 			}
 		}
 //		System.out.println("TOKENS " + summarizable.getTokens().toString());
 		// System.out.println(summarizable.getTokens().toString());
+		sfc.addContribution(dev, summarizable);
+		if(summarizable == null){
+			System.out.println("FOUND NULL");
+		}
 		return summarizable;
 	}
 
-//	private LinkedList<String> jankySplit(String line) {
-//		LinkedList<String> tokenList = new LinkedList<String>();
-//		String tmp;
-//		char[] lineChars =line.toCharArray();
-//		for(char c : lineChars){
-//				
-//			}
-//		}
-//		return tokenList;
-//	}
+
 
 	private boolean isWord(String lineToken) {
 		return wordRegex.matcher(lineToken).matches();

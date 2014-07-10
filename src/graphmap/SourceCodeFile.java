@@ -124,7 +124,9 @@ public class SourceCodeFile {
 
 	public void addContribution(Author a, ISummarizable filesum) {
 		if(contributions.get(a) != null){
-			contributions.get(a).add(filesum);
+			Set<ISummarizable> tmp = contributions.get(a);
+			tmp.add(filesum);
+			contributions.put(a, tmp);
 		}
 		
 	}

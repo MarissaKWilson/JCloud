@@ -46,14 +46,23 @@ public class JParser {
 
 		for (SourceCodeFile f : sourceFiles) {
 			contributions = f.getContributions();
+			System.out.println("JPARSER got contributions");
 			LinkedList<Author> authors = f.getAuthors();
 			for (Author a : authors) {
+				System.out.println("JPARSER got an author");
 				Set<ISummarizable> allFiles = contributions.get(a);
+				System.out.println("JPARSER got ISUM set");
 				Iterator<ISummarizable> itr = allFiles.iterator();
+				System.out.println("JPARSER got itr");
 				while (itr.hasNext()) {
+					System.out.println("JPARSER itr has next");
 					ISummarizable fileSummary = itr.next();
+					System.out.println("JPARSER got Filesum");
 					LinkedList<String> listofTokens = fileSummary.getTokens();
+					System.out.println("JPARSER got tokenlist");
+					System.out.println(listofTokens.size());
 					for (String token : listofTokens) {
+						System.out.println("JPARSER TOKENS " + token);
 						if (!javaKeyWords.contains(token)) {
 							System.out.println("TOKEN" + token);
 							Glyph g = new Glyph(token);
