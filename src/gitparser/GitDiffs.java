@@ -44,10 +44,11 @@ public class GitDiffs {
 //		System.out.println("GITDIFFS " + summarizable.getTokens());
 		ISummarizable sum = processTextLine(line, summarizable, sfc, developer);
 		if(sum == null){
-			System.out.println("FOUND NULL");
+			System.out.println("GITDIFFS FOUND NULL");
 		}
 //		System.out.println(sum.getTokens().toString());
 		sfc.addContribution(developer, sum);
+		// Shows the problem
 		Set<ISummarizable> tmpsums= sfc.getContributions().get(developer);
 		Iterator<ISummarizable >it = tmpsums.iterator();
 		while(it.hasNext()){
@@ -78,7 +79,7 @@ public class GitDiffs {
 		// System.out.println(summarizable.getTokens().toString());
 		sfc.addContribution(dev, summarizable);
 		if(summarizable == null){
-			System.out.println("FOUND NULL");
+			System.out.println("GIT DIFFS FOUND NULL");
 		}
 		return summarizable;
 	}

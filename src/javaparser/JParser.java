@@ -54,6 +54,9 @@ public class JParser {
 				System.out.println("JPARSER got ISUM set");
 				Iterator<ISummarizable> itr = allFiles.iterator();
 				System.out.println("JPARSER got itr");
+				if(itr.equals(null)){
+					System.out.println("JPARSER FOUND NULL");
+				}
 				while (itr.hasNext()) {
 					System.out.println("JPARSER itr has next");
 					ISummarizable fileSummary = itr.next();
