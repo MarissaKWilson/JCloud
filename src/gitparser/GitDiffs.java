@@ -59,30 +59,50 @@ public class GitDiffs {
 	}
 
 	public ISummarizable processTextLine(String line,
-			ISummarizable summarizable, SourceCodeFile sfc, Author dev) {
-		if (ignoreIt(line)){
-			return summarizable;
-		}
-		String[] lineTokens = line.split(javaDelimiters);
-//		System.out.println(lineTokens);
-//		System.out.println("GITDIFFS line " + line);
-//		System.out.println(lineTokens.toString());
-		for (String lineToken : lineTokens) {
-			lineToken = lineToken.trim();
-			if (isWord(lineToken)) {
-				summarizable.addToken(lineToken);	
-//					System.out.println("GITDIFFS linetoken " + summarizable.getTokens());
-				
+			ISummarizable summarizable, SourceCodeFile sfc, Author developer) {
+			 if (ignoreIt(line)){
+				 return summarizable;
+			 }
+			String[] lineTokens = line.split(javaDelimiters);
+			//System.out.println(lineTokens);
+			// LinkedList<String> newTokens = jankySplit(line);
+			 System.out.println("GITDIFFS line " + line);
+			// System.out.println(lineTokens.toString());
+			for (String lineToken : lineTokens) {
+				lineToken = lineToken.trim();
+				if (isWord(lineToken)) {
+					summarizable.addToken(lineToken);
+				}
 			}
-		}
-//		System.out.println("TOKENS " + summarizable.getTokens().toString());
-		// System.out.println(summarizable.getTokens().toString());
-		sfc.addContribution(dev, summarizable);
-		if(summarizable == null){
-			System.out.println("GIT DIFFS FOUND NULL");
-		}
-		return summarizable;
-	}
+			System.out.println(summarizable.getTokens().toString());
+			return summarizable;
+			}
+	
+//	public ISummarizable processTextLine(String line,
+//			ISummarizable summarizable, SourceCodeFile sfc, Author dev) {
+//		if (ignoreIt(line)){
+//			return summarizable;
+//		}
+//		String[] lineTokens = line.split(javaDelimiters);
+////		System.out.println(lineTokens);
+////		System.out.println("GITDIFFS line " + line);
+////		System.out.println(lineTokens.toString());
+//		for (String lineToken : lineTokens) {
+//			lineToken = lineToken.trim();
+//			if (isWord(lineToken)) {
+//				summarizable.addToken(lineToken);	
+////					System.out.println("GITDIFFS linetoken " + summarizable.getTokens());
+//				
+//			}
+//		}
+////		System.out.println("TOKENS " + summarizable.getTokens().toString());
+//		// System.out.println(summarizable.getTokens().toString());
+//		sfc.addContribution(dev, summarizable);
+//		if(summarizable == null){
+//			System.out.println("GIT DIFFS FOUND NULL");
+//		}
+//		return summarizable;
+//	}
 
 
 
