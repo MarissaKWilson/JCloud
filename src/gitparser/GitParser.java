@@ -122,9 +122,11 @@ public class GitParser {
 									currentSummarizable = diffs.makeSummarizable(line);
 									// UP TO HERE WORKS PROPERLY(mostly)
 								}
-								if (currentSummarizable != null)
-									diffs.processTextLine(line, contributions,
+								if (currentSummarizable != null){
+									currentSummarizable = diffs.processTextLine(line, contributions,
 											sf, dev, currentSummarizable);
+									sf.addContribution(dev, currentSummarizable);
+								}
 							}
 						}
 					} catch (IOException e) {

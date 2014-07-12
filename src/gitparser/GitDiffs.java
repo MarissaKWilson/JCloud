@@ -6,9 +6,7 @@ import graphmap.SourceCodeFile;
 import graphmap.iToken;
 
 import java.io.File;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -42,41 +40,41 @@ public class GitDiffs {
 		}
 
 //		System.out.println("GITDIFFS " + summarizable.getTokens());
-		ISummarizable sum = processTextLine(line, summarizable, sfc, developer);
+		ISummarizable sum = tokenizeLine(line, summarizable, sfc, developer);
 		if(sum == null){
 			System.out.println("GITDIFFS FOUND NULL");
 		}
 //		System.out.println(sum.getTokens().toString());
-		sfc.addContribution(developer, sum);
-		// Shows the problem
-		Set<ISummarizable> tmpsums= sfc.getContributions().get(developer);
-		Iterator<ISummarizable >it = tmpsums.iterator();
-		while(it.hasNext()){
-			ISummarizable tmp = it.next();
-			System.out.print(tmp.getTokens());
-		}
+//		sfc.addContribution(developer, sum);
+//		// Shows the problem
+//		Set<ISummarizable> tmpsums= sfc.getContributions().get(developer);
+//		Iterator<ISummarizable >it = tmpsums.iterator();
+//		while(it.hasNext()){
+//			ISummarizable tmp = it.next();
+//			System.out.print("GITDIFFS SUM " + tmp.getTokens());
+//		}
 		return sum;
 	}
 
-	public ISummarizable processTextLine(String line,
+	public ISummarizable tokenizeLine(String line,
 			ISummarizable summarizable, SourceCodeFile sfc, Author developer) {
-			 if (ignoreIt(line)){
-				 return summarizable;
-			 }
-			String[] lineTokens = line.split(javaDelimiters);
+		if (ignoreIt(line)){
+			 return summarizable;
+		 }
+		String[] lineTokens = line.split(javaDelimiters);
 			//System.out.println(lineTokens);
 			// LinkedList<String> newTokens = jankySplit(line);
-			 System.out.println("GITDIFFS line " + line);
+			//System.out.println("GITDIFFS line " + line);
 			// System.out.println(lineTokens.toString());
-			for (String lineToken : lineTokens) {
-				lineToken = lineToken.trim();
-				if (isWord(lineToken)) {
-					summarizable.addToken(lineToken);
-				}
+		for (String lineToken : lineTokens) {
+			lineToken = lineToken.trim();
+			if (isWord(lineToken)) {
+				summarizable.addToken(lineToken);
 			}
-			System.out.println(summarizable.getTokens().toString());
-			return summarizable;
-			}
+		}
+//			System.out.println(summarizable.getTokens().toString());
+		return summarizable;
+	}
 	
 //	public ISummarizable processTextLine(String line,
 //			ISummarizable summarizable, SourceCodeFile sfc, Author dev) {

@@ -33,8 +33,8 @@ public class Main {
 		GitParser gitParser = new GitParser(path, prevDays);
 		List<SourceCodeFile> files = gitParser.findRecentFiles();
 
-//		System.out.println("Main: Process the list of recently modified files to get all of their Java identifiers");
-//		new JParser().populateGlyphs(files);
+		System.out.println("Main: Process the list of recently modified files to get all of their Java identifiers");
+		new JParser().populateGlyphs(files);
 
 	
 //		System.out.println("Main: Edgify glyph to author, with weighted edge. Graph complete.");

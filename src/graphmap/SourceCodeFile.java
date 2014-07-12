@@ -4,6 +4,7 @@ import gitparser.ISummarizable;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -127,6 +128,10 @@ public class SourceCodeFile {
 			Set<ISummarizable> tmp = contributions.get(a);
 			tmp.add(filesum);
 			contributions.put(a, tmp);
+		}else{
+			Set<ISummarizable> tmp2 = new HashSet<ISummarizable>();
+			tmp2.add(filesum);
+			contributions.put(a, tmp2);
 		}
 		
 	}
