@@ -84,7 +84,6 @@ public class GitParser {
 	 * @return
 	 */
 	public List<SourceCodeFile> findRecentFiles() {
-		Author test = new Author(" ");
 		System.out
 				.println("	GitParser: Run a git log command to get the most recent files");
 		// List of sourcecodefiles (scf)
@@ -92,12 +91,10 @@ public class GitParser {
 
 		if (!loaded) {
 			Iterator<RevCommit> itr = loadRevWalk().iterator();
-
 			while (itr.hasNext()) {
 				RevCommit commit = itr.next();
 				String aEmail = commit.getAuthorIdent().getEmailAddress();
 				Author dev = new Author(aEmail);
-				test=dev;
 				authors.add(dev);
 				SourceCodeFile sf = new SourceCodeFile(commit);
 				sf.addAuthor(dev);
@@ -134,11 +131,10 @@ public class GitParser {
 						e.printStackTrace();
 					}
 				}
-			}
-			
+			}	
 			loaded = true;
 		}
-
+//		testPrint(scf);
 		return scf;
 	}
 
@@ -191,16 +187,18 @@ public class GitParser {
 		return builder.toString();
 	}
 
-	/**
-	 * returns true if the glyph is in the diff false if the glyph has not been
-	 * changed
-	 * 
-	 * @param g
-	 * @return
-	 */
-	private boolean isDiff(Glyph g, SourceCodeFile f) {
-		// TODO Auto-generated method stub
-		return false;
+	public void testPrint(LinkedList<SourceCodeFile> scf){
+		for(SourceCodeFile f : scf){
+			LinkedList<Author> authors = f.getAuthors();
+			for(Author a:authors){
+				Set<ISummarizable> fileSums = f.getContributions().get(a);
+				Iterator<ISummarizable> itr = fileSums.iterator();
+				while(itr.hasNext()){
+					ISummarizable file = itr.next();
+					System.out.println(file.getTokens());
+				}
+			}
+		}
 	}
 
 }

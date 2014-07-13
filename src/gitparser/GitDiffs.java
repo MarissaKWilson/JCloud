@@ -36,7 +36,7 @@ public class GitDiffs {
 			Map<Author, Set<ISummarizable>> contributions, SourceCodeFile sfc,
 			Author developer, ISummarizable summarizable) {
 		if (isFile(line)) {
-			addContribution(developer, contributions, line, sfc);
+			addContribution(developer, summarizable, sfc);
 		}
 
 //		System.out.println("GITDIFFS " + summarizable.getTokens());
@@ -111,17 +111,9 @@ public class GitDiffs {
 		return line.startsWith("+++");
 	}
 
-	private ISummarizable addContribution(Author developer,
-			Map<Author, Set<ISummarizable>> contributions, String line,
-			SourceCodeFile sfc) {
-		Set<ISummarizable> files = contributions.get(developer);
-		if (files == null) {
-			files = new LinkedHashSet<ISummarizable>();
-		}
-		FileSummaries filesum = new FileSummaries(new File(line.substring(6)));
-		files.add(filesum);
-		sfc.addContribution(developer, filesum);
-		return filesum;
+	private ISummarizable addContribution(Author developer, ISummarizable summary, SourceCodeFile sfc) {
+		sfc.addContribution(developer, summary);
+		return summary;
 	}
 
 	private boolean ignoreIt(String line) {
