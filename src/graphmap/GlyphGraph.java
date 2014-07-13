@@ -1,9 +1,11 @@
 package graphmap;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import javassist.bytecode.Descriptor.Iterator;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
@@ -69,6 +71,43 @@ public class GlyphGraph {
 			EdgeType edgeType) {
 		addEdge(weight, pair, edgeType);
 	}
-	
+	/**
+	 * Finds all edges connected to a vertex
+	 * @param token
+	 * @return
+	 */
+	public Collection<WeightedEdge> findIncidentEdges(iToken token){
+		return g.getIncidentEdges(token);
+	}
+	/**
+	 * Finds the vertex opposite of the one given
+	 * @param token
+	 * @param edge
+	 * @return
+	 */
+	public iToken getOppositeVertex(iToken token, WeightedEdge edge){
+		return g.getOpposite(token, edge);
+	}
+	/**
+	 * Checks all edges of a glyph, finds the largest, sets dominate author
+	 * @param glyph
+	 * @return
+	 */
+	public iToken findDominateAuthor(iToken glyph){
+		LinkedList<WeightedEdge> allEdges = new LinkedList<WeightedEdge>();
+		allEdges.addAll(g.getIncidentEdges(glyph));
+		WeightedEdge tmpEdge = new WeightedEdge();
+		WeightedEdge largestEdge = new WeightedEdge();
+		for(int i = 0; i < allEdges.size(); i++){
+			tmpEdge=allEdges.get(i);
+			if(largestEdge == null){
+				largestEdge=tmpEdge;
+			}else if(largestEdge.getWeight()<tmpEdge.getWeight()){
+				largestEdge=tmpEdge;
+			}
+		}
+		iToken dom = getOppositeVertex(glyph, largestEdge);
+		return dom;
+	}
 	
 }

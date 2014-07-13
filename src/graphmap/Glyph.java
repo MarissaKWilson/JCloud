@@ -17,6 +17,7 @@ import java.util.List;
 public class Glyph implements iToken{
 	private String name;
 	private LinkedList<SourceCodeFile> files = new LinkedList<SourceCodeFile>();
+	private Author primaryAuthor = new Author(" ");
 	private Font font;
 	private Point2D.Double home = new Point2D.Double();
 	//String file;
@@ -58,7 +59,12 @@ public class Glyph implements iToken{
 	 * Author associated becomes primary author
 	 */
 	public Author getPrimary(){
-		return null;
+		return primaryAuthor;
+	}
+	
+	public boolean setPrimaryAuthor(Author a){
+		primaryAuthor = a;
+		return true;
 	}
 	
 	public List<SourceCodeFile> getSourceCodeFiles(){

@@ -1,12 +1,11 @@
 package visualizer.color;
 
-import gitparser.ISummarizable;
-import graphmap.WeightedEdge;
+import graphmap.iToken;
 
 import java.awt.Color;
 
 public interface IColorScheme {
 
-	abstract public Color lookup(ISummarizable token, WeightedEdge weights); 
+	abstract public Color lookup(iToken token); 
 	
 }

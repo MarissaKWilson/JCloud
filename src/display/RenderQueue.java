@@ -93,20 +93,20 @@ public class RenderQueue {
 //				since).crossWithDiff(weights, new MultiplyModifier(1.2));
 		LinkedList<Integer> weights = getAllWeights();
 		IFontTransformer fontTransformer = new BoundedLogFont(new Font(font,
-				Font.BOLD, maxFontSize), weights , maxFontSize);
+				Font.BOLD, maxFontSize), maxFontSize , weights);
 		Random rand = new Random(randSeed);
 
 		AWTIntersector awtIntersectorTmp = new AWTIntersector(10, leafCutoff);
 		Dimension parentNetworkDimension = new Dimension(width / 2, height / 2);
 		Point2D.Double parentNetworkPoint = new Point2D.Double(3*width/4, 3*height/4);
-		ParentNetworkPlacement parentNetworkPlacementTmp = new ParentNetworkPlacement(weights.tokens(),parentNetworkDimension, parentNetworkPoint);
+		ParentNetworkPlacement parentNetworkPlacementTmp = new ParentNetworkPlacement(glyphs ,parentNetworkDimension, parentNetworkPoint);
 		SpiralIterator spiralTmp = new SpiralIterator(spiralMaxRadius, spiralSteps, squashdown);
 		CenteredTokenWrapper centeredTokenTmp = new CenteredTokenWrapper(parentNetworkPlacementTmp);//, spiralTmp, new JavaColorScheme(rand, 20));
 		
 		LayoutTokens layoutTokens = new LayoutTokens(width, height, maxTokens,
 				fontTransformer, awtIntersectorTmp, 
 				centeredTokenTmp, spiralTmp, new JavaColorScheme(rand, 20));
-		BufferedImage bi = layoutTokens.makeImage(weights, new File(
+		BufferedImage bi = layoutTokens.makeImage(graph, new File(
 				"output/summarizerepo.png"), "PNG");
 		return bi;
 	}
