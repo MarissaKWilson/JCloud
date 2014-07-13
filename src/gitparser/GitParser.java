@@ -83,7 +83,7 @@ public class GitParser {
 	 * 
 	 * @return
 	 */
-	public List<SourceCodeFile> findRecentFiles() {
+	public LinkedList<SourceCodeFile> findRecentFiles() {
 		System.out
 				.println("	GitParser: Run a git log command to get the most recent files");
 		// List of sourcecodefiles (scf)

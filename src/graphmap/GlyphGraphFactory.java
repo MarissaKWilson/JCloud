@@ -1,6 +1,8 @@
 package graphmap;
 
-import java.util.List;
+import java.util.LinkedList;
+import edu.uci.ics.jung.graph.util.EdgeType;
+import edu.uci.ics.jung.graph.util.Pair;
 
 /**
  * Edgify class adds glyphs to glyph graph Parses through Author's list of
@@ -23,19 +25,23 @@ public class GlyphGraphFactory {
 	 * 
 	 * @param files
 	 */
-	public GlyphGraph edgify(List<SourceCodeFile> files) {
-		System.out.println("	GlyphGraph: Iterate through SCFs, associate glyph with author using weighted edge, increase weight as needed.");
-		// int fileNum;
-		// fileNum = a.numberOfFiles();
-		// for(int i=0; i<=fileNum; i++){
-		// SourceCodeFile f = a.getOneFile(i);
-		// List<Glyph> glyphs = f.getGlyphs();
-		// for(int e=0; e<glyphs.size(); e++){
-		// WeightedEdge we = new WeightedEdge();
-		// g.addGlyph(glyphs.get(e), we, a);
-		// }
-		// }
-		return new GlyphGraph();
+	public GlyphGraph edgify(LinkedList<SourceCodeFile> files) {
+		System.out
+				.println("	GlyphGraph: Iterate through SCFs, associate glyph with author using weighted edge, increase weight as needed.");
+		GlyphGraph graph = new GlyphGraph();
+		for (SourceCodeFile f : files) {
+			LinkedList<Author> authors = f.getAuthors();
+			for (Author tmpAuthor : authors) {
+				LinkedList<Glyph> glyphs = tmpAuthor.getGlyphs();
+				for (Glyph tmpGlyph : glyphs) {
+					WeightedEdge weight = tmpAuthor.getGlyphWeight(tmpGlyph);
+					graph.addEdge(weight,
+							new Pair<iToken>(tmpAuthor, tmpGlyph),
+							EdgeType.UNDIRECTED);
+				}
+			}
+		}
+		return graph;
 	}
 
 }
