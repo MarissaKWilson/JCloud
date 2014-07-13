@@ -32,9 +32,11 @@ public class GlyphGraphFactory {
 		for (SourceCodeFile f : files) {
 			LinkedList<Author> authors = f.getAuthors();
 			for (Author tmpAuthor : authors) {
+				graph.addAuthor(tmpAuthor);
 				LinkedList<Glyph> glyphs = tmpAuthor.getGlyphs();
 				for (Glyph tmpGlyph : glyphs) {
 					WeightedEdge weight = tmpAuthor.getGlyphWeight(tmpGlyph);
+					graph.addGlyph(tmpGlyph);
 					graph.addEdge(weight,
 							new Pair<iToken>(tmpAuthor, tmpGlyph),
 							EdgeType.UNDIRECTED);

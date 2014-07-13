@@ -1,31 +1,29 @@
 package visualizer.font;
 
-import gitparser.ISummarizable;
-import graphmap.WeightedEdge;
+import graphmap.iToken;
 
 import java.awt.Font;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.LinkedList;
+
 
 public class BoundedLogFont implements IFontTransformer {
-	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(BoundedLogFont.class);
 	private final double multiplier;
 	private final Font initialFont;
 
-	public BoundedLogFont(Font initialFont, WeightedEdge weights, double maxFontSize) {
+	public BoundedLogFont(Font initialFont, double maxFontSize, LinkedList<Integer> weights) {
 		this.initialFont = initialFont;
-		Set<Entry<ISummarizable, Double>> unsortedEntries = weights.unsortedEntries();
 		double max = 0.0d;
-		for (Entry<ISummarizable, Double> entry : unsortedEntries) {
-			if (max < entry.getValue())
-				max = entry.getValue();
+		for (Integer i : weights ) {
+			if (max < i){
+				max = i;
+			}
 		}
 		multiplier = maxFontSize / Math.log(max);
 	}
 
-	public Font transform(ISummarizable token, Double weight) {
+	public Font transform(iToken token, Double weight) {
 		float fontSize = (float) (multiplier * (Math.log(weight + 1.0)));
-		log.trace(token.getToken() + " gets font " + fontSize);
+		System.out.println(token.getName() + " gets font " + fontSize);
 		return initialFont.deriveFont(fontSize);
 	}
 }

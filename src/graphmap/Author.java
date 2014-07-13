@@ -99,6 +99,10 @@ public class Author implements iToken {
 	public LinkedList<Glyph> getGlyphs(){
 		return glyphs;
 	}
+
+	public Map<Glyph, WeightedEdge> getAllGlyphWeights() {
+		return glyphWeights;
+	}
 	
 	
 	

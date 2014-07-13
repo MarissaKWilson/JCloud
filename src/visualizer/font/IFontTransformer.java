@@ -1,11 +1,11 @@
-package org.chaoticbits.collabcloud.visualizer.font;
+package visualizer.font;
+
+import graphmap.iToken;
 
 import java.awt.Font;
 
-import org.chaoticbits.collabcloud.ISummaryToken;
-
 public interface IFontTransformer {
 
-	abstract public Font transform(ISummaryToken token, Double weight);
+	abstract public Font transform(iToken token, Double weight);
 
 }

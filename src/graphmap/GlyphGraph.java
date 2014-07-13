@@ -1,6 +1,8 @@
 package graphmap;
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -15,15 +17,8 @@ import edu.uci.ics.jung.graph.util.Pair;
 
 public class GlyphGraph {
 	UndirectedSparseGraph<iToken, WeightedEdge> g;
-	LinkedList<Author> authors = new LinkedList<Author>(); // TODO Do we really
-															// need this? Graph
-															// has this list and
-															// maybe that's all
-															// we need
-	LinkedList<Glyph> glyphs = new LinkedList<Glyph>(); // TODO Do we really
-														// need this? Graph has
-														// this list and maybe
-														// that's all we need
+	Set<Author> authors = new HashSet<Author>(); 
+	Set<Glyph> glyphs = new HashSet<Glyph>(); 
 
 	/*
 	 * Glyph Graph constructor Creates a new undirected sparse graph
@@ -37,23 +32,23 @@ public class GlyphGraph {
 	 * sourceCodeFiles to attach to the author. Not sure where to have those
 	 * added Also creates new vertex for author in graph
 	 */
-	public void add(Author a) {
-		authors.add(a);
-		g.addVertex(a);
+	public void addAuthor(Author author) {
+		authors.add(author);
+		g.addVertex(author);
 	}
 
-	public void add(Glyph a) {
+	public void addGlyph(Glyph glyph) {
 		System.out.println("GlyphGraph: Add glyph if not present");
-		glyphs.add(a);
-		g.addVertex(a);
+		glyphs.add(glyph);
+		g.addVertex(glyph);
 	}
 
-	public LinkedList<Author> getAuthors() {
+	public Set<Author> getAuthors() {
 		System.out.println("GlyphGraph: return list of authors");
 		return authors;
 	}
 
-	public LinkedList<Glyph> getGlyph() {
+	public Set<Glyph> getGlyphs() {
 		System.out.println("GlyphGraph: return list of glyphs");
 		return glyphs;
 	}
@@ -63,9 +58,10 @@ public class GlyphGraph {
 	 * already exists, increment weight
 	 */
 	public boolean addGlyph(iToken glyph, WeightedEdge weight, iToken auth) {
-		System.out
-				.println("GlyphGraph: Creates the edge association between Author and Glyph using WeightedEdge");
+		System.out.println( "GlyphGraph: Creates the edge association between Author and Glyph using WeightedEdge");
 		g.addVertex(glyph);
+//		addGlyph(glyph);
+//		addAuthor(auth);
 		return g.addEdge(weight, glyph, auth);
 	}
 
