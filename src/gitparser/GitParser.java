@@ -138,6 +138,9 @@ public class GitParser {
 		return scf;
 	}
 
+	public Set<Author> getAuthors(){
+		return authors;
+	}
 
 	/**
 	 * Creates a new RevWalk and assigns a head Marks commits to be

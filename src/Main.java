@@ -34,7 +34,10 @@ public class Main {
 		List<SourceCodeFile> files = gitParser.findRecentFiles();
 
 		System.out.println("Main: Process the list of recently modified files to get all of their Java identifiers");
-		new JParser().populateGlyphs(files);
+		JParser jp = new JParser();
+		jp.populateGlyphs(files);
+		jp.testPrint(gitParser.getAuthors());
+		
 
 	
 //		System.out.println("Main: Edgify glyph to author, with weighted edge. Graph complete.");

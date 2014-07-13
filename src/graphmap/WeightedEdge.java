@@ -30,4 +30,5 @@ public class WeightedEdge {
 	public int getWeight(){
 		return weight;
 	}
+	
 }

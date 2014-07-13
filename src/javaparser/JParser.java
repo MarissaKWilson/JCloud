@@ -4,6 +4,7 @@ import gitparser.ISummarizable;
 import graphmap.Author;
 import graphmap.Glyph;
 import graphmap.SourceCodeFile;
+import graphmap.WeightedEdge;
 import japa.parser.ParseException;
 
 import java.io.IOException;
@@ -68,10 +69,7 @@ public class JParser {
 						System.out.println("JPARSER TOKENS " + token);
 						if (!javaKeyWords.contains(token)) {
 							System.out.println("TOKEN" + token);
-							Glyph g = new Glyph(token);
-							a.setGlyph(g);
-							a.addWeight(g, 1);
-							f.addGlyph(g);
+							makeToken(token, a, f);
 						}
 					}
 				}
@@ -83,13 +81,25 @@ public class JParser {
 
 	}
 
-	public void makeTokens(LinkedList<String> tokens, Author a,
-			SourceCodeFile sfc) {
-		for (String t : tokens) {
-			Glyph g = new Glyph(t);
+	public void makeToken(String token, Author a, SourceCodeFile sfc) {
+			Glyph g = new Glyph(token);
 			sfc.addGlyph(g);
 			a.addWeight(g, 1);
+			a.addGlyph(g);
+	}
+
+	public void testPrint(Set<Author> authors) {
+		Iterator<Author> authorIterator = authors.iterator();
+		Author tmpAuthor = new Author(" ");
+		while(authorIterator.hasNext()){
+			tmpAuthor = authorIterator.next();
+			System.out.println("Author is: " + tmpAuthor.getName());
+			LinkedList<Glyph> tmpGlyphs = tmpAuthor.getGlyphs();
+			for(Glyph g : tmpGlyphs){
+				System.out.println("Glyph: " + g.getName() + " used " + tmpAuthor.getGlyphWeight(g).getWeight() + " times.");
+			}
 		}
+		
 	}
 
 }

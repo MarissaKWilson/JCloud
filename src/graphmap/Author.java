@@ -57,8 +57,8 @@ public class Author implements iToken {
 		sourceFiles.add(f);
 	}
 	
-	public Map<Glyph, WeightedEdge> getGlyphWeights(){
-		return glyphWeights;
+	public WeightedEdge getGlyphWeight(Glyph g){
+		return glyphWeights.get(g);
 	}
 	
 	public void addWeight(Glyph g, int weight){
@@ -92,7 +92,7 @@ public class Author implements iToken {
 		return true;
 	}
 
-	public void setGlyph(Glyph g) {
+	public void addGlyph(Glyph g) {
 		glyphs.add(g);		
 	}
 	
