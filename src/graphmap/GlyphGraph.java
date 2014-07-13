@@ -2,10 +2,15 @@ package graphmap;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
-import javassist.bytecode.Descriptor.Iterator;
+import org.apache.commons.collections15.map.LinkedMap;
+
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
@@ -96,6 +101,11 @@ public class GlyphGraph {
 	public iToken findDominateAuthor(iToken glyph){
 		LinkedList<WeightedEdge> allEdges = new LinkedList<WeightedEdge>();
 		allEdges.addAll(g.getIncidentEdges(glyph));
+		WeightedEdge largestEdge = findLargestEdge(allEdges);
+		iToken dom = getOppositeVertex(glyph, largestEdge);
+		return dom;
+	}
+	public WeightedEdge findLargestEdge(LinkedList<WeightedEdge> allEdges){
 		WeightedEdge tmpEdge = new WeightedEdge();
 		WeightedEdge largestEdge = new WeightedEdge();
 		for(int i = 0; i < allEdges.size(); i++){
@@ -106,8 +116,26 @@ public class GlyphGraph {
 				largestEdge=tmpEdge;
 			}
 		}
-		iToken dom = getOppositeVertex(glyph, largestEdge);
-		return dom;
+		return largestEdge;
+	}
+	
+	public List<Entry<iToken, WeightedEdge>> getWeightedEdges(){
+		Map<iToken,WeightedEdge> edgeMap = new LinkedMap<iToken, WeightedEdge>();
+		List<Entry<iToken, WeightedEdge>> entries = new LinkedList<Entry<iToken,WeightedEdge>>();
+		Iterator<Glyph> glyphItr = glyphs.iterator();
+		Glyph tmpGlyph = new Glyph("");
+		while(glyphItr.hasNext()){
+			
+			tmpGlyph=glyphItr.next();
+			LinkedList<WeightedEdge> allEdges = new LinkedList<WeightedEdge>();
+			allEdges.addAll(g.getIncidentEdges(tmpGlyph));
+			WeightedEdge largestEdge = findLargestEdge(allEdges);
+			
+			edgeMap.put(tmpGlyph, largestEdge);
+			//Add largest edge and glyph to list
+		}
+		entries.addAll(edgeMap.entrySet());
+		return entries;
 	}
 	
 }

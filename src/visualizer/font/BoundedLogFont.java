@@ -1,5 +1,6 @@
 package visualizer.font;
 
+import graphmap.WeightedEdge;
 import graphmap.iToken;
 
 import java.awt.Font;
@@ -21,7 +22,8 @@ public class BoundedLogFont implements IFontTransformer {
 		multiplier = maxFontSize / Math.log(max);
 	}
 
-	public Font transform(iToken token, Double weight) {
+	public Font transform(iToken token, WeightedEdge weightEdge) {
+		double weight = weightEdge.getWeight();
 		float fontSize = (float) (multiplier * (Math.log(weight + 1.0)));
 		System.out.println(token.getName() + " gets font " + fontSize);
 		return initialFont.deriveFont(fontSize);

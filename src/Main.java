@@ -5,6 +5,8 @@ import graphmap.GlyphGraphFactory;
 import graphmap.SourceCodeFile;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class Main {
 		System.out.println("Main: Process the list of recently modified files to get all of their Java identifiers");
 		JParser jp = new JParser();
 		jp.populateGlyphs(files);
-		jp.testPrint(gitParser.getAuthors());
+	//	jp.testPrint(gitParser.getAuthors());
 		
 
 	
@@ -44,7 +46,7 @@ public class Main {
 		GlyphGraph graph = new GlyphGraphFactory().edgify(files);
 
 		System.out.println("Main: Network placement algorithm to get starting places");
-		new RenderQueue(resolution, graph).run();
+		BufferedImage image = new RenderQueue(resolution, graph).call();
 
 		System.out.println("Main: Rasterize to png");
 		new Rasterizer().rasterize(resolution, graph);

@@ -1,5 +1,6 @@
 package visualizer;
 
+import graphmap.GlyphGraph;
 import graphmap.WeightedEdge;
 import graphmap.iToken;
 
@@ -29,8 +30,8 @@ import visualizer.spiral.SpiralIterator;
  * 
  */
 public class LayoutTokens {
-	private static final FontRenderContext FONT_RENDER_CONTEXT = new FontRenderContext(new AffineTransform(), true,
-			true);
+	private static final FontRenderContext FONT_RENDER_CONTEXT = new FontRenderContext(
+			new AffineTransform(), true, true);
 	private final int width;
 	private final int height;
 	private final IFontTransformer fontTrans;
@@ -40,8 +41,10 @@ public class LayoutTokens {
 	private final IColorScheme colorScheme;
 	private final int maxTokens;
 
-	public LayoutTokens(int width, int height, int maxTokens, IFontTransformer fontTrans, IHitCheck<Shape> checker,
-			IPlaceStrategy placeStrategy, SpiralIterator spiral, IColorScheme colorScheme) {
+	public LayoutTokens(int width, int height, int maxTokens,
+			IFontTransformer fontTrans, IHitCheck<Shape> checker,
+			IPlaceStrategy placeStrategy, SpiralIterator spiral,
+			IColorScheme colorScheme) {
 		this.width = width;
 		this.height = height;
 		this.maxTokens = maxTokens;
@@ -52,39 +55,46 @@ public class LayoutTokens {
 		this.colorScheme = colorScheme;
 	}
 
-	public BufferedImage makeImage(WeightedEdge weights, File outputImageFile, String imageFormat) {
+	public BufferedImage makeImage(GlyphGraph graph, File outputImageFile,
+			String imageFormat) {
 		System.out.println("Laying out tokens...");
-		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage bi = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = bi.createGraphics();
 		g2d.setTransform(new AffineTransform()); // fixes upside down problem
 		setRenderingHints(g2d);
-		layoutTokens(g2d, weights);
+		layoutTokens(g2d, graph);
 		System.out.println("Done laying out tokens.");
 		return bi;
 	}
 
-	private void layoutTokens(Graphics2D g2d, WeightedEdge weights) {
+	private void layoutTokens(Graphics2D g2d, GlyphGraph g) {
 		initImage(g2d);
 		LastHitCache<Shape> placedShapes = new LastHitCache<Shape>(checker);
-		List<Entry<iToken, Double>> entries = weights.sortedEntries();
+		List<Entry<iToken, WeightedEdge>> entries = g.getWeightedEdges();
 		int tokensHit = 0;
-		for (Entry<iToken, Double> entry : entries) {
+		for (Entry<iToken, WeightedEdge> entry : entries) {
 			if (tokensHit++ > maxTokens)
 				break;
 			Font font = fontTrans.transform(entry.getKey(), entry.getValue());
-			System.out.println("Laying out " + entry.getKey() + "...[" + entry.getValue() + "]");
-			GlyphVector glyph = font.createGlyphVector(FONT_RENDER_CONTEXT, entry.getKey().getToken());
-			Point2D startingPlace = placeStrategy.getStartingPlace(entry.getKey(), glyph.getOutline());
-			Shape nextShape = glyph.getOutline((float) startingPlace.getX(), (float) startingPlace.getY());
+			System.out.println("Laying out " + entry.getKey() + "...["
+					+ entry.getValue() + "]");
+			GlyphVector glyph = font.createGlyphVector(FONT_RENDER_CONTEXT,
+					entry.getKey().getName());
+			Point2D startingPlace = placeStrategy.getStartingPlace(
+					entry.getKey(), glyph.getOutline());
+			Shape nextShape = glyph.getOutline((float) startingPlace.getX(),
+					(float) startingPlace.getY());
 			spiral.resetCenter(startingPlace);
 			Point2D last = startingPlace;
 			while (spiral.hasNext()) {
 				Point2D next = spiral.next();
-				nextShape = AffineTransform.getTranslateInstance(next.getX() - last.getX(), next.getY() - last.getY())
+				nextShape = AffineTransform.getTranslateInstance(
+						next.getX() - last.getX(), next.getY() - last.getY())
 						.createTransformedShape(nextShape);
 				last = next;
 				if (!placedShapes.hitNCache(nextShape)) {
-					g2d.setColor(colorScheme.lookup(entry.getKey(), weights));
+					g2d.setColor(colorScheme.lookup(entry.getKey()));
 					g2d.fill(nextShape);
 					break;
 				}
@@ -95,9 +105,11 @@ public class LayoutTokens {
 	}
 
 	private void setRenderingHints(Graphics2D g2d) {
-		RenderingHints renderHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+		RenderingHints renderHints = new RenderingHints(
+				RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		renderHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		renderHints.put(RenderingHints.KEY_RENDERING,
+				RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHints(renderHints);
 	}
 

@@ -20,6 +20,7 @@ import java.util.Set;
 
 import visualizer.AWTIntersector;
 import visualizer.LayoutTokens;
+import visualizer.color.JavaColorScheme;
 import visualizer.command.VisualizerConfigException;
 import visualizer.font.BoundedLogFont;
 import visualizer.font.IFontTransformer;
@@ -105,7 +106,7 @@ public class RenderQueue {
 		
 		LayoutTokens layoutTokens = new LayoutTokens(width, height, maxTokens,
 				fontTransformer, awtIntersectorTmp, 
-				centeredTokenTmp, spiralTmp, new JavaColorScheme(rand, 20));
+				centeredTokenTmp, spiralTmp, new JavaColorScheme(rand, 20, graph));
 		BufferedImage bi = layoutTokens.makeImage(graph, new File(
 				"output/summarizerepo.png"), "PNG");
 		return bi;

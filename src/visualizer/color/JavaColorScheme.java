@@ -28,11 +28,11 @@ public class JavaColorScheme implements IColorScheme {
 //		initColorMap();
 //	}
 
-	public JavaColorScheme(Random randJitter, int jitterMax, GlyphGraph g, Set<Author> a) {
+	public JavaColorScheme(Random randJitter, int jitterMax, GlyphGraph g) {
 		this.randJitter = randJitter;
 		this.jitterMax = jitterMax;
 		this.g=g;
-		initColorMap(a);
+		initColorMap(g.getAuthors());
 	}
 
 	private void initColorMap(Set<Author> authors) {
