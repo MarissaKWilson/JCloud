@@ -15,9 +15,7 @@ import java.util.Map;
 public class LastHitCache<E> {
 	private static int hitCounter = 0;
 
-	public static interface IHitCheck<E> {
-		public boolean hits(E obj1, E obj2);
-	}
+
 
 	private final Map<E, Integer> lastHit = new HashMap<E, Integer>();
 	private LinkedList<E> list = new LinkedList<E>();

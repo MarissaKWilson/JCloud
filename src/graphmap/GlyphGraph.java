@@ -73,4 +73,6 @@ public class GlyphGraph {
 			EdgeType edgeType) {
 		addEdge(weight, pair, edgeType);
 	}
+	
+	
 }

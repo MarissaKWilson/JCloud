@@ -4,8 +4,6 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.chaoticbits.collabcloud.visualizer.LastHitCache.IHitCheck;
-
 abstract public class HierarchicalBoxIntersector<T> implements IHitCheck<T> {
 
 	private final int recursiveDepth;

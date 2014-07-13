@@ -5,6 +5,7 @@ import edu.uci.ics.jung.algorithms.layout.SpringLayout;
 import edu.uci.ics.jung.graph.UndirectedGraph;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import graphmap.Glyph;
+import graphmap.WeightedEdge;
 import graphmap.iToken;
 
 import java.awt.Dimension;
@@ -59,18 +60,18 @@ public class ParentNetworkPlacement implements IPlaceStrategy {
 	}
 
 	private void computeLayout() {
-		layout = new SpringLayout<Glyph, Long>(initGraph());
+		layout = new SpringLayout<Glyph, WeightedEdge>(initGraph());
 		layout.setSize(size);
 	}
 
-	private UndirectedGraph<Glyph, Long> initGraph() {
-		UndirectedSparseGraph<Glyph, Long> g = new UndirectedSparseGraph<ISummaryToken, Long>();
+	private UndirectedGraph<iToken, WeightedEdge> initGraph() {
+		UndirectedSparseGraph<iToken, WeightedEdge> g = new UndirectedSparseGraph<iToken, WeightedEdge>();
 		long edge = 0;
 		;
-		for (ISummaryToken token : tokens)
+		for (iToken token : tokens)
 			g.addVertex(token);
-		for (ISummaryToken tokenA : tokens) {
-			for (ISummaryToken tokenB : tokens) {
+		for (iToken tokenA : tokens) {
+			for (iToken tokenB : tokens) {
 				if (tokenA != tokenB && sameParent(tokenA, tokenB)) {
 					g.addEdge(edge++, tokenA, tokenB);
 				}

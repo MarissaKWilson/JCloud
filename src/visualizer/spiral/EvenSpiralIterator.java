@@ -1,4 +1,4 @@
-package org.chaoticbits.collabcloud.visualizer.spiral;
+package visualizer.spiral;
 
 import java.awt.geom.Point2D;
 import java.util.Iterator;

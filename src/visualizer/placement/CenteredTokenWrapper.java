@@ -1,10 +1,10 @@
-package org.chaoticbits.collabcloud.visualizer.placement;
+package visualizer.placement;
+
+import graphmap.iToken;
 
 import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-
-import org.chaoticbits.collabcloud.ISummaryToken;
 
 /**
  * Calls the inner placement strategy, but then moves the token up and to the
@@ -21,7 +21,7 @@ public class CenteredTokenWrapper implements IPlaceStrategy {
 	}
 
 	//TODO Remove the Shape from this method
-	public Point2D getStartingPlace(ISummaryToken token, Shape shape) {
+	public Point2D getStartingPlace(iToken token, Shape shape) {
 		Point2D ul = place.getStartingPlace(token, shape);
 		Rectangle2D bounds = shape.getBounds2D();
 		return new Point2D.Double(ul.getX() - bounds.getWidth() / 2, ul.getY() - bounds.getHeight() / 2);

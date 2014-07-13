@@ -1,6 +1,7 @@
 package visualizer;
 
 import graphmap.WeightedEdge;
+import graphmap.iToken;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -16,7 +17,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map.Entry;
 
-import visualizer.LastHitCache.IHitCheck;
 import visualizer.color.IColorScheme;
 import visualizer.font.IFontTransformer;
 import visualizer.placement.IPlaceStrategy;
@@ -31,7 +31,6 @@ import visualizer.spiral.SpiralIterator;
 public class LayoutTokens {
 	private static final FontRenderContext FONT_RENDER_CONTEXT = new FontRenderContext(new AffineTransform(), true,
 			true);
-	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(LayoutTokens.class);
 	private final int width;
 	private final int height;
 	private final IFontTransformer fontTrans;
@@ -54,26 +53,26 @@ public class LayoutTokens {
 	}
 
 	public BufferedImage makeImage(WeightedEdge weights, File outputImageFile, String imageFormat) {
-		log.info("Laying out tokens...");
+		System.out.println("Laying out tokens...");
 		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = bi.createGraphics();
 		g2d.setTransform(new AffineTransform()); // fixes upside down problem
 		setRenderingHints(g2d);
 		layoutTokens(g2d, weights);
-		log.info("Done laying out tokens.");
+		System.out.println("Done laying out tokens.");
 		return bi;
 	}
 
 	private void layoutTokens(Graphics2D g2d, WeightedEdge weights) {
 		initImage(g2d);
 		LastHitCache<Shape> placedShapes = new LastHitCache<Shape>(checker);
-		List<Entry<ISummaryToken, Double>> entries = weights.sortedEntries();
+		List<Entry<iToken, Double>> entries = weights.sortedEntries();
 		int tokensHit = 0;
-		for (Entry<ISummaryToken, Double> entry : entries) {
+		for (Entry<iToken, Double> entry : entries) {
 			if (tokensHit++ > maxTokens)
 				break;
 			Font font = fontTrans.transform(entry.getKey(), entry.getValue());
-			log.debug("Laying out " + entry.getKey() + "...[" + entry.getValue() + "]");
+			System.out.println("Laying out " + entry.getKey() + "...[" + entry.getValue() + "]");
 			GlyphVector glyph = font.createGlyphVector(FONT_RENDER_CONTEXT, entry.getKey().getToken());
 			Point2D startingPlace = placeStrategy.getStartingPlace(entry.getKey(), glyph.getOutline());
 			Shape nextShape = glyph.getOutline((float) startingPlace.getX(), (float) startingPlace.getY());

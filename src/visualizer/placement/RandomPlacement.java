@@ -1,11 +1,11 @@
-package org.chaoticbits.collabcloud.visualizer.placement;
+package visualizer.placement;
+
+import graphmap.iToken;
 
 import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
-
-import org.chaoticbits.collabcloud.ISummaryToken;
 
 public class RandomPlacement implements IPlaceStrategy {
 
@@ -17,7 +17,7 @@ public class RandomPlacement implements IPlaceStrategy {
 		this.boundary = boundary;
 	}
 
-	public Point2D getStartingPlace(ISummaryToken token, Shape shape) {
+	public Point2D getStartingPlace(iToken token, Shape shape) {
 		return new Point2D.Double(boundary.getMinX() + rand.nextDouble() * boundary.getWidth(), boundary.getMinY() + rand.nextDouble()
 				* boundary.getHeight());
 	}

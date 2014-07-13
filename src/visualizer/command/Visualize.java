@@ -1,5 +1,8 @@
 package visualizer.command;
 
+import gitparser.GitParser;
+import graphmap.WeightedEdge;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.geom.Point2D;
@@ -14,23 +17,20 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.chaoticbits.collabcloud.CloudWeights;
-import org.chaoticbits.collabcloud.codeprocessor.MultiplyModifier;
-import org.chaoticbits.collabcloud.codeprocessor.java.JavaColorScheme;
-import org.chaoticbits.collabcloud.codeprocessor.java.JavaProjectSummarizer;
-import org.chaoticbits.collabcloud.vc.IVersionControlLoader;
-import org.chaoticbits.collabcloud.vc.git.GitLoader;
-import org.chaoticbits.collabcloud.visualizer.AWTIntersector;
-import org.chaoticbits.collabcloud.visualizer.LayoutTokens;
-import org.chaoticbits.collabcloud.visualizer.font.BoundedLogFont;
-import org.chaoticbits.collabcloud.visualizer.font.IFontTransformer;
-import org.chaoticbits.collabcloud.visualizer.placement.CenteredTokenWrapper;
-import org.chaoticbits.collabcloud.visualizer.placement.ParentNetworkPlacement;
-import org.chaoticbits.collabcloud.visualizer.spiral.SpiralIterator;
+
+import visualizer.AWTIntersector;
+import visualizer.LayoutTokens;
+import visualizer.font.BoundedLogFont;
+import visualizer.font.IFontTransformer;
+import visualizer.placement.CenteredTokenWrapper;
+import visualizer.placement.ParentNetworkPlacement;
+import visualizer.spiral.SpiralIterator;
 
 /**
- * This is the command pattern-ish class that handles the actual calling of the visualizer API. The main
- * functionality of this class is to handle all of the properties, defaults, algorithms, constructors, etc.
+ * This is the command pattern-ish class that handles the actual calling of the
+ * visualizer API. The main functionality of this class is to handle all of the
+ * properties, defaults, algorithms, constructors, etc.
+ * 
  * @author andy
  * 
  */
@@ -39,21 +39,33 @@ public class Visualize {
 
 	private final File srcTree;
 
-	@Property private String since = "";
+	@Property
+	private String since = "";
 	// TODO create an auto-detect loader so users don't need to set it
-	@Property private IVersionControlLoader loader = null;
-	@Property private int width = 800;
-	@Property private int height = 800;
-	@Property private int maxTokens = 100;
-	@Property private double leafCutoff = 1.0d;
-	@Property private int spiralSteps = 500;
+	@Property
+	private IVersionControlLoader loader = null;
+	@Property
+	private int width = 800;
+	@Property
+	private int height = 800;
+	@Property
+	private int maxTokens = 100;
+	@Property
+	private double leafCutoff = 1.0d;
+	@Property
+	private int spiralSteps = 500;
 	// TODO Make this parameter computable from the width/height
-	@Property private double spiralMaxRadius = 350.0d;
+	@Property
+	private double spiralMaxRadius = 350.0d;
 	// TODO Make this parameter computable from the width/height
-	@Property private double squashdown = 1;
-	@Property private long randSeed = System.nanoTime();
-	@Property private int maxFontSize = 50;
-	@Property private String font = "Lucida Sans";
+	@Property
+	private double squashdown = 1;
+	@Property
+	private long randSeed = System.nanoTime();
+	@Property
+	private int maxFontSize = 50;
+	@Property
+	private String font = "Lucida Sans";
 
 	public Visualize(File srcTree) {
 		this.srcTree = srcTree;
@@ -61,17 +73,25 @@ public class Visualize {
 
 	public BufferedImage call() throws VisualizerConfigException, IOException {
 		validate();
-		CloudWeights weights = new JavaProjectSummarizer().summarize(srcTree);
-		weights = new GitLoader(new File(srcTree.getAbsolutePath() + "/.git"), since).crossWithDiff(weights,
-				new MultiplyModifier(1.2));
-		IFontTransformer fontTransformer = new BoundedLogFont(new Font(font, Font.BOLD, maxFontSize), weights,
-				maxFontSize);
+		WeightedEdge weights = new JavaProjectSummarizer().summarize(srcTree);
+		weights = new GitParser(new File(srcTree.getAbsolutePath() + "/.git"),
+				since).crossWithDiff(weights, new MultiplyModifier(1.2));
+		IFontTransformer fontTransformer = new BoundedLogFont(new Font(font,
+				Font.BOLD, maxFontSize), weights, maxFontSize);
 		Random rand = new Random(randSeed);
-		LayoutTokens layoutTokens = new LayoutTokens(width, height, maxTokens, fontTransformer, new AWTIntersector(10,
-				leafCutoff), new CenteredTokenWrapper(new ParentNetworkPlacement(weights.tokens(), new Dimension(
-				width / 2, height / 2), new Point2D.Double(3 * width / 4, 3 * height / 4))), new SpiralIterator(
-				spiralMaxRadius, spiralSteps, squashdown), new JavaColorScheme(rand, 20));
-		BufferedImage bi = layoutTokens.makeImage(weights, new File("output/summarizerepo.png"), "PNG");
+
+		AWTIntersector awtIntersectorTmp = new AWTIntersector(10, leafCutoff);
+		Dimension parentNetworkDimension = new Dimension(width / 2, height / 2);
+		Point2D.Double parentNetworkPoint = new Point2D.Double(3*width/4, 3*height/4);
+		ParentNetworkPlacement parentNetworkPlacementTmp = new ParentNetworkPlacement(weights.tokens(),parentNetworkDimension, parentNetworkPoint);
+		SpiralIterator spiralTmp = new SpiralIterator(spiralMaxRadius, spiralSteps, squashdown);
+		CenteredTokenWrapper centeredTokenTmp = new CenteredTokenWrapper(parentNetworkPlacementTmp);//, spiralTmp, new JavaColorScheme(rand, 20));
+		
+		LayoutTokens layoutTokens = new LayoutTokens(width, height, maxTokens,
+				fontTransformer, awtIntersectorTmp, 
+				centeredTokenTmp, spiralTmp, new JavaColorScheme(rand, 20));
+		BufferedImage bi = layoutTokens.makeImage(weights, new File(
+				"output/summarizerepo.png"), "PNG");
 		return bi;
 	}
 
@@ -82,8 +102,10 @@ public class Visualize {
 		if (loader == null)
 			errors.add("SVN or Git");
 		if (!errors.isEmpty())
-			throw new VisualizerConfigException("Missing the following properties: "
-					+ errors.toString().substring(1, errors.toString().length() - 1));
+			throw new VisualizerConfigException(
+					"Missing the following properties: "
+							+ errors.toString().substring(1,
+									errors.toString().length() - 1));
 	}
 
 	public Visualize useGit() throws VisualizerConfigException {
@@ -101,7 +123,10 @@ public class Visualize {
 			Set<Entry<Object, Object>> set = props.entrySet();
 			for (Entry<Object, Object> entry : set) {
 				if (entry.getKey().toString().startsWith(PROPS_PREFIX))
-					myProps.put(entry.getKey().toString().substring(PROPS_PREFIX.length()), entry.getValue());
+					myProps.put(
+							entry.getKey().toString()
+									.substring(PROPS_PREFIX.length()),
+							entry.getValue());
 			}
 			BeanUtils.populate(this, myProps);
 			return this;
