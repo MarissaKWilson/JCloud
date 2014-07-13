@@ -125,7 +125,6 @@ public class GitParser {
 								if (currentSummarizable != null){
 									currentSummarizable = diffs.processTextLine(line, contributions,
 											sf, dev, currentSummarizable);
-									sf.addContribution(dev, currentSummarizable);
 								}
 							}
 						}

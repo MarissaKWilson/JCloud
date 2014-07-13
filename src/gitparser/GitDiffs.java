@@ -62,10 +62,8 @@ public class GitDiffs {
 			 return summarizable;
 		 }
 		String[] lineTokens = line.split(javaDelimiters);
-			//System.out.println(lineTokens);
-			// LinkedList<String> newTokens = jankySplit(line);
 			//System.out.println("GITDIFFS line " + line);
-			// System.out.println(lineTokens.toString());
+			// System.out.println(lineTokens);
 		for (String lineToken : lineTokens) {
 			lineToken = lineToken.trim();
 			if (isWord(lineToken)) {
@@ -73,6 +71,7 @@ public class GitDiffs {
 			}
 		}
 //			System.out.println(summarizable.getTokens().toString());
+		
 		return summarizable;
 	}
 	
@@ -121,8 +120,7 @@ public class GitDiffs {
 		}
 		FileSummaries filesum = new FileSummaries(new File(line.substring(6)));
 		files.add(filesum);
-		contributions.put(developer, files);
-		sfc.addContribution(developer, contributions);
+		sfc.addContribution(developer, filesum);
 		return filesum;
 	}
 

@@ -103,17 +103,14 @@ public class SourceCodeFile {
 		return true;
 	}
 
-	public void addContribution(Author a,
-			Map<Author, Set<ISummarizable>> aContribution) {
-		if (contributions.get(a) != null) {
-			Set<ISummarizable> tmp1 = contributions.get(a);
-			tmp1.addAll(aContribution.get(a));
-			contributions.put(a, tmp1);
-		} else if (contributions.get(a) == null) {
-			contributions.put(a, aContribution.get(a));
+	public void addContribution(Author a, ISummarizable filesum) {
+		Set<ISummarizable> tmp = contributions.get(a);
+		if(tmp==null){
+			tmp = new HashSet<ISummarizable>();
 		}
-		// This ended up being the same, this doesn't seem right
-	}
+		tmp.add(filesum);
+		contributions.put(a, tmp);
+		}
 
 	public void addAuthor(Author dev) {
 		authors.add(dev);
@@ -123,16 +120,16 @@ public class SourceCodeFile {
 		return contributions;
 	}
 
-	public void addContribution(Author a, ISummarizable filesum) {
-		if(contributions.get(a) != null){
-			Set<ISummarizable> tmp = contributions.get(a);
-			tmp.add(filesum);
-			contributions.put(a, tmp);
-		}else{
-			Set<ISummarizable> tmp2 = new HashSet<ISummarizable>();
-			tmp2.add(filesum);
-			contributions.put(a, tmp2);
-		}
-		
-	}
+//	public void addContribution(Author a, ISummarizable filesum) {
+//		if(contributions.get(a) != null){
+//			Set<ISummarizable> tmp = contributions.get(a);
+//			tmp.add(filesum);
+//			contributions.put(a, tmp);
+//		}else{
+//			Set<ISummarizable> tmp2 = new HashSet<ISummarizable>();
+//			tmp2.add(filesum);
+//			contributions.put(a, tmp2);
+//		}
+//		
+//	}
 }
