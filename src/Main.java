@@ -10,6 +10,8 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import javaparser.JParser;
 import display.Rasterizer;
 import display.RenderQueue;
@@ -24,7 +26,7 @@ import display.font.FontRegistrar;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		int prevDays = 3; // default to nine days
+		int prevDays = 1; // default to nine days
 		String path = "C:\\Users\\M\\workspace\\JCloud\\.git"; // TODO put together a test repo
 		Dimension resolution = new Dimension(800, 600);
 
@@ -50,9 +52,9 @@ public class Main {
 		System.out.println("Main: Edgify glyph to author, with weighted edge. Graph complete.");
 		factory.edgify(files);
 		
-//		System.out.println("Main: Network placement algorithm to get starting places");
-//		BufferedImage image = new RenderQueue(resolution, graph).call();
-
+		System.out.println("Main: Network placement algorithm to get starting places");
+		BufferedImage image = new RenderQueue(resolution, graph).call();
+		ImageIO.write(image, "png", new File("output.png"));
 //		System.out.println("Main: Rasterize to png");
 //		new Rasterizer().rasterize(resolution, graph);
 		//

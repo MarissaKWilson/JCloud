@@ -38,6 +38,10 @@ public class Glyph implements iToken{
 	public String getName() {
 		return name;
 	}
+	
+	public String toString(){
+		return getName();
+	}
 	/*
 	 * Setter for fontSize
 	 */

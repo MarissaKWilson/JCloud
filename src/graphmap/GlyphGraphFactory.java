@@ -1,6 +1,10 @@
 package graphmap;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Set;
+
+
 
 import org.apache.commons.collections15.Factory;
 
@@ -46,8 +50,11 @@ public class GlyphGraphFactory {
 			LinkedList<Author> authors = f.getAuthors();
 			for (Author tmpAuthor : authors) {
 				graph.addAuthor(tmpAuthor);
-				LinkedList<Glyph> glyphs = tmpAuthor.getGlyphs();
-				for (Glyph tmpGlyph : glyphs) {
+				Set<Glyph> glyphs = tmpAuthor.getGlyphs();
+				Iterator<Glyph> glyphItr = glyphs.iterator();
+				Glyph tmpGlyph;
+				while(glyphItr.hasNext()){
+					tmpGlyph=glyphItr.next();
 					WeightedEdge weight = tmpAuthor.getGlyphWeight(tmpGlyph);
 					graph.addGlyph(tmpGlyph);
 					 System.out.println("Author " + tmpAuthor.getName()

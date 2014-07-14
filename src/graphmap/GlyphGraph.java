@@ -91,6 +91,9 @@ public class GlyphGraph {
 		}
 		boolean done = g.addEdge(weight, vertices);
 		System.out.println(done);
+//		if(!done){
+//			System.exit(1);
+//		}
 	}
 	/**
 	 * Finds all edges connected to a vertex
