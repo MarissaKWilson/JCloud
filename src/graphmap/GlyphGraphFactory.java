@@ -50,9 +50,9 @@ public class GlyphGraphFactory {
 				for (Glyph tmpGlyph : glyphs) {
 					WeightedEdge weight = tmpAuthor.getGlyphWeight(tmpGlyph);
 					graph.addGlyph(tmpGlyph);
-					// System.out.println("Author " + tmpAuthor.getName()
-					// + (" -- ") + weight.getWeight() + " -- Glyph "
-					// + tmpGlyph.getName());
+					 System.out.println("Author " + tmpAuthor.getName()
+					 + (" -- ") + weight.getWeight() + " -- Glyph "
+					 + tmpGlyph.getName());
 					graph.addVertexAndEdge(weight, tmpAuthor, tmpGlyph);
 				}
 			}

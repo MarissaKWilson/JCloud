@@ -85,6 +85,10 @@ public class GlyphGraph {
 //		g.addVertex(auth);
 //		g.addVertex(glyph);
 		Pair<iToken> vertices = new Pair<iToken>(auth,glyph);
+		System.out.println("Contains Edge? " + g.containsEdge(weight));
+		if(g.containsVertex(auth) && g.containsVertex(glyph)){
+			System.out.println("Are neighbors? " + g.isNeighbor(auth, glyph));
+		}
 		boolean done = g.addEdge(weight, vertices);
 		System.out.println(done);
 	}
