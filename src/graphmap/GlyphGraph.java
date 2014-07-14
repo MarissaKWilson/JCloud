@@ -12,6 +12,7 @@ import java.util.Set;
 import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.map.LinkedMap;
 
+import edu.uci.ics.jung.graph.UndirectedGraph;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
@@ -24,19 +25,22 @@ import edu.uci.ics.jung.graph.util.Pair;
  */
 
 public class GlyphGraph {
-	UndirectedSparseGraph<iToken, WeightedEdge> g;
+	UndirectedGraph<iToken, WeightedEdge> g;
 	Set<iToken> authors = new HashSet<iToken>(); 
 	Set<iToken> glyphs = new HashSet<iToken>(); 
 
 	/*
 	 * Glyph Graph constructor Creates a new undirected sparse graph
 	 */
-	public GlyphGraph(UndirectedSparseGraph<iToken,WeightedEdge>g) {
-		this.g = g;
+	public GlyphGraph(UndirectedGraph<iToken, WeightedEdge> undirectedGraph) {
+		this.g = undirectedGraph;
 	}
 	
-	public static Factory<UndirectedSparseGraph<iToken,WeightedEdge>> getFactory(){
-		return getFactory();
+	public static Factory<UndirectedGraph<iToken, WeightedEdge>> makeFactory(){
+		Factory<UndirectedGraph<iToken, WeightedEdge>> fact = UndirectedSparseGraph.getFactory();
+		System.out.println(fact.toString());
+		return fact;
+		
 	}
 
 	/*
@@ -177,7 +181,7 @@ public class GlyphGraph {
 		return edgeValues;
 	}
 	
-	public UndirectedSparseGraph<iToken, WeightedEdge> returnGraph(){
+	public UndirectedGraph<iToken, WeightedEdge> returnGraph(){
 		return g;
 	}
 	

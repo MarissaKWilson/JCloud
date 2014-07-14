@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import org.apache.commons.collections15.Factory;
 
+import edu.uci.ics.jung.graph.UndirectedGraph;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
@@ -20,9 +21,9 @@ import edu.uci.ics.jung.graph.util.Pair;
  */
 public class GlyphGraphFactory {
 	GlyphGraph graph;
-	Factory<UndirectedSparseGraph<iToken, WeightedEdge>> factory;
+	Factory<UndirectedGraph<iToken, WeightedEdge>> factory;
 	public GlyphGraphFactory() {
-		factory=GlyphGraph.getFactory();
+		factory=GlyphGraph.makeFactory();
 		graph = new GlyphGraph(factory.create());
 	}
 		
