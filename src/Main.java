@@ -44,12 +44,12 @@ public class Main {
 	
 		System.out.println("Main: Edgify glyph to author, with weighted edge. Graph complete.");
 		GlyphGraph graph = new GlyphGraphFactory().edgify(files);
-
+		
 		System.out.println("Main: Network placement algorithm to get starting places");
 		BufferedImage image = new RenderQueue(resolution, graph).call();
 
-		System.out.println("Main: Rasterize to png");
-		new Rasterizer().rasterize(resolution, graph);
+//		System.out.println("Main: Rasterize to png");
+//		new Rasterizer().rasterize(resolution, graph);
 		//
 		// /* Prompt user for input */
 		// // TODO Add in a file not found exception here

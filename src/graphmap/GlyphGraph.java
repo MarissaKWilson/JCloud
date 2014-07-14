@@ -24,8 +24,8 @@ import edu.uci.ics.jung.graph.util.Pair;
 
 public class GlyphGraph {
 	UndirectedSparseGraph<iToken, WeightedEdge> g;
-	Set<Author> authors = new HashSet<Author>(); 
-	Set<Glyph> glyphs = new HashSet<Glyph>(); 
+	Set<iToken> authors = new HashSet<iToken>(); 
+	Set<iToken> glyphs = new HashSet<iToken>(); 
 
 	/*
 	 * Glyph Graph constructor Creates a new undirected sparse graph
@@ -45,17 +45,17 @@ public class GlyphGraph {
 	}
 
 	public void addGlyph(Glyph glyph) {
-		System.out.println("GlyphGraph: Add glyph if not present");
+//		System.out.println("GlyphGraph: Add glyph if not present");
 		glyphs.add(glyph);
 		g.addVertex(glyph);
 	}
 
-	public Set<Author> getAuthors() {
+	public Set<iToken> getAuthors() {
 		System.out.println("GlyphGraph: return list of authors");
 		return authors;
 	}
 
-	public Set<Glyph> getGlyphs() {
+	public Set<iToken> getGlyphs() {
 		System.out.println("GlyphGraph: return list of glyphs");
 		return glyphs;
 	}
@@ -74,7 +74,7 @@ public class GlyphGraph {
 
 	public void addEdge(WeightedEdge weight, Pair<iToken> pair,
 			EdgeType edgeType) {
-		addEdge(weight, pair, edgeType);
+		g.addEdge(weight, pair, edgeType);
 	}
 	/**
 	 * Finds all edges connected to a vertex
@@ -91,6 +91,7 @@ public class GlyphGraph {
 	 * @return
 	 */
 	public iToken getOppositeVertex(iToken token, WeightedEdge edge){
+		System.out.println(g.getOpposite(token, edge).getName());
 		return g.getOpposite(token, edge);
 	}
 	/**
@@ -122,8 +123,8 @@ public class GlyphGraph {
 	public List<Entry<iToken, WeightedEdge>> getWeightedEdges(){
 		Map<iToken,WeightedEdge> edgeMap = new LinkedMap<iToken, WeightedEdge>();
 		List<Entry<iToken, WeightedEdge>> entries = new LinkedList<Entry<iToken,WeightedEdge>>();
-		Iterator<Glyph> glyphItr = glyphs.iterator();
-		Glyph tmpGlyph = new Glyph("");
+		Iterator<iToken> glyphItr = glyphs.iterator();
+		iToken tmpGlyph = new Glyph("");
 		while(glyphItr.hasNext()){
 			
 			tmpGlyph=glyphItr.next();
@@ -137,5 +138,44 @@ public class GlyphGraph {
 		entries.addAll(edgeMap.entrySet());
 		return entries;
 	}
+	
+	public LinkedList<Integer> getWeightValue(){
+		Collection<WeightedEdge> edges = g.getEdges();
+		LinkedList<Integer> edgeValues = new LinkedList<Integer>();
+		Iterator<WeightedEdge> edgeit = edges.iterator();
+		WeightedEdge tmp = new WeightedEdge();
+		while(edgeit.hasNext()){
+			tmp=edgeit.next();
+			edgeValues.add(tmp.getWeight());
+		}
+		return edgeValues;
+	}
+	
+	public UndirectedSparseGraph<iToken, WeightedEdge> returnGraph(){
+		return g;
+	}
+	
+//	public void testPrint(){
+//		System.out.println("GRAPH " + g.getEdgeCount() + " edges");
+//		Collection<WeightedEdge>edges = g.getEdges();
+//		Iterator<WeightedEdge> edgeItr = edges.iterator();
+//		WeightedEdge tmpEdge;
+//		while(edgeItr.hasNext()){
+//			tmpEdge=edgeItr.next();
+//			Pair vertices = g.getEndpoints(tmpEdge);
+//			System.out.print(vertices.getFirst() + "--" );
+//			System.out.print(tmpEdge.getWeight() + "--");
+//			System.out.print(vertices.getSecond());
+//			System.out.println(" ");
+//		}
+//		
+//		Collection<iToken> vertices = g.getVertices();
+//		Iterator<iToken> vItr = vertices.iterator();
+//		iToken tmp; 
+//		while(vItr.hasNext()){
+//			tmp=vItr.next();
+//			System.out.println("GRAPH " + tmp.getName());
+//		}
+//	}
 	
 }

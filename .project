@@ -3,6 +3,7 @@
 	<name>JCloudMavenStinks</name>
 	<comment></comment>
 	<projects>
+		<project>collabcloud-public</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

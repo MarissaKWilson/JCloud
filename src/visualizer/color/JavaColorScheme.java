@@ -35,7 +35,7 @@ public class JavaColorScheme implements IColorScheme {
 		initColorMap(g.getAuthors());
 	}
 
-	private void initColorMap(Set<Author> authors) {
+	private void initColorMap(Set<iToken> authors) {
 		LinkedList<Color> colorList = new LinkedList<Color>();
 		colorList.add(0, new Color(13,01,209)); //blue
 		colorList.add(1, new Color(166,4,0)); //red
@@ -43,9 +43,9 @@ public class JavaColorScheme implements IColorScheme {
 		colorList.add(3, new Color(237,117,24)); //orange
 		colorList.add(4, new Color(181,40,217)); //purple
 		colorList.add(5, new Color(232,176,12)); //yellow
-		Iterator<Author> it = authors.iterator();
+		Iterator<iToken> it = authors.iterator();
 		int i = 0;
-		Author tmpAuth = new Author("");
+		iToken tmpAuth = new Author("");
 		while(it.hasNext()){
 			tmpAuth = it.next();
 			colorMap.put(tmpAuth, colorList.get(i%6));

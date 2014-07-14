@@ -77,8 +77,8 @@ public class LayoutTokens {
 			if (tokensHit++ > maxTokens)
 				break;
 			Font font = fontTrans.transform(entry.getKey(), entry.getValue());
-			System.out.println("Laying out " + entry.getKey() + "...["
-					+ entry.getValue() + "]");
+			System.out.println("Laying out " + entry.getKey().getName() + "...["
+					+ entry.getValue().getWeight() + "]");
 			GlyphVector glyph = font.createGlyphVector(FONT_RENDER_CONTEXT,
 					entry.getKey().getName());
 			Point2D startingPlace = placeStrategy.getStartingPlace(
