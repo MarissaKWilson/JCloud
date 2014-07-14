@@ -42,8 +42,13 @@ public class Main {
 		
 
 	
+		
+		System.out.println("Making Factory");
+		GlyphGraphFactory factory = new GlyphGraphFactory();
+		System.out.println("Making graph");
+		GlyphGraph graph = factory.getGraph();
 		System.out.println("Main: Edgify glyph to author, with weighted edge. Graph complete.");
-		GlyphGraph graph = new GlyphGraphFactory().edgify(files);
+		factory.edgify(files);
 		
 		System.out.println("Main: Network placement algorithm to get starting places");
 		BufferedImage image = new RenderQueue(resolution, graph).call();

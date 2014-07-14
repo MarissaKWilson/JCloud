@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.map.LinkedMap;
 
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
@@ -30,8 +31,12 @@ public class GlyphGraph {
 	/*
 	 * Glyph Graph constructor Creates a new undirected sparse graph
 	 */
-	public GlyphGraph() {
-		g = new UndirectedSparseGraph<iToken, WeightedEdge>();
+	public GlyphGraph(UndirectedSparseGraph<iToken,WeightedEdge>g) {
+		this.g = g;
+	}
+	
+	public static Factory<UndirectedSparseGraph<iToken,WeightedEdge>> getFactory(){
+		return getFactory();
 	}
 
 	/*
@@ -72,9 +77,10 @@ public class GlyphGraph {
 		return g.addEdge(weight, glyph, auth);
 	}
 
-	public void addEdge(WeightedEdge weight, Pair<iToken> pair,
-			EdgeType edgeType) {
-		g.addEdge(weight, pair, edgeType);
+	public void addEdge(WeightedEdge weight, iToken auth, iToken glyph) {
+		Pair<iToken> vertices = new Pair<iToken>(auth,glyph);
+		boolean done = g.addEdge(weight, vertices, EdgeType.UNDIRECTED);
+		System.out.println(done);
 	}
 	/**
 	 * Finds all edges connected to a vertex
@@ -91,8 +97,28 @@ public class GlyphGraph {
 	 * @return
 	 */
 	public iToken getOppositeVertex(iToken token, WeightedEdge edge){
-		System.out.println(g.getOpposite(token, edge).getName());
-		return g.getOpposite(token, edge);
+		System.out.println("GRAPH TOKEN " + token.getName());
+		System.out.println("GRAPH EDGE " + edge.getWeight());
+		LinkedList<Author> authList = new LinkedList<Author>();
+		Iterator authItr = authors.iterator();
+		int i =0;
+		while(authItr.hasNext()){
+			authList.add((Author) authItr.next());
+			Author tmpAuthor = authList.get(i);
+			Map<Glyph, WeightedEdge> glyphWeights = tmpAuthor.getAllGlyphWeights();
+			System.out.println("AUTH HAS KEY -- " + glyphWeights.containsKey(token));
+			i++;
+		}
+		//System.out.println(g.getOpposite(token, edge).getName());
+		Pair<iToken> vertices = g.getEndpoints(edge);
+		if(vertices.getFirst().equals(null)){
+			System.out.println("FOUND NULL");
+		}
+		if(vertices.getFirst().equals(token)){
+			return vertices.getSecond();
+		}else{
+			return vertices.getFirst();
+		}
 	}
 	/**
 	 * Checks all edges of a glyph, finds the largest, sets dominate author
