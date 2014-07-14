@@ -68,7 +68,7 @@ public class ParentNetworkPlacement implements IPlaceStrategy {
 	}
 
 	private UndirectedGraph<iToken, WeightedEdge> initGraph() {
-		UndirectedSparseGraph<iToken, WeightedEdge> g = graph.returnGraph();
+		UndirectedGraph<iToken, WeightedEdge> g = graph.returnGraph();
 //				new UndirectedSparseGraph<iToken, WeightedEdge>();
 //		Set<iToken> authors = graph.getAuthors();
 		

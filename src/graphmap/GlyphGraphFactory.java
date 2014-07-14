@@ -22,14 +22,16 @@ import edu.uci.ics.jung.graph.util.Pair;
 public class GlyphGraphFactory {
 	GlyphGraph graph;
 	Factory<UndirectedGraph<iToken, WeightedEdge>> factory;
+
 	public GlyphGraphFactory() {
-		factory=GlyphGraph.makeFactory();
+		factory = GlyphGraph.makeFactory();
 		graph = new GlyphGraph(factory.create());
 	}
-		
-	public GlyphGraph getGraph(){
+
+	public GlyphGraph getGraph() {
 		return graph;
 	}
+
 	/**
 	 * Given a list of source code files, make a GlyphGraph where authors are
 	 * connected to glyphs via the same source code files.
@@ -39,7 +41,7 @@ public class GlyphGraphFactory {
 	public GlyphGraph edgify(LinkedList<SourceCodeFile> files) {
 		System.out
 				.println("	GlyphGraph: Iterate through SCFs, associate glyph with author using weighted edge, increase weight as needed.");
-		
+
 		for (SourceCodeFile f : files) {
 			LinkedList<Author> authors = f.getAuthors();
 			for (Author tmpAuthor : authors) {
@@ -48,10 +50,10 @@ public class GlyphGraphFactory {
 				for (Glyph tmpGlyph : glyphs) {
 					WeightedEdge weight = tmpAuthor.getGlyphWeight(tmpGlyph);
 					graph.addGlyph(tmpGlyph);
-					System.out.println("Author " + tmpAuthor.getName()
-							+ (" -- ") + weight.getWeight() + " -- Glyph "
-							+ tmpGlyph.getName());
-					graph.addEdge(weight, tmpAuthor, tmpGlyph);
+					// System.out.println("Author " + tmpAuthor.getName()
+					// + (" -- ") + weight.getWeight() + " -- Glyph "
+					// + tmpGlyph.getName());
+					graph.addVertexAndEdge(weight, tmpAuthor, tmpGlyph);
 				}
 			}
 		}

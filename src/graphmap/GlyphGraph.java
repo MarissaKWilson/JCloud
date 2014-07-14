@@ -50,13 +50,13 @@ public class GlyphGraph {
 	 */
 	public void addAuthor(Author author) {
 		authors.add(author);
-		g.addVertex(author);
+//		g.addVertex(author);
 	}
 
 	public void addGlyph(Glyph glyph) {
 //		System.out.println("GlyphGraph: Add glyph if not present");
 		glyphs.add(glyph);
-		g.addVertex(glyph);
+//		g.addVertex(glyph);
 	}
 
 	public Set<iToken> getAuthors() {
@@ -73,17 +73,19 @@ public class GlyphGraph {
 	 * Returns true if glyph added successfully Adds a glyph TODO If edge
 	 * already exists, increment weight
 	 */
-	public boolean addGlyph(iToken glyph, WeightedEdge weight, iToken auth) {
-		System.out.println( "GlyphGraph: Creates the edge association between Author and Glyph using WeightedEdge");
-		g.addVertex(glyph);
-//		addGlyph(glyph);
-//		addAuthor(auth);
-		return g.addEdge(weight, glyph, auth);
-	}
+//	public boolean addGlyph(iToken glyph, WeightedEdge weight, iToken auth) {
+//		System.out.println( "GlyphGraph: Creates the edge association between Author and Glyph using WeightedEdge");
+//		g.addVertex(glyph);
+////		addGlyph(glyph);
+////		addAuthor(auth);
+//		return g.addEdge(weight, glyph, auth);
+//	}
 
-	public void addEdge(WeightedEdge weight, iToken auth, iToken glyph) {
+	public void addVertexAndEdge(WeightedEdge weight, iToken auth, iToken glyph) {
+//		g.addVertex(auth);
+//		g.addVertex(glyph);
 		Pair<iToken> vertices = new Pair<iToken>(auth,glyph);
-		boolean done = g.addEdge(weight, vertices, EdgeType.UNDIRECTED);
+		boolean done = g.addEdge(weight, vertices);
 		System.out.println(done);
 	}
 	/**
@@ -101,6 +103,7 @@ public class GlyphGraph {
 	 * @return
 	 */
 	public iToken getOppositeVertex(iToken token, WeightedEdge edge){
+		System.out.println(g.getEdgeCount());
 		System.out.println("GRAPH TOKEN " + token.getName());
 		System.out.println("GRAPH EDGE " + edge.getWeight());
 		LinkedList<Author> authList = new LinkedList<Author>();

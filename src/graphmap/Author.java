@@ -67,7 +67,7 @@ public class Author implements iToken {
 			tmpWeight.addWeight(weight);
 			glyphWeights.put(g,tmpWeight);
 		}else{
-			glyphWeights.put(g, new WeightedEdge());
+			glyphWeights.put(g, new WeightedEdge(g, this));
 		}
 	}
 	
